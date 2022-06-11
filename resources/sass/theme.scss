@@ -1,0 +1,23 @@
+@import "~bootstrap/scss/bootstrap";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "sweetalert2/dist/sweetalert2.min.css";
+
+$primary : #6f42c1;
+
+// Variables
+@import 'variables';
+
+@media print{
+    @page{
+        size: A4;
+        margin-top: 2in;
+    }
+}
+
+.print-table tr td{
+    padding: 1.2px 0.5rem !important;
+}
+
+//.print-table tr .title{
+//    width: 370px;
+//}
