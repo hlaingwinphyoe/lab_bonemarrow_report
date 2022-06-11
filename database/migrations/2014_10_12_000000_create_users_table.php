@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('role',[0,1])->default(1);
             $table->string('photo')->nullable();
-            $table->string('signature_thumbnails')->nullable();
+            $table->string('signature')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
