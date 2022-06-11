@@ -18,7 +18,7 @@ class CytoPhotoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -28,7 +28,7 @@ class CytoPhotoController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -72,7 +72,7 @@ class CytoPhotoController extends Controller
      */
     public function show(CytoPhoto $cytoPhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -83,7 +83,7 @@ class CytoPhotoController extends Controller
      */
     public function edit(CytoPhoto $cytoPhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -95,7 +95,7 @@ class CytoPhotoController extends Controller
      */
     public function update(UpdateCytoPhotoRequest $request, CytoPhoto $cytoPhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**

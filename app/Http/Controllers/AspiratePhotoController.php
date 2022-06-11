@@ -18,7 +18,7 @@ class AspiratePhotoController extends Controller
      */
     public function index()
     {
-        return abort(404);
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -28,7 +28,7 @@ class AspiratePhotoController extends Controller
      */
     public function create()
     {
-        return abort(404);
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -69,7 +69,7 @@ class AspiratePhotoController extends Controller
      */
     public function show(AspiratePhoto $aspiratePhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -80,7 +80,7 @@ class AspiratePhotoController extends Controller
      */
     public function edit(AspiratePhoto $aspiratePhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -92,7 +92,7 @@ class AspiratePhotoController extends Controller
      */
     public function update(UpdateAspiratePhotoRequest $request, AspiratePhoto $aspiratePhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**

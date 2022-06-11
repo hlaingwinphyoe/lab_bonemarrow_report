@@ -18,7 +18,7 @@ class TrephinePhotoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -28,7 +28,7 @@ class TrephinePhotoController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -73,7 +73,7 @@ class TrephinePhotoController extends Controller
      */
     public function show(TrephinePhoto $trephinePhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -84,7 +84,7 @@ class TrephinePhotoController extends Controller
      */
     public function edit(TrephinePhoto $trephinePhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -96,7 +96,7 @@ class TrephinePhotoController extends Controller
      */
     public function update(UpdateTrephinePhotoRequest $request, TrephinePhoto $trephinePhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**

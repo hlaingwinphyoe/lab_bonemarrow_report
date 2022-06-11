@@ -18,7 +18,7 @@ class HistoPhotoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -28,7 +28,7 @@ class HistoPhotoController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -72,7 +72,7 @@ class HistoPhotoController extends Controller
      */
     public function show(HistoPhoto $histoPhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -83,7 +83,7 @@ class HistoPhotoController extends Controller
      */
     public function edit(HistoPhoto $histoPhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
@@ -95,7 +95,7 @@ class HistoPhotoController extends Controller
      */
     public function update(UpdateHistoPhotoRequest $request, HistoPhoto $histoPhoto)
     {
-        //
+        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
     }
 
     /**
