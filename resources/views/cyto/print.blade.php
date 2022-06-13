@@ -41,13 +41,8 @@
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
-                    <h3 class="text-capitalize text-center mb-0">
-                        bone marrow cyto report
-                    </h3>
-                    <h5 class="text-center text-uppercase mb-0">ICSH Guidelines</h5>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <h6 class="text-uppercase mb-0">Patient's Particulars</h6>
                             <div class="ms-5 mt-2">
                                 <div class="row mb-2">
                                     <div class="col-4">
@@ -60,7 +55,7 @@
                                             <span class="second">{{ $patientFact->doctor }}</span>
                                         </div>
                                         <div class="print-header">
-                                            <span class="first">Biopsy Cutting Date: &nbsp;</span>
+                                            <span class="first">Cutting Date: &nbsp;</span>
                                             <span class="second">{{ date('d / M / Y',strtotime($patientFact->bio_cut_date)) }}</span>
                                         </div>
 
@@ -75,7 +70,7 @@
                                             <span class="second">{{ $patientFact->hospital->name }}</span>
                                         </div>
                                         <div class="print-header">
-                                            <span class="first">Biopsy Report Date: &nbsp;</span>
+                                            <span class="first">Report Date: &nbsp;</span>
                                             <span class="second">{{ date('d / M / Y',strtotime($patientFact->bio_report_date)) }}</span>
                                         </div>
 
@@ -87,22 +82,22 @@
                                             <span class="second">{{ $patientFact->gender }}</span>
                                         </div>
                                         <div class="print-header">
-                                            <span class="first">Biopsy Received Date: &nbsp;</span>
+                                            <span class="first">Received Date: &nbsp;</span>
                                             <span class="second">{{ date('d / M / Y',strtotime($patientFact->bio_receive_date)) }}</span>
                                         </div>
 
                                     </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h3 class="text-uppercase text-center my-1">
+                                            Cytopathology report
+                                        </h3>
+                                        <p>
+                                            {!! DNS2D::getBarcodeHTML('http://127.0.0.1:8000/cyto-print/'.$patientFact->slug, 'QRCODE',3,3,'black') !!}
+                                        </p>
+                                    </div>
                                     <div class="col-12">
-                                        <div class="print-header mb-2">
-                                            <span class="first">Address: &nbsp;</span>
-                                            <span class="second">{{ $patientFact->contact_detail ?? '-' }}</span>
-                                        </div>
-                                        <div class="print-header">
-                                            <span class="first d-block text-decoration-underline">Gross</span>
-                                            <span class="second">{{ $patientFact->gross ?? '-' }}</span>
-                                        </div>
                                         <div class="print-header my-1">
-                                            <span class="first d-block mb-1 text-decoration-underline">Cytological Diagnosis</span>
+                                            <span class="first d-block mb-1 text-decoration-underline">Description</span>
                                             <div class="">
                                                 @forelse($patientFact->cytoPhotos as $key=>$photo)
                                                     <img src="{{ asset('storage/cyto_thumbnails/'.$photo->name) }}" class="rounded shadow-sm mb-1" height="130" alt="image alt"/>
@@ -111,12 +106,12 @@
                                                 @endforelse
                                             </div>
                                             <div class="">
-                                                {{ $patientFact->cyto_diagnosis }}
+                                                {{ $patientFact->description }}
                                             </div>
                                         </div>
                                         <div class="print-header my-1">
-                                            <span class="first d-block text-decoration-underline">Remark</span>
-                                            <span>{{ $patientFact->remark }}</span>
+                                            <span class="first d-block text-decoration-underline">Cytological Diagnosis</span>
+                                            <span>{{ $patientFact->cyto_diagnosis }}</span>
                                         </div>
                                         <div class="print-header mt-2">
                                             <span class="first ">Authorize By: </span>

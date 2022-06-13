@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function(){
     Route::resource('/cyto_photos',\App\Http\Controllers\CytoPhotoController::class);
     Route::get('/cyto-print/{patient_name}',[\App\Http\Controllers\CytoController::class, 'print'])->name('cyto.print');
 
+    Route::get('/search',[\App\Http\Controllers\PageController::class,'search']);
+
     Route::middleware('AdminOnly')->group(function(){
         // Custom User Register
         Route::get('/user-register', [\App\Http\Controllers\PageController::class, 'registration'])->name('register');

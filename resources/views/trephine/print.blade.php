@@ -40,10 +40,17 @@
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
-                    <h3 class="text-capitalize text-center mb-0">
-                        bone marrow aspirate report
-                    </h3>
-                    <h5 class="text-center text-uppercase mb-0">ICSH Guidelines</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="text-capitalize text-center mb-0">
+                                bone marrow trephine report
+                            </h3>
+                            <h5 class="text-center text-uppercase mb-0">ICSH Guidelines</h5>
+                        </div>
+                        <p>
+                            {!! DNS2D::getBarcodeHTML('http://127.0.0.1:8000/trephine-print/'.$patientFact->slug, 'QRCODE',3,3) !!}
+                        </p>
+                    </div>
                     <div class="row mt-4">
                         <div class="col-12">
                             <h6 class="text-uppercase mb-0">Patient's Particulars</h6>

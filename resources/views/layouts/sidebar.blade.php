@@ -43,12 +43,15 @@
             </li>
             <li class="menu-spacer"></li>
 
-            <x-side-bar-title title="Manage Hospitals" />
+            @if(auth()->user()->role == 0)
+            <x-side-bar-title title="Manage Setting" />
 
             <li class="menu-item">
                 <x-side-bar-link name="Hospitals" link="{{ route('hospital.create') }}" />
             </li>
+
             <li class="menu-spacer"></li>
+            @endif
             <x-side-bar-title title="User Setting" />
 
             <li class="menu-item">

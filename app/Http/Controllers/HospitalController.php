@@ -6,6 +6,7 @@ use App\Models\Hospital;
 use App\Http\Requests\StoreHospitalRequest;
 use App\Http\Requests\UpdateHospitalRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class HospitalController extends Controller
 {
@@ -26,7 +27,11 @@ class HospitalController extends Controller
      */
     public function create()
     {
-        return view('hospital.create');
+        if (auth()->user()->role == 0){
+            return view('hospital.create');
+        }else{
+            return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
+        }
     }
 
     /**

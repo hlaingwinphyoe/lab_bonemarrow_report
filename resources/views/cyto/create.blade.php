@@ -167,11 +167,11 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="gross" class="form-label">Gross</label>
+                                    <label for="morphology" class="form-label">Morphology</label>
                                     <div class="form-floating">
-                                        <textarea class="form-control @error('gross') is-invalid @enderror" name="gross" id="gross" placeholder="Enter Gross" style="height: 180px">{{ old('gross') }}</textarea>
-                                        <label for="gross">Enter Gross</label>
-                                        @error('gross')
+                                        <textarea class="form-control @error('morphology') is-invalid @enderror" name="morphology" id="morphology" placeholder="Enter Morphology" style="height: 180px">{{ old('morphology') }}</textarea>
+                                        <label for="morphology">Enter Morphology</label>
+                                        @error('morphology')
                                         <small class="invalid-feedback">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -186,16 +186,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="remark" class="form-label">Remark</label>
-                                    <div class="form-floating">
-                                        <textarea class="form-control @error('remark') is-invalid @enderror" name="remark" id="remark" placeholder="Enter Remark" style="height: 180px">{{ old('remark') }}</textarea>
-                                        <label for="remark">Enter Remark</label>
-                                        @error('remark')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                         <hr>

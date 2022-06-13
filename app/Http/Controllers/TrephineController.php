@@ -101,7 +101,7 @@ class TrephineController extends Controller
         }
 
 
-        return redirect()->back()->with('status',"Trephine Report Submitted.");
+        return redirect()->route('index')->with('status',"Trephine Report Submitted.");
 
     }
 

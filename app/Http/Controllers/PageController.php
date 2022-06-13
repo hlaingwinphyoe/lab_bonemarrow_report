@@ -13,10 +13,22 @@ use Illuminate\Support\Facades\Hash;
 class PageController extends Controller
 {
     public function index(){
-        $aspirates = Aspirate::latest('id')->paginate(5);
-        $trephines = Trephine::latest('id')->paginate(5);
-        $histos = Histo::latest('id')->paginate(5);
-        $cytos = Cyto::latest('id')->paginate(5);
+        $aspirates = Aspirate::when(isset(request()->search),function ($query){
+            $search = request()->search;
+            $query->where('patient_name','LIKE',"%$search%")->orwhere('sc_date','LIKE',"%$search%");
+        })->latest('id')->paginate(5);
+        $trephines = Trephine::when(isset(request()->search),function ($query){
+            $search = request()->search;
+            $query->where('patient_name','LIKE',"%$search%")->orwhere('sc_date','LIKE',"%$search%");
+        })->latest('id')->paginate(5);
+        $histos = Histo::when(isset(request()->search),function ($query){
+            $search = request()->search;
+            $query->where('name','LIKE',"%$search%")->orwhere('bio_receive_date','LIKE',"%$search%")->orwhere('bio_cut_date','LIKE',"%$search%")->orwhere('bio_report_date','LIKE',"%$search%");
+        })->latest('id')->paginate(5);
+        $cytos = Cyto::when(isset(request()->search),function ($query){
+            $search = request()->search;
+            $query->where('name','LIKE',"%$search%")->orwhere('bio_receive_date','LIKE',"%$search%")->orwhere('bio_cut_date','LIKE',"%$search%")->orwhere('bio_report_date','LIKE',"%$search%");
+        })->latest('id')->paginate(5);
 
         return view('index',['aspirates'=>$aspirates,'trephines'=>$trephines,'histos'=>$histos,'cytos'=>$cytos]);
     }

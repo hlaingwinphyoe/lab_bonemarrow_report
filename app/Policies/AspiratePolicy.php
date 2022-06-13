@@ -53,7 +53,7 @@ class AspiratePolicy
      */
     public function update(User $user, Aspirate $aspirate)
     {
-        return $user->id === $aspirate->user_id;
+        return $user->id == $aspirate->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class AspiratePolicy
      */
     public function delete(User $user, Aspirate $aspirate)
     {
-        return $user->id === $aspirate->user_id;
+        return $user->id == $aspirate->user_id;
     }
 
     /**

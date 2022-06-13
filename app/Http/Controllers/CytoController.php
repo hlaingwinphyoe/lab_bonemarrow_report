@@ -51,9 +51,8 @@ class CytoController extends Controller
         $cyto->bio_cut_date = $request->bio_cut_date;
         $cyto->bio_report_date = $request->bio_report_date;
         $cyto->specimen = $request->specimen;
-        $cyto->gross = $request->gross;
+        $cyto->morphology = $request->morphology;
         $cyto->cyto_diagnosis = $request->cyto_diagnosis;
-        $cyto->remark = $request->remark;
         $cyto->hospital_id = $request->hospital;
         $cyto->user_id = Auth::id();
         $cyto->save();
@@ -124,9 +123,8 @@ class CytoController extends Controller
         $cyto->bio_cut_date = $request->bio_cut_date;
         $cyto->bio_report_date = $request->bio_report_date;
         $cyto->specimen = $request->specimen;
-        $cyto->gross = $request->gross;
+        $cyto->morphology = $request->morphology;
         $cyto->cyto_diagnosis = $request->cyto_diagnosis;
-        $cyto->remark = $request->remark;
         $cyto->hospital_id = $request->hospital;
         $cyto->user_id = Auth::id();
         $cyto->update();

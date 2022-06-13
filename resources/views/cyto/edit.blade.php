@@ -190,11 +190,11 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="gross" class="form-label">Gross</label>
+                                <label for="morphology" class="form-label">Morphology</label>
                                 <div class="form-floating">
-                                    <textarea form="cytoUpdateForm" class="form-control @error('gross') is-invalid @enderror" name="gross" id="gross" placeholder="Enter Gross" style="height: 180px">{{ old('gross',$cyto->gross) }}</textarea>
-                                    <label for="gross">Enter Gross</label>
-                                    @error('gross')
+                                    <textarea form="cytoUpdateForm" class="form-control @error('morphology') is-invalid @enderror" name="morphology" id="morphology" placeholder="Enter Morphology" style="height: 180px">{{ old('morphology',$cyto->morphology) }}</textarea>
+                                    <label for="morphology">Enter Morphology</label>
+                                    @error('morphology')
                                     <small class="invalid-feedback">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -205,16 +205,6 @@
                                     <textarea form="cytoUpdateForm" class="form-control @error('cyto_diagnosis') is-invalid @enderror" name="cyto_diagnosis" id="cyto_diagnosis" placeholder="Enter Cytological Diagnosis" style="height: 180px">{{ old('cyto_diagnosis',$cyto->cyto_diagnosis) }}</textarea>
                                     <label for="cyto_diagnosis">Enter Cytological Diagnosis</label>
                                     @error('cyto_diagnosis')
-                                    <small class="invalid-feedback">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="remark" class="form-label">Remark</label>
-                                <div class="form-floating">
-                                    <textarea form="cytoUpdateForm" class="form-control @error('remark') is-invalid @enderror" name="remark" id="remark" placeholder="Enter Remark" style="height: 180px">{{ old('remark',$cyto->remark) }}</textarea>
-                                    <label for="remark">Enter Remark</label>
-                                    @error('remark')
                                     <small class="invalid-feedback">{{ $message }}</small>
                                     @enderror
                                 </div>

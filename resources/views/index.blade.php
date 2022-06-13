@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title') 550MCH Biopsy Reports @endsection
 
 @section('content')
     <div class="row align-items-end">
@@ -17,12 +18,26 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <a href="{{ route('aspirate.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
+                            @isset(request()->search)
+                                <a href="{{ route("index") }}" class="btn btn-outline-primary btn-sm mb-3 me-2">
+                                    <i class="feather-list"></i>
+                                    All Reports
+                                </a>
+                                <span>Search By : <b>" {{ request()->search }} "</b></span>
+                            @endisset
                         </div>
                         <div class="mb-2">
-                            <input type="text" class="form-control" placeholder="Search..." id="search" name="search" onfocus="this.value=''">
+                            <form method="get" class="">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="Search Something...">
+                                    <button class="btn btn-primary btn-sm" type="submit">
+                                        <i class="fa-solid fa-search fa-fw"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <table class="table table-hover  mb-3" id="search_list">
+                    <table class="table table-hover  mb-3">
                         <thead>
                         <tr>
                             <th>Name</th>
@@ -91,7 +106,28 @@
                         </button>
                     </div>
                     <hr>
-                    <a href="{{ route('trephine.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="{{ route('trephine.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
+                            @isset(request()->search)
+                                <a href="{{ route("index") }}" class="btn btn-outline-primary btn-sm mb-3 me-2">
+                                    <i class="feather-list"></i>
+                                    All Reports
+                                </a>
+                                <span>Search By : <b>" {{ request()->search }} "</b></span>
+                            @endisset
+                        </div>
+                        <div class="mb-2">
+                            <form method="get" class="">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="Search Something...">
+                                    <button class="btn btn-primary btn-sm" type="submit">
+                                        <i class="fa-solid fa-search fa-fw"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <table class="table table-hover  mb-3">
                         <thead>
                         <tr>
@@ -161,7 +197,28 @@
                         </button>
                     </div>
                     <hr>
-                    <a href="{{ route('histo.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="{{ route('histo.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
+                            @isset(request()->search)
+                                <a href="{{ route("index") }}" class="btn btn-outline-primary btn-sm mb-3 me-2">
+                                    <i class="feather-list"></i>
+                                    All Reports
+                                </a>
+                                <span>Search By : <b>" {{ request()->search }} "</b></span>
+                            @endisset
+                        </div>
+                        <div class="mb-2">
+                            <form method="get" class="">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="Search Something...">
+                                    <button class="btn btn-primary btn-sm" type="submit">
+                                        <i class="fa-solid fa-search fa-fw"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <table class="table table-hover  mb-3">
                         <thead>
                         <tr>
@@ -233,7 +290,28 @@
                         </button>
                     </div>
                     <hr>
-                    <a href="{{ route('cyto.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <a href="{{ route('cyto.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
+                            @isset(request()->search)
+                                <a href="{{ route("index") }}" class="btn btn-outline-primary btn-sm mb-3 me-2">
+                                    <i class="feather-list"></i>
+                                    All Reports
+                                </a>
+                                <span>Search By : <b>" {{ request()->search }} "</b></span>
+                            @endisset
+                        </div>
+                        <div class="mb-2">
+                            <form method="get" class="">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="Search Something...">
+                                    <button class="btn btn-primary btn-sm" type="submit">
+                                        <i class="fa-solid fa-search fa-fw"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <table class="table table-hover  mb-3">
                         <thead>
                         <tr>
@@ -295,3 +373,4 @@
         </div>
     </div>
 @stop
+

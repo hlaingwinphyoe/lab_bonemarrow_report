@@ -9,6 +9,7 @@ use App\Models\HistoPhoto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Milon\Barcode\DNS2D;
 
 class HistoController extends Controller
 {
