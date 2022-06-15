@@ -43,20 +43,6 @@
 <body onload="print()">
 <div class="container">
     <div class="row">
-        <div class="col-12 px-5 pt-3">
-            <div class="mb-2">
-                <div class="d-flex align-items-center">
-                    <div class="">
-                        <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
-                    </div>
-                    <div class="ms-2">
-                        <p class="mb-2" style="font-size: 2rem">ချမ်းမြေ့ရောဂါရှာဖွေရေး ဓါတ်ခွဲခန်း</p>
-                        <p class="mb-0" style="font-size: 12px">12E, 68 Street,Between 29th & 30th Street, Mandalay. Ph: 09974478264, 0933763367</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="border-top: 1px solid black"></div>
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
@@ -67,14 +53,14 @@
                             </h3>
                             <h5 class="text-center text-uppercase mb-0">ICSH Guidelines</h5>
                         </div>
-                        <p class="mb-0">
+                        <p>
                             {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/aspirate-print/'.$patientFact->slug, 'DATAMATRIX',3,3) !!}
                         </p>
                     </div>
                     <div class="">
                         <p class="mb-0" style="font-size: 14px">Date: {{ date('d M Y') }} ({{ date('h:i A') }})</p>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-4">
                         <div class="col-12">
                             <h6 class="text-uppercase mb-0">Patient's Particulars</h6>
                             <div class="ms-3 mt-2">
@@ -118,6 +104,7 @@
                                                 @forelse($patientFact->aspiratePhotos as $key=>$photo)
                                                     <img src="{{ asset('storage/aspirate_thumbnails/'.$photo->name) }}" class="rounded shadow-sm mb-1" height="100" alt="image alt"/>
                                                 @empty
+                                                    <p class="mb-0 text-muted">-</p>
                                                 @endforelse
                                             </span>
                                         </div>

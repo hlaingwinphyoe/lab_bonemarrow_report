@@ -66,9 +66,21 @@
                                 <td class="text-nowrap">{{ $aspirate->user->name ?? 'Unknown Owner' }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('aspirate.print',$aspirate->slug) }}" class="btn btn-outline-primary btn-sm" title="Print">
+                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fa-solid fa-print fa-fw"></i>
-                                        </a>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('aspirate.print',$aspirate->slug) }}">
+                                                    With Header
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('aspirate.without.print',$aspirate->slug) }}">
+                                                    Without Header
+                                                </a>
+                                            </li>
+                                        </ul>
                                         @can('update',$aspirate)
                                             <a href="{{ route('aspirate.edit',$aspirate->id) }}" class="btn btn-outline-primary btn-sm" title="Edit">
                                                 <i class="fa-solid fa-pen fa-fw"></i>
@@ -157,9 +169,21 @@
                                 <td class="text-nowrap">{{ $trephine->user->name ?? 'Unknown Owner' }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('trephine.print',$trephine->slug) }}" class="btn btn-outline-primary btn-sm" title="Print">
+                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fa-solid fa-print fa-fw"></i>
-                                        </a>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('trephine.print',$trephine->slug) }}">
+                                                    With Header
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('trephine.without.print',$trephine->slug) }}">
+                                                    Without Header
+                                                </a>
+                                            </li>
+                                        </ul>
                                         @can('update',$trephine)
                                             <a href="{{ route('trephine.edit',$trephine->id) }}" class="btn btn-outline-primary btn-sm" title="Edit">
                                                 <i class="fa-solid fa-pen fa-fw"></i>
@@ -251,9 +275,21 @@
                                 <td>{{ date('j/n/Y',strtotime($histo->bio_report_date)) }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('histo.print',$histo->slug) }}" class="btn btn-outline-primary btn-sm" title="Print">
+                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fa-solid fa-print fa-fw"></i>
-                                        </a>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('histo.print',$histo->slug) }}">
+                                                    With Header
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('histo.without.print',$histo->slug) }}">
+                                                    Without Header
+                                                </a>
+                                            </li>
+                                        </ul>
                                         @can('update',$histo)
                                             <a href="{{ route('histo.edit',$histo->id) }}" class="btn btn-outline-primary btn-sm" title="Edit">
                                                 <i class="fa-solid fa-pen fa-fw"></i>
@@ -344,9 +380,21 @@
                                 <td>{{ date('j/n/Y',strtotime($cyto->bio_report_date)) }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('cyto.print',$cyto->slug) }}" class="btn btn-outline-primary btn-sm" title="Print">
+                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fa-solid fa-print fa-fw"></i>
-                                        </a>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('cyto.print',$cyto->slug) }}">
+                                                    With Header
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('cyto.without.print',$cyto->slug) }}">
+                                                    Without Header
+                                                </a>
+                                            </li>
+                                        </ul>
                                         @can('update',$cyto)
                                             <a href="{{ route('cyto.edit',$cyto->id) }}" class="btn btn-outline-primary btn-sm" title="Edit">
                                                 <i class="fa-solid fa-pen fa-fw"></i>

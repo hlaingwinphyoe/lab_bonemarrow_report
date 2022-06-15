@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Print : Cyto Report</title>
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
+    <link rel="icon" href="{{ asset('images/logo.jpg') }}">
     <style>
         .print-header span{
             font-size: 15px !important;
@@ -18,6 +19,12 @@
 
         .print-header .first{
             font-weight: bold;
+        }
+        @media print{
+            @page{
+                size: A4;
+                margin: 10px 0.2in !important;
+            }
         }
 
 
@@ -37,11 +44,22 @@
 </head>
 <body onload="print()">
 <div class="container">
-    <div class="row">
+    <div class="row vh-100 position-relative">
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
-                    <div class="row mt-4">
+                    <div class="mb-2">
+                        <div class="d-flex align-items-center">
+                            <div class="">
+                                <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
+                            </div>
+                            <div class="ms-2">
+                                <p class="mb-2" style="font-size: 2rem">ချမ်းမြေ့ရောဂါရှာဖွေရေး ဓါတ်ခွဲခန်း</p>
+                                <p class="mb-0" style="font-size: 12px">12E, 68 Street,Between 29th & 30th Street, Mandalay. Ph: 09974478264, 0933763367</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
                         <div class="col-12">
                             <div class="ms-5 mt-2">
                                 <div class="row mb-2">
@@ -51,7 +69,7 @@
                                             <span class="second">{{ $patientFact->name }}</span>
                                         </div>
                                         <div class="print-header">
-                                            <span class="first">Referring Doctor: &nbsp;</span>
+                                            <span class="first">Refer Doctor: &nbsp;</span>
                                             <span class="second">{{ $patientFact->doctor }}</span>
                                         </div>
                                         <div class="print-header">
@@ -92,7 +110,7 @@
                                             Cytopathology report
                                         </h3>
                                         <p>
-                                            {!! DNS2D::getBarcodeHTML('http://127.0.0.1:8000/cyto-print/'.$patientFact->slug, 'QRCODE',3,3,'black') !!}
+                                            {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/cyto-print/'.$patientFact->slug, 'DATAMATRIX',3,3) !!}
                                         </p>
                                     </div>
                                     <div class="col-12">
@@ -127,6 +145,21 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-12 position-absolute bottom-0 mb-5">
+            <div class="">
+                <p class="mb-0">
+                    This document is computer-generated and has been approved by authorized pathologists;
+                    <br>
+                    Dr Ye Thu Win
+                    <br>
+                    MBBS, MMedSc(Patho), PhD(Patho), IFCAP
+                    <br>
+                    Senior Consultant Pathologist
+                </p>
+                <div style="border-top: 2px solid black"></div>
+                <p>Thanks for Your Choice of our Laboratory.</p>
             </div>
         </div>
     </div>

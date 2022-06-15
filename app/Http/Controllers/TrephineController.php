@@ -191,4 +191,9 @@ class TrephineController extends Controller
         return view('trephine.print',compact('patientFact'));
     }
 
+    public function withoutHeaderPrint($patientName){
+        $patientFact = Trephine::where('slug','=',$patientName)->first();
+        return view('trephine.without-header-print',compact('patientFact'));
+    }
+
 }
