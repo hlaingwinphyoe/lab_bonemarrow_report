@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Print : Histo Report</title>
+    <title>Print : Cyto Report</title>
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <link rel="icon" href="{{ asset('images/logo.jpg') }}">
     <style>
@@ -48,20 +48,9 @@
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
-                    <div class="mb-2">
-                        <div class="d-flex align-items-center">
-                            <div class="">
-                                <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
-                            </div>
-                            <div class="ms-2">
-                                <p class="mb-2" style="font-size: 2rem">ချမ်းမြေ့ရောဂါရှာဖွေရေး ဓါတ်ခွဲခန်း</p>
-                                <p class="mb-0" style="font-size: 12px">12E, 68 Street,Between 29th & 30th Street, Mandalay. Ph: 09974478264, 0933763367</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-12">
-                            <div class="mt-2">
+                            <div class="ms-5 mt-2">
                                 <div class="row mb-2">
                                     <div class="col-4">
                                         <div class="print-header">
@@ -107,22 +96,18 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h3 class="text-uppercase text-center my-1">
-                                            Histopathology report
+                                            Cytopathology report
                                         </h3>
                                         <p>
-                                            {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/histo-print/'.$patientFact->slug, 'DATAMATRIX',3,3) !!}
+                                            {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/cyto-print/'.$patientFact->slug, 'DATAMATRIX',3,3) !!}
                                         </p>
                                     </div>
                                     <div class="col-12">
-                                        <div class="print-header">
-                                            <span class="first d-block text-decoration-underline">Gross</span>
-                                            <span class="second">{{ $patientFact->gross ?? '-' }}</span>
-                                        </div>
                                         <div class="print-header my-1">
-                                            <span class="first d-block mb-1 text-decoration-underline">Microscopic</span>
+                                            <span class="first d-block mb-1 text-decoration-underline">Description</span>
                                             <div class="">
-                                                @forelse($patientFact->histoPhotos as $key=>$photo)
-                                                    <img src="{{ asset('storage/histo_thumbnails/'.$photo->name) }}" class="rounded shadow-sm mb-1" height="130" alt="image alt"/>
+                                                @forelse($patientFact->cytoPhotos as $key=>$photo)
+                                                    <img src="{{ asset('storage/cyto_thumbnails/'.$photo->name) }}" class="rounded shadow-sm mb-1" height="130" alt="image alt"/>
                                                 @empty
 
                                                 @endforelse
@@ -132,10 +117,9 @@
                                             </div>
                                         </div>
                                         <div class="print-header my-1">
-                                            <span class="first d-block text-decoration-underline">Remark</span>
-                                            <span>{{ $patientFact->remark }}</span>
+                                            <span class="first d-block text-decoration-underline">Cytological Diagnosis</span>
+                                            <span>{{ $patientFact->cyto_diagnosis }}</span>
                                         </div>
-
                                         <div class="print-header mt-2">
                                             <span class="first ">Authorize By: </span>
                                             @if(isset($patientFact->user->signature))
@@ -144,7 +128,6 @@
                                                 <span>{{ $patientFact->user->name }}</span>
                                             @endif
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

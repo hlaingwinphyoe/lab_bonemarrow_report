@@ -15,22 +15,35 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 
+Route::get('/aspirate-print/{patient_name}',[\App\Http\Controllers\AspirateController::class, 'print'])->name('aspirate.print');
+Route::get('/aspirate-print/without-header/{patient_name}',[\App\Http\Controllers\AspirateController::class, 'withoutHeaderPrint'])->name('aspirate.without.print');
+
+Route::get('/trephine-print/{patient_name}',[\App\Http\Controllers\TrephineController::class, 'print'])->name('trephine.print');
+Route::get('/trephine-print/without-header/{patient_name}',[\App\Http\Controllers\TrephineController::class, 'withoutHeaderPrint'])->name('trephine.without.print');
+
+Route::get('/histo-print/{patient_name}',[\App\Http\Controllers\HistoController::class, 'print'])->name('histo.print');
+Route::get('/histo-print/without-header/{patient_name}',[\App\Http\Controllers\HistoController::class, 'withoutHeaderPrint'])->name('histo.without.print');
+
+Route::get('/cyto-print/{patient_name}',[\App\Http\Controllers\CytoController::class, 'print'])->name('cyto.print');
+Route::get('/cyto-print/without-header/{patient_name}',[\App\Http\Controllers\CytoController::class, 'withoutHeaderPrint'])->name('cyto.without.print');
+
+
 Route::middleware('auth')->group(function(){
     Route::get('/',[\App\Http\Controllers\PageController::class,'index'])->name('index');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('/hospital',\App\Http\Controllers\HospitalController::class);
     Route::resource('/aspirate',\App\Http\Controllers\AspirateController::class)->except('show','destroy');
-    Route::get('/aspirate-print/{patient_name}',[\App\Http\Controllers\AspirateController::class, 'print'])->name('aspirate.print');
+
     Route::resource('/aspirate_photos',\App\Http\Controllers\AspiratePhotoController::class);
     Route::resource('/trephine',\App\Http\Controllers\TrephineController::class)->except('show','destroy');
     Route::resource('/trephine_photos',\App\Http\Controllers\TrephinePhotoController::class);
-    Route::get('/trephine-print/{patient_name}',[\App\Http\Controllers\TrephineController::class, 'print'])->name('trephine.print');
+
     Route::resource('/histo',\App\Http\Controllers\HistoController::class)->except('show','destroy');
     Route::resource('/histo_photos',\App\Http\Controllers\HistoPhotoController::class);
-    Route::get('/histo-print/{patient_name}',[\App\Http\Controllers\HistoController::class, 'print'])->name('histo.print');
+
     Route::resource('/cyto',\App\Http\Controllers\CytoController::class)->except('show','destroy');
     Route::resource('/cyto_photos',\App\Http\Controllers\CytoPhotoController::class);
-    Route::get('/cyto-print/{patient_name}',[\App\Http\Controllers\CytoController::class, 'print'])->name('cyto.print');
+
 
     Route::get('/search',[\App\Http\Controllers\PageController::class,'search']);
 

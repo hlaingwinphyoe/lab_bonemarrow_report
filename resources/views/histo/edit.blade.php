@@ -155,7 +155,7 @@
 
                                 </div>
                                 <div class="mb-3">
-                                    <label for="bio_receive_date">Biopsy Receive Date</label>
+                                    <label for="bio_receive_date">Receive Date</label>
                                     <div class="">
                                         <input type="date" form="histoUpdateForm" class="form-control @error('bio_receive_date') is-invalid @enderror" id="bio_receive_date" name="bio_receive_date" value="{{ old('bio_receive_date',$histo->bio_receive_date) }}">
                                         @error('bio_receive_date')
@@ -164,7 +164,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="bio_cut_date">Biopsy Cutting Date</label>
+                                    <label for="bio_cut_date">Cutting Date</label>
                                     <div class="">
                                         <input type="date" form="histoUpdateForm" class="form-control @error('bio_cut_date') is-invalid @enderror" id="bio_cut_date" name="bio_cut_date" value="{{ old('bio_cut_date',$histo->bio_cut_date) }}">
                                         @error('bio_cut_date')
@@ -173,7 +173,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="bio_report_date">Biopsy Report Date</label>
+                                    <label for="bio_report_date">Report Date</label>
                                     <div class="">
                                         <input type="date" form="histoUpdateForm" class="form-control @error('bio_report_date') is-invalid @enderror" id="bio_report_date" name="bio_report_date" value="{{ old('bio_report_date',$histo->bio_report_date) }}">
                                         @error('bio_report_date')

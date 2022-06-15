@@ -53,7 +53,7 @@ class HistoPolicy
      */
     public function update(User $user, Histo $histo)
     {
-        return $user->id === $histo->user_id;
+        return $user->id == $histo->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class HistoPolicy
      */
     public function delete(User $user, Histo $histo)
     {
-        return $user->id === $histo->user_id;
+        return $user->id == $histo->user_id;
     }
 
     /**

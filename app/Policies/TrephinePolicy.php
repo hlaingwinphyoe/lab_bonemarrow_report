@@ -53,7 +53,7 @@ class TrephinePolicy
      */
     public function update(User $user, Trephine $trephine)
     {
-        return $user->id === $trephine->user_id;
+        return $user->id == $trephine->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class TrephinePolicy
      */
     public function delete(User $user, Trephine $trephine)
     {
-        return $user->id === $trephine->user_id;
+        return $user->id == $trephine->user_id;
     }
 
     /**

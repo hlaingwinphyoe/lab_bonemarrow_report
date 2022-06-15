@@ -48,17 +48,6 @@
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
-                    <div class="mb-2">
-                        <div class="d-flex align-items-center">
-                            <div class="">
-                                <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
-                            </div>
-                            <div class="ms-2">
-                                <p class="mb-2" style="font-size: 2rem">ချမ်းမြေ့ရောဂါရှာဖွေရေး ဓါတ်ခွဲခန်း</p>
-                                <p class="mb-0" style="font-size: 12px">12E, 68 Street,Between 29th & 30th Street, Mandalay. Ph: 09974478264, 0933763367</p>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-12">
                             <div class="mt-2">

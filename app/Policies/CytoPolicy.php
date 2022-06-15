@@ -53,7 +53,7 @@ class CytoPolicy
      */
     public function update(User $user, Cyto $cyto)
     {
-        return $user->id === $cyto->user_id;
+        return $user->id == $cyto->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class CytoPolicy
      */
     public function delete(User $user, Cyto $cyto)
     {
-        return $user->id === $cyto->user_id;
+        return $user->id == $cyto->user_id;
     }
 
     /**

@@ -10,7 +10,7 @@ $primary : #6f42c1;
 @media print{
     @page{
         size: A4;
-        margin-top: 2in;
+        margin: 10px 0.2in !important;
     }
 }
 

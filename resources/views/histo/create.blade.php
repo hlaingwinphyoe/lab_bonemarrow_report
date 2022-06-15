@@ -126,7 +126,7 @@
 
                                 </div>
                                 <div class="mb-3">
-                                    <label for="datepicker">Biopsy Receive Date</label>
+                                    <label for="datepicker">Receive Date</label>
                                     <div class="">
                                         <input type="text" class="form-control @error('bio_receive_date') is-invalid @enderror" id="datepicker" placeholder="dd/MM/YYYY" name="bio_receive_date" value="{{ old('bio_receive_date') }}">
                                         @error('bio_receive_date')
@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="datepicker1">Biopsy Cutting Date</label>
+                                    <label for="datepicker1">Cutting Date</label>
                                     <div class="">
                                         <input type="text" class="form-control @error('bio_cut_date') is-invalid @enderror" id="datepicker1" placeholder="dd/MM/YYYY" name="bio_cut_date" value="{{ old('bio_cut_date') }}">
                                         @error('bio_cut_date')
@@ -144,7 +144,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="datepicker2">Biopsy Report Date</label>
+                                    <label for="datepicker2">Report Date</label>
                                     <div class="">
                                         <input type="text" class="form-control @error('bio_report_date') is-invalid @enderror" id="datepicker2" placeholder="dd/MM/YYYY" name="bio_report_date" value="{{ old('bio_report_date') }}">
                                         @error('bio_report_date')

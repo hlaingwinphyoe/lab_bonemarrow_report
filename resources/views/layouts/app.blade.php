@@ -47,7 +47,7 @@
     </div>
 </div>
 
-
+@yield('foot')
 <script src="{{ asset("js/app.js") }}"></script>
 <script src="{{ asset('/sw.js') }}"></script>
 <script>
