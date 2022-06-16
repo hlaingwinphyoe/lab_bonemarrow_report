@@ -23,7 +23,7 @@
         @media print{
             @page{
                 size: A4;
-                margin: 10px 0.2in !important;
+                margin: 2in 0.2in 0.2in 0.2in !important;
             }
         }
 
@@ -62,7 +62,7 @@
                                             <span class="second">{{ $patientFact->doctor }}</span>
                                         </div>
                                         <div class="print-header">
-                                            <span class="first">Cutting Date: &nbsp;</span>
+                                            <span class="first">Staining Date: &nbsp;</span>
                                             <span class="second">{{ date('d / M / Y',strtotime($patientFact->bio_cut_date)) }}</span>
                                         </div>
 
@@ -120,14 +120,14 @@
                                             <span class="first d-block text-decoration-underline">Cytological Diagnosis</span>
                                             <span>{{ $patientFact->cyto_diagnosis }}</span>
                                         </div>
-                                        <div class="print-header mt-2">
-                                            <span class="first ">Authorize By: </span>
-                                            @if(isset($patientFact->user->signature))
-                                                <span><img src="{{ asset('storage/signature_thumbnails/'.$patientFact->user->signature) }}" style="width: 70px;height: 40px" alt=""></span>
-                                            @else
-                                                <span>{{ $patientFact->user->name }}</span>
-                                            @endif
-                                        </div>
+{{--                                        <div class="print-header mt-2">--}}
+{{--                                            <span class="first ">Authorize By: </span>--}}
+{{--                                            @if(isset($patientFact->user->signature))--}}
+{{--                                                <span><img src="{{ asset('storage/signature_thumbnails/'.$patientFact->user->signature) }}" style="width: 70px;height: 40px" alt=""></span>--}}
+{{--                                            @else--}}
+{{--                                                <span>{{ $patientFact->user->name }}</span>--}}
+{{--                                            @endif--}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
                             </div>

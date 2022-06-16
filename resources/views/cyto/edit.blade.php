@@ -121,6 +121,30 @@
                                 </div>
 
                             </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="">Specimen Type</label>
+                                        <div class="form-floating">
+                                            <input type="text" name="specimen_type" form="cytoUpdateForm" class="form-control @error('specimen_type') is-invalid @enderror" id="specimen_type" placeholder="specimen_type" value="{{ old('specimen_type',$cyto->specimen_type) }}">
+                                            <label for="specimen_type">Enter Specimen Type</label>
+                                            @error('specimen_type')
+                                            <small class="invalid-feedback">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="">Price</label>
+                                        <div class="form-floating">
+                                            <input type="number" name="price" form="cytoUpdateForm" class="form-control @error('price') is-invalid @enderror" id="price" placeholder="price" value="{{ old('price',$cyto->price) }}">
+                                            <label for="price">Enter Price</label>
+                                            @error('price')
+                                            <small class="invalid-feedback">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="col-12 col-lg-6">
@@ -160,7 +184,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="bio_cut_date">Cutting Date</label>
+                                <label for="bio_cut_date">Staining Date</label>
                                 <div class="">
                                     <input type="date" form="cytoUpdateForm" class="form-control @error('bio_cut_date') is-invalid @enderror" id="bio_cut_date" name="bio_cut_date" value="{{ old('bio_cut_date',$cyto->bio_cut_date) }}">
                                     @error('bio_cut_date')

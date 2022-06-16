@@ -29,6 +29,8 @@ class UpdateHistoRequest extends FormRequest
             "name" => 'required|min:3',
             "age" => 'required|numeric|max:100',
             "age_type" => 'required',
+            "specimen_type" => 'required|min:3',
+            "price" => 'required|numeric',
             "gender" => 'required',
             "doctor" => 'required|min:3',
             "bio_receive_date" => 'required|date',

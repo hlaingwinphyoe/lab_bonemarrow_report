@@ -78,6 +78,7 @@
                                 </div>
                             </div>
 
+
                             <div class="mb-3">
                                 <label for="sc_date">Date of Procedure</label>
                                 <div class="">
@@ -170,6 +171,30 @@
                                 @error('gender')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="">Specimen Type</label>
+                                        <div class="form-floating">
+                                            <input type="text" name="specimen_type" form="aspirateUpdateForm" class="form-control @error('specimen_type') is-invalid @enderror" id="specimen_type" placeholder="specimen_type" value="{{ old('specimen_type',$aspirate->specimen_type) }}">
+                                            <label for="specimen_type">Enter Specimen Type</label>
+                                            @error('specimen_type')
+                                            <small class="invalid-feedback">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="">Price</label>
+                                        <div class="form-floating">
+                                            <input type="number" name="price" form="aspirateUpdateForm" class="form-control @error('price') is-invalid @enderror" id="price" placeholder="price" value="{{ old('price',$aspirate->price) }}">
+                                            <label for="price">Enter Price</label>
+                                            @error('price')
+                                            <small class="invalid-feedback">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="contact_detail" class="form-label">Contact Details</label>

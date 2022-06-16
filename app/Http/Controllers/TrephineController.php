@@ -47,6 +47,8 @@ class TrephineController extends Controller
         $trephine->slug = Str::slug($request->patient_name,'-');
         $trephine->age = $request->age;
         $trephine->age_type = $request->age_type;
+        $trephine->specimen_type = $request->specimen_type;
+        $trephine->price = $request->price;
         $trephine->gender = $request->gender;
         $trephine->contact_detail = $request->contact_detail;
         $trephine->physician_name = $request->physician_name;
@@ -142,6 +144,8 @@ class TrephineController extends Controller
         $trephine->slug = Str::slug($request->patient_name,'-');
         $trephine->age = $request->age;
         $trephine->age_type = $request->age_type;
+        $trephine->specimen_type = $request->specimen_type;
+        $trephine->price = $request->price;
         $trephine->gender = $request->gender;
         $trephine->contact_detail = $request->contact_detail;
         $trephine->physician_name = $request->physician_name;
@@ -194,6 +198,11 @@ class TrephineController extends Controller
     public function withoutHeaderPrint($patientName){
         $patientFact = Trephine::where('slug','=',$patientName)->first();
         return view('trephine.without-header-print',compact('patientFact'));
+    }
+
+    public function invoice($id){
+        $invoice = Trephine::where('id','=',$id)->first();
+        return view('trephine.invoice',compact('invoice'));
     }
 
 }

@@ -28,6 +28,8 @@ class CreateHistosTable extends Migration
             $table->longText('gross')->nullable();
             $table->longText('description')->nullable();
             $table->longText('remark')->nullable();
+            $table->text('specimen_type');
+            $table->integer('price');
             $table->foreignId('hospital_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

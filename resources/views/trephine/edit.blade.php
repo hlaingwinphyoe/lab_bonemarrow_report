@@ -24,7 +24,7 @@
                         @csrf
                         @method('put')
                     </form>
-                        <div class="row g-2">
+                        <div class="row g-5">
                             <div class="col-12 col-lg-6 right-divider">
                                 <div class="mb-3">
                                     <label class="form-label">Photos</label>
@@ -65,6 +65,30 @@
                                             <p class="mb-0 fw-bold ms-3" style="margin-top: 35px;">No Photo</p>
                                         @endforelse
 
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="">Specimen Type</label>
+                                            <div class="form-floating">
+                                                <input type="text" name="specimen_type" form="trephineUpdateForm" class="form-control @error('specimen_type') is-invalid @enderror" id="specimen_type" placeholder="specimen_type" value="{{ old('specimen_type',$trephine->specimen_type) }}">
+                                                <label for="specimen_type">Enter Specimen Type</label>
+                                                @error('specimen_type')
+                                                <small class="invalid-feedback">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="">Price</label>
+                                            <div class="form-floating">
+                                                <input type="number" name="price" form="trephineUpdateForm" class="form-control @error('price') is-invalid @enderror" id="price" placeholder="price" value="{{ old('price',$trephine->price) }}">
+                                                <label for="price">Enter Price</label>
+                                                @error('price')
+                                                <small class="invalid-feedback">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 

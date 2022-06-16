@@ -66,8 +66,11 @@
                                 <td class="text-nowrap">{{ $aspirate->user->name ?? 'Unknown Owner' }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa-solid fa-print fa-fw"></i>
+                                        <a href="{{ route('aspirate.invoice',$aspirate->id) }}" class="btn btn-outline-primary btn-sm" title="Invoice">
+                                            <i class="fa-solid fa-receipt text-success"></i>
+                                        </a>
+                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="Print">
+                                            <i class="fa-solid fa-print"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li>
@@ -83,7 +86,7 @@
                                         </ul>
                                         @can('update',$aspirate)
                                             <a href="{{ route('aspirate.edit',$aspirate->id) }}" class="btn btn-outline-primary btn-sm" title="Edit">
-                                                <i class="fa-solid fa-pen fa-fw"></i>
+                                                <i class="fa-solid fa-pen text-info"></i>
                                             </a>
                                         @endcan
                                     </div>
@@ -169,8 +172,11 @@
                                 <td class="text-nowrap">{{ $trephine->user->name ?? 'Unknown Owner' }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa-solid fa-print fa-fw"></i>
+                                        <a href="{{ route('trephine.invoice',$trephine->id) }}" class="btn btn-outline-primary btn-sm" title="Invoice">
+                                            <i class="fa-solid fa-receipt text-success"></i>
+                                        </a>
+                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="Print">
+                                            <i class="fa-solid fa-print"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li>
@@ -186,7 +192,7 @@
                                         </ul>
                                         @can('update',$trephine)
                                             <a href="{{ route('trephine.edit',$trephine->id) }}" class="btn btn-outline-primary btn-sm" title="Edit">
-                                                <i class="fa-solid fa-pen fa-fw"></i>
+                                                <i class="fa-solid fa-pen text-info" ></i>
                                             </a>
                                         @endcan
                                     </div>
@@ -270,13 +276,16 @@
                                         <p class="mb-0 text-muted">No Photo</p>
                                     @endforelse
                                 </td>
-                                <td>{{ date('j/n/Y',strtotime($histo->bio_receive_date)) }}</td>
-                                <td>{{ date('j/n/Y',strtotime($histo->bio_cut_date)) }}</td>
-                                <td>{{ date('j/n/Y',strtotime($histo->bio_report_date)) }}</td>
+                                <td>{{ date('j/n/y',strtotime($histo->bio_receive_date)) }}</td>
+                                <td>{{ date('j/n/y',strtotime($histo->bio_cut_date)) }}</td>
+                                <td>{{ date('j/n/y',strtotime($histo->bio_report_date)) }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa-solid fa-print fa-fw"></i>
+                                        <a href="{{ route('histo.invoice',$histo->id) }}" class="btn btn-outline-primary btn-sm" title="Invoice">
+                                            <i class="fa-solid fa-receipt text-success"></i>
+                                        </a>
+                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="Print">
+                                            <i class="fa-solid fa-print"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li>
@@ -292,7 +301,7 @@
                                         </ul>
                                         @can('update',$histo)
                                             <a href="{{ route('histo.edit',$histo->id) }}" class="btn btn-outline-primary btn-sm" title="Edit">
-                                                <i class="fa-solid fa-pen fa-fw"></i>
+                                                <i class="fa-solid fa-pen text-info"></i>
                                             </a>
                                         @endcan
                                     </div>
@@ -375,13 +384,16 @@
                                         <p class="mb-0 text-muted">No Photo</p>
                                     @endforelse
                                 </td>
-                                <td>{{ date('j/n/Y',strtotime($cyto->bio_receive_date)) }}</td>
-                                <td>{{ date('j/n/Y',strtotime($cyto->bio_cut_date)) }}</td>
-                                <td>{{ date('j/n/Y',strtotime($cyto->bio_report_date)) }}</td>
+                                <td>{{ date('j/n/y',strtotime($cyto->bio_receive_date)) }}</td>
+                                <td>{{ date('j/n/y',strtotime($cyto->bio_cut_date)) }}</td>
+                                <td>{{ date('j/n/y',strtotime($cyto->bio_report_date)) }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa-solid fa-print fa-fw"></i>
+                                        <a href="{{ route('cyto.invoice',$cyto->id) }}" class="btn btn-outline-primary btn-sm" title="Invoice">
+                                            <i class="fa-solid fa-receipt text-success"></i>
+                                        </a>
+                                        <button class="btn btn-outline-primary btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" title="Print">
+                                            <i class="fa-solid fa-print"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li>
@@ -397,7 +409,7 @@
                                         </ul>
                                         @can('update',$cyto)
                                             <a href="{{ route('cyto.edit',$cyto->id) }}" class="btn btn-outline-primary btn-sm" title="Edit">
-                                                <i class="fa-solid fa-pen fa-fw"></i>
+                                                <i class="fa-solid fa-pen text-info"></i>
                                             </a>
                                         @endcan
                                     </div>

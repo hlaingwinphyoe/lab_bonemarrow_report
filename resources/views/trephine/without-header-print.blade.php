@@ -23,7 +23,7 @@
         @media print{
             @page{
                 size: A4;
-                margin: 10px 0.2in !important;
+                margin: 2in 0.2in 0.2in 0.2in !important;
             }
         }
 
