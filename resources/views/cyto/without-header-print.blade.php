@@ -136,7 +136,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 position-absolute bottom-0 mb-5">
+        <div class="col-12">
             <div class="">
                 <p class="mb-0">
                     This document is computer-generated and has been approved by authorized pathologists;
