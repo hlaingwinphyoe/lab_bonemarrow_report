@@ -59,6 +59,7 @@
                             </div>
                         </div>
                     </div>
+                    <div style="border-top: 1px solid black"></div>
                     <div class="row mt-2">
                         <div class="col-12">
                             <div class="ms-5 mt-2">
@@ -73,7 +74,7 @@
                                             <span class="second">{{ $patientFact->doctor }}</span>
                                         </div>
                                         <div class="print-header">
-                                            <span class="first">Cutting Date: &nbsp;</span>
+                                            <span class="first">Staining Date: &nbsp;</span>
                                             <span class="second">{{ date('d / M / Y',strtotime($patientFact->bio_cut_date)) }}</span>
                                         </div>
 
@@ -115,7 +116,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="print-header my-1">
-                                            <span class="first d-block mb-1 text-decoration-underline">Description</span>
+                                            <span class="first d-block mb-1 text-decoration-underline">Morphology</span>
                                             <div class="">
                                                 @forelse($patientFact->cytoPhotos as $key=>$photo)
                                                     <img src="{{ asset('storage/cyto_thumbnails/'.$photo->name) }}" class="rounded shadow-sm mb-1" height="130" alt="image alt"/>
@@ -124,7 +125,7 @@
                                                 @endforelse
                                             </div>
                                             <div class="">
-                                                {{ $patientFact->description }}
+                                                {{ $patientFact->morphology }}
                                             </div>
                                         </div>
                                         <div class="print-header my-1">

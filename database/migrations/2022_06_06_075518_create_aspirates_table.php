@@ -50,6 +50,8 @@ class CreateAspiratesTable extends Migration
             $table->longText('conclusion')->nullable();
             $table->longText('classification')->nullable();
             $table->longText('disease_code')->nullable();
+            $table->text('specimen_type');
+            $table->integer('price');
             $table->foreignId('hospital_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

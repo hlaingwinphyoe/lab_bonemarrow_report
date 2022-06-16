@@ -59,6 +59,7 @@
                             </div>
                         </div>
                     </div>
+                    <div style="border-top: 1px solid black"></div>
                     <div class="row">
                         <div class="col-12">
                             <div class="mt-2">

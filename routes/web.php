@@ -31,17 +31,22 @@ Route::get('/cyto-print/without-header/{patient_name}',[\App\Http\Controllers\Cy
 Route::middleware('auth')->group(function(){
     Route::get('/',[\App\Http\Controllers\PageController::class,'index'])->name('index');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('/hospital',\App\Http\Controllers\HospitalController::class);
-    Route::resource('/aspirate',\App\Http\Controllers\AspirateController::class)->except('show','destroy');
+    Route::resource('/hospital',\App\Http\Controllers\HospitalController::class)->except('show');
 
+    Route::resource('/aspirate',\App\Http\Controllers\AspirateController::class)->except('show','destroy');
+    Route::get('/aspirate-invoice/{id}',[\App\Http\Controllers\AspirateController::class, 'invoice'])->name('aspirate.invoice');
     Route::resource('/aspirate_photos',\App\Http\Controllers\AspiratePhotoController::class);
+
     Route::resource('/trephine',\App\Http\Controllers\TrephineController::class)->except('show','destroy');
+    Route::get('/trephine-invoice/{id}',[\App\Http\Controllers\TrephineController::class, 'invoice'])->name('trephine.invoice');
     Route::resource('/trephine_photos',\App\Http\Controllers\TrephinePhotoController::class);
 
     Route::resource('/histo',\App\Http\Controllers\HistoController::class)->except('show','destroy');
+    Route::get('/histo-invoice/{id}',[\App\Http\Controllers\HistoController::class, 'invoice'])->name('histo.invoice');
     Route::resource('/histo_photos',\App\Http\Controllers\HistoPhotoController::class);
 
     Route::resource('/cyto',\App\Http\Controllers\CytoController::class)->except('show','destroy');
+    Route::get('/cyto-invoice/{id}',[\App\Http\Controllers\CytoController::class, 'invoice'])->name('cyto.invoice');
     Route::resource('/cyto_photos',\App\Http\Controllers\CytoPhotoController::class);
 
 

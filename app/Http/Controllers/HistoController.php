@@ -47,6 +47,8 @@ class HistoController extends Controller
         $histo->age = $request->age;
         $histo->age_type = $request->age_type;
         $histo->gender = $request->gender;
+        $histo->specimen_type = $request->specimen_type;
+        $histo->price = $request->price;
         $histo->doctor = $request->doctor;
         $histo->bio_receive_date = $request->bio_receive_date;
         $histo->bio_cut_date = $request->bio_cut_date;
@@ -120,6 +122,8 @@ class HistoController extends Controller
         $histo->slug = Str::slug($request->name,'-');
         $histo->age = $request->age;
         $histo->age_type = $request->age_type;
+        $histo->specimen_type = $request->specimen_type;
+        $histo->price = $request->price;
         $histo->gender = $request->gender;
         $histo->doctor = $request->doctor;
         $histo->bio_receive_date = $request->bio_receive_date;
@@ -153,6 +157,11 @@ class HistoController extends Controller
     public function withoutHeaderPrint($patientName){
         $patientFact = Histo::where('slug','=',$patientName)->first();
         return view('histo.without-header-print',compact('patientFact'));
+    }
+
+    public function invoice($id){
+        $invoice = Histo::where('id','=',$id)->first();
+        return view('histo.invoice',compact('invoice'));
     }
 
 }

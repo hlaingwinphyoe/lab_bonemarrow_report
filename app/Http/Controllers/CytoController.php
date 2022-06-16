@@ -45,6 +45,8 @@ class CytoController extends Controller
         $cyto->slug = Str::slug($request->name,'-');
         $cyto->age = $request->age;
         $cyto->age_type = $request->age_type;
+        $cyto->specimen_type = $request->specimen_type;
+        $cyto->price = $request->price;
         $cyto->gender = $request->gender;
         $cyto->doctor = $request->doctor;
         $cyto->bio_receive_date = $request->bio_receive_date;
@@ -118,6 +120,8 @@ class CytoController extends Controller
         $cyto->age = $request->age;
         $cyto->age_type = $request->age_type;
         $cyto->gender = $request->gender;
+        $cyto->specimen_type = $request->specimen_type;
+        $cyto->price = $request->price;
         $cyto->doctor = $request->doctor;
         $cyto->bio_receive_date = $request->bio_receive_date;
         $cyto->bio_cut_date = $request->bio_cut_date;
@@ -150,6 +154,12 @@ class CytoController extends Controller
     public function withoutHeaderPrint($patientName){
         $patientFact = Cyto::where('slug','=',$patientName)->first();
         return view('cyto.without-header-print',compact('patientFact'));
+    }
+
+    // Invoice
+    public function invoice($id){
+        $invoice = Cyto::where('id','=',$id)->first();
+        return view('cyto.invoice',compact('invoice'));
     }
 
 }

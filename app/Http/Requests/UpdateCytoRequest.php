@@ -30,6 +30,8 @@ class UpdateCytoRequest extends FormRequest
             "age" => 'required|numeric|max:100',
             "age_type" => 'required',
             "gender" => 'required',
+            "specimen_type" => "required|min:3",
+            "price" => "required|numeric",
             "doctor" => 'required|min:3',
             "bio_receive_date" => 'required|date',
             "bio_cut_date" => 'required|date',

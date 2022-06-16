@@ -31,6 +31,8 @@ class StoreAspirateRequest extends FormRequest
             "patient_name" => 'required|min:3',
             "age" => 'required|numeric|max:100',
             "age_type" => 'required',
+            "specimen_type" => "required|min:3",
+            "price" => "required|numeric",
             "gender" => 'required',
             "contact_detail" => 'nullable|min:3',
             "physician_name" => 'required|min:3',

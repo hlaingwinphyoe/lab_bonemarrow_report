@@ -27,6 +27,8 @@ class CreateCytosTable extends Migration
             $table->date('bio_report_date');
             $table->longText('morphology')->nullable();
             $table->longText('cyto_diagnosis')->nullable();
+            $table->text('specimen_type');
+            $table->integer('price');
             $table->foreignId('hospital_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

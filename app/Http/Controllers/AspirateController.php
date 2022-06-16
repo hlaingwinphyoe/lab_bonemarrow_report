@@ -48,6 +48,8 @@ class AspirateController extends Controller
         $aspirate->slug = Str::slug($request->patient_name,'-');
         $aspirate->age = $request->age;
         $aspirate->age_type = $request->age_type;
+        $aspirate->specimen_type = $request->specimen_type;
+        $aspirate->price = $request->price;
         $aspirate->gender = $request->gender;
         $aspirate->contact_detail = $request->contact_detail;
         $aspirate->physician_name = $request->physician_name;
@@ -145,6 +147,8 @@ class AspirateController extends Controller
         $aspirate->slug = Str::slug($request->patient_name,'-');
         $aspirate->age = $request->age;
         $aspirate->age_type = $request->age_type;
+        $aspirate->specimen_type = $request->specimen_type;
+        $aspirate->price = $request->price;
         $aspirate->gender = $request->gender;
         $aspirate->contact_detail = $request->contact_detail;
         $aspirate->physician_name = $request->physician_name;
@@ -200,6 +204,11 @@ class AspirateController extends Controller
     public function withoutHeaderPrint($patientName){
         $patientFact = Aspirate::where('slug','=',$patientName)->first();
         return view('aspirate.without-header-print',compact('patientFact'));
+    }
+
+    public function invoice($id){
+        $invoice = Aspirate::where('id','=',$id)->first();
+        return view('aspirate.invoice',compact('invoice'));
     }
 
 }
