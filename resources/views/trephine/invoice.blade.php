@@ -56,7 +56,7 @@
                                 <h4 class="text-uppercase mb-0">Receipt</h4>
                                 <p class="mb-0">
                                     scan ဖတ်၍ အဖြေကြည့်ရှုနိုင်ပါသည်။ 👉
-                                    {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/cyto-print/'.$invoice->slug, 'DATAMATRIX',3,3) !!}
+                                    {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/trephine-print/'.$invoice->slug, 'DATAMATRIX',3,3) !!}
                                 </p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
