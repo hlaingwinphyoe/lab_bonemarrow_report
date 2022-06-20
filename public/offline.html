@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+        *{
+            font-family: "Rubik", "Padauk", sans-serif;
+        }
         .error_body {
             margin: 0;
             padding: 0;
@@ -42,15 +45,15 @@
 
         .error_container .error_message,
         .error_container .error_paragraph {
-            color: #787878;
+            color: #000000;
         }
     </style>
 </head>
 <body>
 <div class="error_body">
     <div class="container error_container d-flex justify-content-center align-items-center flex-column w-100 h-100 p-5 text-center">
-        <h2 class="error_message text-center mb-3" style="text-transform: uppercase">You are not connected to any network.</h2>
-        <p class="error_paragraph text-center mb-5">
+        <p class="error_message text-center mb-3" style="text-transform: uppercase; font-size: 3rem;">You are not connected to any network.</p>
+        <p class="error_paragraph text-center mb-5" style="font-size: 1.5rem">
             Please check your network connection and try again.
         </p>
     </div>

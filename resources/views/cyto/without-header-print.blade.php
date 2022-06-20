@@ -104,7 +104,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="print-header my-1">
-                                            <span class="first d-block mb-1 text-decoration-underline">Description</span>
+                                            <span class="first d-block mb-1 text-decoration-underline">Morphology</span>
                                             <div class="">
                                                 @forelse($patientFact->cytoPhotos as $key=>$photo)
                                                     <img src="{{ asset('storage/cyto_thumbnails/'.$photo->name) }}" class="rounded shadow-sm mb-1" height="130" alt="image alt"/>
@@ -113,7 +113,7 @@
                                                 @endforelse
                                             </div>
                                             <div class="">
-                                                {{ $patientFact->description }}
+                                                {{ $patientFact->morphology }}
                                             </div>
                                         </div>
                                         <div class="print-header my-1">
