@@ -18,18 +18,18 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <a href="{{ route('aspirate.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
-                            @isset(request()->search)
+                            @isset(request()->aspirateSearch)
                                 <a href="{{ route("index") }}" class="btn btn-outline-primary btn-sm mb-3 me-2">
                                     <i class="feather-list"></i>
                                     All Reports
                                 </a>
-                                <span>Search By : <b>" {{ request()->search }} "</b></span>
+                                <span>Search By : <b>" {{ request()->aspirateSearch }} "</b></span>
                             @endisset
                         </div>
                         <div class="mb-2">
                             <form method="get" class="">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="Search Something...">
+                                    <input type="text" class="form-control" name="aspirateSearch" value="{{ request()->aspirateSearch }}" placeholder="Search Something...">
                                     <button class="btn btn-primary btn-sm" type="submit">
                                         <i class="fa-solid fa-search fa-fw"></i>
                                     </button>
@@ -124,18 +124,18 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <a href="{{ route('trephine.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
-                            @isset(request()->search)
+                            @isset(request()->trephineSearch)
                                 <a href="{{ route("index") }}" class="btn btn-outline-primary btn-sm mb-3 me-2">
                                     <i class="feather-list"></i>
                                     All Reports
                                 </a>
-                                <span>Search By : <b>" {{ request()->search }} "</b></span>
+                                <span>Search By : <b>" {{ request()->trephineSearch }} "</b></span>
                             @endisset
                         </div>
                         <div class="mb-2">
                             <form method="get" class="">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="Search Something...">
+                                    <input type="text" class="form-control" name="trephineSearch" value="{{ request()->trephineSearch }}" placeholder="Search Something...">
                                     <button class="btn btn-primary btn-sm" type="submit">
                                         <i class="fa-solid fa-search fa-fw"></i>
                                     </button>
@@ -230,18 +230,18 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <a href="{{ route('histo.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
-                            @isset(request()->search)
+                            @isset(request()->histoSearch)
                                 <a href="{{ route("index") }}" class="btn btn-outline-primary btn-sm mb-3 me-2">
                                     <i class="feather-list"></i>
                                     All Reports
                                 </a>
-                                <span>Search By : <b>" {{ request()->search }} "</b></span>
+                                <span>Search By : <b>" {{ request()->histoSearch }} "</b></span>
                             @endisset
                         </div>
                         <div class="mb-2">
                             <form method="get" class="">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="Search Something...">
+                                    <input type="text" class="form-control" name="histoSearch" value="{{ request()->histoSearch }}" placeholder="Search Something...">
                                     <button class="btn btn-primary btn-sm" type="submit">
                                         <i class="fa-solid fa-search fa-fw"></i>
                                     </button>
@@ -338,18 +338,18 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <a href="{{ route('cyto.create') }}" class="btn btn-sm btn-primary mb-3 text-uppercase"><i class="fa fa-plus"></i> Create</a>
-                            @isset(request()->search)
+                            @isset(request()->cytoSearch)
                                 <a href="{{ route("index") }}" class="btn btn-outline-primary btn-sm mb-3 me-2">
                                     <i class="feather-list"></i>
                                     All Reports
                                 </a>
-                                <span>Search By : <b>" {{ request()->search }} "</b></span>
+                                <span>Search By : <b>" {{ request()->cytoSearch }} "</b></span>
                             @endisset
                         </div>
                         <div class="mb-2">
                             <form method="get" class="">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="search" value="{{ request()->search }}" placeholder="Search Something...">
+                                    <input type="text" class="form-control" name="cytoSearch" value="{{ request()->cytoSearch }}" placeholder="Search Something...">
                                     <button class="btn btn-primary btn-sm" type="submit">
                                         <i class="fa-solid fa-search fa-fw"></i>
                                     </button>
