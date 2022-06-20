@@ -132,14 +132,6 @@
                                             <span class="first d-block text-decoration-underline">Cytological Diagnosis</span>
                                             <span>{{ $patientFact->cyto_diagnosis }}</span>
                                         </div>
-                                        <div class="print-header mt-2">
-                                            <span class="first ">Authorize By: </span>
-                                            @if(isset($patientFact->user->signature))
-                                                <span><img src="{{ asset('storage/signature_thumbnails/'.$patientFact->user->signature) }}" style="width: 70px;height: 40px" alt=""></span>
-                                            @else
-                                                <span>{{ $patientFact->user->name }}</span>
-                                            @endif
-                                        </div>
                                     </div>
                                 </div>
                             </div>
