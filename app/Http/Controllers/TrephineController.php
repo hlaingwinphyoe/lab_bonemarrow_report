@@ -190,13 +190,13 @@ class TrephineController extends Controller
         //
     }
 
-    public function print($patientName){
-        $patientFact = Trephine::where('slug','=',$patientName)->first();
+    public function print($id){
+        $patientFact = Trephine::where('id','=',$id)->first();
         return view('trephine.print',compact('patientFact'));
     }
 
-    public function withoutHeaderPrint($patientName){
-        $patientFact = Trephine::where('slug','=',$patientName)->first();
+    public function withoutHeaderPrint($id){
+        $patientFact = Trephine::where('id','=',$id)->first();
         return view('trephine.without-header-print',compact('patientFact'));
     }
 

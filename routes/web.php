@@ -15,17 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 
-Route::get('/aspirate-print/{patient_name}',[\App\Http\Controllers\AspirateController::class, 'print'])->name('aspirate.print');
-Route::get('/aspirate-print/without-header/{patient_name}',[\App\Http\Controllers\AspirateController::class, 'withoutHeaderPrint'])->name('aspirate.without.print');
+Route::get('/aspirate-print/{id}',[\App\Http\Controllers\AspirateController::class, 'print'])->name('aspirate.print');
+Route::get('/aspirate-print/without-header/{id}',[\App\Http\Controllers\AspirateController::class, 'withoutHeaderPrint'])->name('aspirate.without.print');
 
-Route::get('/trephine-print/{patient_name}',[\App\Http\Controllers\TrephineController::class, 'print'])->name('trephine.print');
-Route::get('/trephine-print/without-header/{patient_name}',[\App\Http\Controllers\TrephineController::class, 'withoutHeaderPrint'])->name('trephine.without.print');
+Route::get('/trephine-print/{id}',[\App\Http\Controllers\TrephineController::class, 'print'])->name('trephine.print');
+Route::get('/trephine-print/without-header/{id}',[\App\Http\Controllers\TrephineController::class, 'withoutHeaderPrint'])->name('trephine.without.print');
 
-Route::get('/histo-print/{patient_name}',[\App\Http\Controllers\HistoController::class, 'print'])->name('histo.print');
-Route::get('/histo-print/without-header/{patient_name}',[\App\Http\Controllers\HistoController::class, 'withoutHeaderPrint'])->name('histo.without.print');
+Route::get('/histo-print/{id}',[\App\Http\Controllers\HistoController::class, 'print'])->name('histo.print');
+Route::get('/histo-print/without-header/{id}',[\App\Http\Controllers\HistoController::class, 'withoutHeaderPrint'])->name('histo.without.print');
 
-Route::get('/cyto-print/{patient_name}',[\App\Http\Controllers\CytoController::class, 'print'])->name('cyto.print');
-Route::get('/cyto-print/without-header/{patient_name}',[\App\Http\Controllers\CytoController::class, 'withoutHeaderPrint'])->name('cyto.without.print');
+Route::get('/cyto-print/{id}',[\App\Http\Controllers\CytoController::class, 'print'])->name('cyto.print');
+Route::get('/cyto-print/without-header/{id}',[\App\Http\Controllers\CytoController::class, 'withoutHeaderPrint'])->name('cyto.without.print');
 
 
 Route::middleware('auth')->group(function(){
