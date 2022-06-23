@@ -74,12 +74,12 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('aspirate.print',$aspirate->slug) }}">
+                                                <a class="dropdown-item" href="{{ route('aspirate.print',$aspirate->id) }}">
                                                     With Header
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('aspirate.without.print',$aspirate->slug) }}">
+                                                <a class="dropdown-item" href="{{ route('aspirate.without.print',$aspirate->id) }}">
                                                     Without Header
                                                 </a>
                                             </li>
@@ -180,12 +180,12 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('trephine.print',$trephine->slug) }}">
+                                                <a class="dropdown-item" href="{{ route('trephine.print',$trephine->id) }}">
                                                     With Header
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('trephine.without.print',$trephine->slug) }}">
+                                                <a class="dropdown-item" href="{{ route('trephine.without.print',$trephine->id) }}">
                                                     Without Header
                                                 </a>
                                             </li>
@@ -289,12 +289,12 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('histo.print',$histo->slug) }}">
+                                                <a class="dropdown-item" href="{{ route('histo.print',$histo->id) }}">
                                                     With Header
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('histo.without.print',$histo->slug) }}">
+                                                <a class="dropdown-item" href="{{ route('histo.without.print',$histo->id) }}">
                                                     Without Header
                                                 </a>
                                             </li>
@@ -397,12 +397,12 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('cyto.print',$cyto->slug) }}">
+                                                <a class="dropdown-item" href="{{ route('cyto.print',$cyto->id) }}">
                                                     With Header
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('cyto.without.print',$cyto->slug) }}">
+                                                <a class="dropdown-item" href="{{ route('cyto.without.print',$cyto->id) }}">
                                                     Without Header
                                                 </a>
                                             </li>

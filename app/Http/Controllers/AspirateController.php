@@ -196,13 +196,13 @@ class AspirateController extends Controller
     }
 
     // Print Section
-    public function print($patientName){
-        $patientFact = Aspirate::where('slug','=',$patientName)->first();
+    public function print($id){
+        $patientFact = Aspirate::where('id','=',$id)->first();
         return view('aspirate.print',compact('patientFact'));
     }
 
-    public function withoutHeaderPrint($patientName){
-        $patientFact = Aspirate::where('slug','=',$patientName)->first();
+    public function withoutHeaderPrint($id){
+        $patientFact = Aspirate::where('id','=',$id)->first();
         return view('aspirate.without-header-print',compact('patientFact'));
     }
 

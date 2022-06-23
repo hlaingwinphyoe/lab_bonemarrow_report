@@ -150,12 +150,12 @@ class HistoController extends Controller
         //
     }
 
-    public function print($patientName){
-        $patientFact = Histo::where('slug','=',$patientName)->first();
+    public function print($id){
+        $patientFact = Histo::where('id','=',$id)->first();
         return view('histo.print',compact('patientFact'));
     }
-    public function withoutHeaderPrint($patientName){
-        $patientFact = Histo::where('slug','=',$patientName)->first();
+    public function withoutHeaderPrint($id){
+        $patientFact = Histo::where('id','=',$id)->first();
         return view('histo.without-header-print',compact('patientFact'));
     }
 

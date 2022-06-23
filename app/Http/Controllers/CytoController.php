@@ -146,13 +146,13 @@ class CytoController extends Controller
         //
     }
 
-    public function print($patientName){
-        $patientFact = Cyto::where('slug','=',$patientName)->first();
+    public function print($id){
+        $patientFact = Cyto::where('id','=',$id)->first();
         return view('cyto.print',compact('patientFact'));
     }
 
-    public function withoutHeaderPrint($patientName){
-        $patientFact = Cyto::where('slug','=',$patientName)->first();
+    public function withoutHeaderPrint($id){
+        $patientFact = Cyto::where('id','=',$id)->first();
         return view('cyto.without-header-print',compact('patientFact'));
     }
 
