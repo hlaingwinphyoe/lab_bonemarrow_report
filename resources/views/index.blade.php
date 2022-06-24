@@ -7,9 +7,13 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0 fw-bold">
-                            <i class="fa-solid fa-th-list text-primary me-1"></i> Aspirate Report Lists
-                        </h4>
+                        <div class="d-flex align-items-center">
+                            <h4 class="mb-0 fw-bold">
+                                <i class="fa-solid fa-th-list text-primary me-1"></i>
+                                Aspirate Report Lists
+                            </h4>
+                            <h5 class="mb-0 badge bg-primary ms-1">{{ $aspirates->total() }}</h5>
+                        </div>
                         <button type="button" class="btn btn-outline-secondary btn-sm full-screen-btn" >
                             <i class="fa-solid fa-maximize" title="maximize"></i>
                         </button>
@@ -101,10 +105,7 @@
                         @endforelse
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-between align-items-center">
-                        {{ $aspirates->appends(request()->all())->links() }}
-                        <p class="mb-0 fw-bolder h5">Total : {{ $aspirates->total() }}</p>
-                    </div>
+                    {{ $aspirates->appends(request()->all())->onEachSide(1)->links() }}
 
                 </div>
             </div>
@@ -113,9 +114,13 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0 fw-bold">
-                            <i class="fa-solid fa-th-list text-primary me-1"></i> Trephine Report Lists
-                        </h4>
+                        <div class="d-flex align-items-center">
+                            <h4 class="mb-0 fw-bold">
+                                <i class="fa-solid fa-th-list text-primary me-1"></i>
+                                Trephine Report Lists
+                            </h4>
+                            <h5 class="mb-0 badge bg-primary ms-1">{{ $trephines->total() }}</h5>
+                        </div>
                         <button type="button" class="btn btn-outline-secondary btn-sm full-screen-btn" >
                             <i class="fa-solid fa-maximize" title="maximize"></i>
                         </button>
@@ -207,10 +212,7 @@
                         @endforelse
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-between align-items-center">
-                        {{ $trephines->appends(request()->all())->links() }}
-                        <p class="mb-0 fw-bolder h5">Total : {{ $trephines->total() }}</p>
-                    </div>
+                    {{ $trephines->appends(request()->all())->onEachSide(1)->links() }}
 
                 </div>
             </div>
@@ -219,9 +221,13 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0 fw-bold">
-                            <i class="fa-solid fa-th-list text-primary me-1"></i> Histo Report Lists
-                        </h4>
+                        <div class="d-flex align-items-center">
+                            <h4 class="mb-0 fw-bold">
+                                <i class="fa-solid fa-th-list text-primary me-1"></i>
+                                Histo Report Lists
+                            </h4>
+                            <h5 class="mb-0 badge bg-primary ms-1">{{ $histos->total() }}</h5>
+                        </div>
                         <button type="button" class="btn btn-outline-secondary btn-sm full-screen-btn" >
                             <i class="fa-solid fa-maximize" title="maximize"></i>
                         </button>
@@ -315,10 +321,7 @@
                         @endforelse
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-between align-items-center">
-                        {{ $histos->appends(request()->all())->links() }}
-                        <p class="mb-0 fw-bolder h5">Total : {{ $histos->total() }}</p>
-                    </div>
+                    {{ $histos->appends(request()->all())->onEachSide(1)->links() }}
 
                 </div>
             </div>
@@ -327,9 +330,13 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0 fw-bold">
-                            <i class="fa-solid fa-th-list text-primary me-1"></i> Cyto Report Lists
-                        </h4>
+                        <div class="d-flex align-items-center">
+                            <h4 class="mb-0 fw-bold">
+                                <i class="fa-solid fa-th-list text-primary me-1"></i>
+                                Cyto Report Lists
+                            </h4>
+                            <h5 class="mb-0 badge bg-primary ms-1">{{ $cytos->total() }}</h5>
+                        </div>
                         <button type="button" class="btn btn-outline-secondary btn-sm full-screen-btn" >
                             <i class="fa-solid fa-maximize" title="maximize"></i>
                         </button>
@@ -423,10 +430,7 @@
                         @endforelse
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-between align-items-center">
-                        {{ $cytos->appends(request()->all())->links() }}
-                        <p class="mb-0 fw-bolder h5">Total : {{ $cytos->total() }}</p>
-                    </div>
+                    {{ $cytos->appends(request()->all())->onEachSide(1)->links() }}
 
                 </div>
             </div>
