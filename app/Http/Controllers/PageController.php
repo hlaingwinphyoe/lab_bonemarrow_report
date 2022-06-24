@@ -71,7 +71,7 @@ class PageController extends Controller
         $currentUser = User::findOrFail($id);
         $currentName = $currentUser->name;
         $currentUser->delete();
-        return redirect()->back()->with('success',"<b>".$currentName."</b> User has been deleted.");
+        return redirect()->back()->with('success',$currentName." User has been deleted.");
 
     }
 
@@ -81,7 +81,7 @@ class PageController extends Controller
             $currentUser->role = '0';
             $currentUser->update();
         }
-        return redirect()->back()->with('success',"<b>".$currentUser->name."</b>"." has been changed to Admin");
+        return redirect()->back()->with('success',$currentUser->name." has been changed to Admin");
     }
 
 }

@@ -10284,6 +10284,10 @@ textarea.form-control-lg {
   font-family: "Rubik", "Padauk", sans-serif;
 }
 
+.card {
+  overflow: scroll;
+}
+
 .file-upload {
   display: inline-flex;
   align-items: center;
