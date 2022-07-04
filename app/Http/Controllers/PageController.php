@@ -38,11 +38,6 @@ class PageController extends Controller
         return view('users',compact('users'));
     }
 
-    public function registration()
-    {
-        return view('auth.register');
-    }
-
 
     public function postRegistration(Request $request)
     {

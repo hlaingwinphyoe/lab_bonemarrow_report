@@ -54,7 +54,6 @@ Route::middleware('auth')->group(function(){
 
     Route::middleware('AdminOnly')->group(function(){
         // Custom User Register
-        Route::get('/user-register', [\App\Http\Controllers\PageController::class, 'registration'])->name('register');
         Route::get('/users', [\App\Http\Controllers\PageController::class, 'users'])->name('users');
         Route::post('/user-register', [\App\Http\Controllers\PageController::class, 'postRegistration'])->name('register.post');
         Route::delete('/user-delete/{id}', [\App\Http\Controllers\PageController::class, 'destroy'])->name('user.destroy');
