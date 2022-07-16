@@ -7,6 +7,7 @@ use App\Http\Requests\StoreHistoRequest;
 use App\Http\Requests\UpdateHistoRequest;
 use App\Models\HistoPhoto;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Milon\Barcode\DNS2D;
@@ -106,6 +107,7 @@ class HistoController extends Controller
      */
     public function edit(Histo $histo)
     {
+        Gate::authorize('update',$histo);
         return view('histo.edit',compact('histo'));
     }
 

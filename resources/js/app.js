@@ -12,12 +12,14 @@ $(".hide-sidebar-btn").click(function () {
 });
 
 // loader
-$(window).on('load',function (){
-    $('.loader-container').fadeOut(500, function(){
-        $(this).remove();
-    });
-});
-
+let spinner = function () {
+    setTimeout(function () {
+        if ($('#spinner').length > 0) {
+            $('#spinner').removeClass('show');
+        }
+    }, 1);
+};
+spinner();
 
 let screenHeight = $(window).height();
 

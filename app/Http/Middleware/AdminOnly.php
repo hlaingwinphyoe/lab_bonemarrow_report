@@ -18,7 +18,7 @@ class AdminOnly
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user()->role != 0){
-            return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
+            return redirect()->route('denied');
         }
         return $next($request);
     }
