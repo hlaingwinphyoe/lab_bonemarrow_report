@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCytoRequest;
 use App\Http\Requests\UpdateCytoRequest;
 use App\Models\CytoPhoto;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -19,7 +20,7 @@ class CytoController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('denied');
     }
 
     /**
@@ -92,7 +93,7 @@ class CytoController extends Controller
      */
     public function show(Cyto $cyto)
     {
-        //
+        return redirect()->route('index');
     }
 
     /**
@@ -103,6 +104,7 @@ class CytoController extends Controller
      */
     public function edit(Cyto $cyto)
     {
+        Gate::authorize('update',$cyto);
         return view('cyto.edit',compact('cyto'));
     }
 

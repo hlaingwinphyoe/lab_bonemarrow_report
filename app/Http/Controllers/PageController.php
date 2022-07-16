@@ -8,6 +8,7 @@ use App\Models\Histo;
 use App\Models\Trephine;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class PageController extends Controller
@@ -16,19 +17,19 @@ class PageController extends Controller
         $aspirates = Aspirate::when(isset(request()->aspirateSearch),function ($query){
             $aspirateSearch = request()->aspirateSearch;
             $query->where('patient_name','LIKE',"%$aspirateSearch%")->orwhere('sc_date','LIKE',"%$aspirateSearch%");
-        })->latest('id')->paginate(5,['*'],'aspiratePage');
+        })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))->latest('id')->paginate(5,['*'],'aspiratePage');
         $trephines = Trephine::when(isset(request()->trephineSearch),function ($query){
             $trephineSearch = request()->trephineSearch;
             $query->where('patient_name','LIKE',"%$trephineSearch%")->orwhere('sc_date','LIKE',"%$trephineSearch%");
-        })->latest('id')->paginate(5,['*'],'trephinePage');
+        })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))->latest('id')->paginate(5,['*'],'trephinePage');
         $histos = Histo::when(isset(request()->histoSearch),function ($query){
             $histoSearch = request()->histoSearch;
             $query->where('name','LIKE',"%$histoSearch%")->orwhere('bio_receive_date','LIKE',"%$histoSearch%")->orwhere('bio_cut_date','LIKE',"%$histoSearch%")->orwhere('bio_report_date','LIKE',"%$histoSearch%");
-        })->latest('id')->paginate(5,['*'],'histoPage');
+        })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))->latest('id')->paginate(5,['*'],'histoPage');
         $cytos = Cyto::when(isset(request()->cytoSearch),function ($query){
             $cytoSearch = request()->cytoSearch;
             $query->where('name','LIKE',"%$cytoSearch%")->orwhere('bio_receive_date','LIKE',"%$cytoSearch%")->orwhere('bio_cut_date','LIKE',"%$cytoSearch%")->orwhere('bio_report_date','LIKE',"%$cytoSearch%");
-        })->latest('id')->paginate(5,['*'],'cytoPage');
+        })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))->latest('id')->paginate(5,['*'],'cytoPage');
 
         return view('index',['aspirates'=>$aspirates,'trephines'=>$trephines,'histos'=>$histos,'cytos'=>$cytos]);
     }
@@ -77,6 +78,11 @@ class PageController extends Controller
             $currentUser->update();
         }
         return redirect()->back()->with('success',$currentUser->name." has been changed to Admin");
+    }
+
+    // 404 Page
+    public function denied(){
+        return view('denied');
     }
 
 }

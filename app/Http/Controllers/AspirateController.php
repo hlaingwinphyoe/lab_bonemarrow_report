@@ -20,7 +20,7 @@ class AspirateController extends Controller
      */
     public function index()
     {
-        return redirect()->route('index');
+        return redirect()->route('denied');
     }
 
     /**

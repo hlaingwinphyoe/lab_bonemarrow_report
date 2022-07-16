@@ -1,5 +1,16 @@
 <?php
 
+use App\Http\Controllers\AspirateController;
+use App\Http\Controllers\AspiratePhotoController;
+use App\Http\Controllers\CytoController;
+use App\Http\Controllers\CytoPhotoController;
+use App\Http\Controllers\HistoController;
+use App\Http\Controllers\HistoPhotoController;
+use App\Http\Controllers\HospitalController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrephineController;
+use App\Http\Controllers\TrephinePhotoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,59 +26,62 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 
-Route::get('/aspirate-print/{id}',[\App\Http\Controllers\AspirateController::class, 'print'])->name('aspirate.print');
-Route::get('/aspirate-print/without-header/{id}',[\App\Http\Controllers\AspirateController::class, 'withoutHeaderPrint'])->name('aspirate.without.print');
+Route::get('/aspirate-print/{id}',[AspirateController::class, 'print'])->name('aspirate.print');
+Route::get('/aspirate-print/without-header/{id}',[AspirateController::class, 'withoutHeaderPrint'])->name('aspirate.without.print');
 
-Route::get('/trephine-print/{id}',[\App\Http\Controllers\TrephineController::class, 'print'])->name('trephine.print');
-Route::get('/trephine-print/without-header/{id}',[\App\Http\Controllers\TrephineController::class, 'withoutHeaderPrint'])->name('trephine.without.print');
+Route::get('/trephine-print/{id}',[TrephineController::class, 'print'])->name('trephine.print');
+Route::get('/trephine-print/without-header/{id}',[TrephineController::class, 'withoutHeaderPrint'])->name('trephine.without.print');
 
-Route::get('/histo-print/{id}',[\App\Http\Controllers\HistoController::class, 'print'])->name('histo.print');
-Route::get('/histo-print/without-header/{id}',[\App\Http\Controllers\HistoController::class, 'withoutHeaderPrint'])->name('histo.without.print');
+Route::get('/histo-print/{id}',[HistoController::class, 'print'])->name('histo.print');
+Route::get('/histo-print/without-header/{id}',[HistoController::class, 'withoutHeaderPrint'])->name('histo.without.print');
 
-Route::get('/cyto-print/{id}',[\App\Http\Controllers\CytoController::class, 'print'])->name('cyto.print');
-Route::get('/cyto-print/without-header/{id}',[\App\Http\Controllers\CytoController::class, 'withoutHeaderPrint'])->name('cyto.without.print');
+Route::get('/cyto-print/{id}',[CytoController::class, 'print'])->name('cyto.print');
+Route::get('/cyto-print/without-header/{id}',[CytoController::class, 'withoutHeaderPrint'])->name('cyto.without.print');
 
 
 Route::middleware('auth')->group(function(){
-    Route::get('/',[\App\Http\Controllers\PageController::class,'index'])->name('index');
+    Route::get('/',[PageController::class,'index'])->name('index');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('/hospital',\App\Http\Controllers\HospitalController::class)->except('show');
+    Route::resource('/hospital',HospitalController::class)->except('show');
 
-    Route::resource('/aspirate',\App\Http\Controllers\AspirateController::class)->except('show','destroy');
-    Route::get('/aspirate-invoice/{id}',[\App\Http\Controllers\AspirateController::class, 'invoice'])->name('aspirate.invoice');
-    Route::resource('/aspirate_photos',\App\Http\Controllers\AspiratePhotoController::class);
+    Route::resource('/aspirate',AspirateController::class)->except('show','destroy');
+    Route::get('/aspirate-invoice/{id}',[AspirateController::class, 'invoice'])->name('aspirate.invoice');
+    Route::resource('/aspirate_photos',AspiratePhotoController::class);
 
-    Route::resource('/trephine',\App\Http\Controllers\TrephineController::class)->except('show','destroy');
-    Route::get('/trephine-invoice/{id}',[\App\Http\Controllers\TrephineController::class, 'invoice'])->name('trephine.invoice');
-    Route::resource('/trephine_photos',\App\Http\Controllers\TrephinePhotoController::class);
+    Route::resource('/trephine',TrephineController::class)->except('show','destroy');
+    Route::get('/trephine-invoice/{id}',[TrephineController::class, 'invoice'])->name('trephine.invoice');
+    Route::resource('/trephine_photos',TrephinePhotoController::class);
 
-    Route::resource('/histo',\App\Http\Controllers\HistoController::class)->except('show','destroy');
-    Route::get('/histo-invoice/{id}',[\App\Http\Controllers\HistoController::class, 'invoice'])->name('histo.invoice');
-    Route::resource('/histo_photos',\App\Http\Controllers\HistoPhotoController::class);
+    Route::resource('/histo',HistoController::class)->except('show','destroy');
+    Route::get('/histo-invoice/{id}',[HistoController::class, 'invoice'])->name('histo.invoice');
+    Route::resource('/histo_photos',HistoPhotoController::class);
 
-    Route::resource('/cyto',\App\Http\Controllers\CytoController::class)->except('show','destroy');
-    Route::get('/cyto-invoice/{id}',[\App\Http\Controllers\CytoController::class, 'invoice'])->name('cyto.invoice');
-    Route::resource('/cyto_photos',\App\Http\Controllers\CytoPhotoController::class);
+    Route::resource('/cyto',CytoController::class)->except('show','destroy');
+    Route::get('/cyto-invoice/{id}',[CytoController::class, 'invoice'])->name('cyto.invoice');
+    Route::resource('/cyto_photos',CytoPhotoController::class);
 
 
-    Route::get('/search',[\App\Http\Controllers\PageController::class,'search']);
+    Route::get('/search',[PageController::class,'search']);
 
     Route::middleware('AdminOnly')->group(function(){
         // Custom User Register
-        Route::get('/users', [\App\Http\Controllers\PageController::class, 'users'])->name('users');
-        Route::post('/user-register', [\App\Http\Controllers\PageController::class, 'postRegistration'])->name('register.post');
-        Route::delete('/user-delete/{id}', [\App\Http\Controllers\PageController::class, 'destroy'])->name('user.destroy');
-        Route::post('/make-admin', [\App\Http\Controllers\PageController::class, 'makeAdmin'])->name('user.makeAdmin');
+        Route::get('/users', [PageController::class, 'users'])->name('users');
+        Route::post('/user-register', [PageController::class, 'postRegistration'])->name('register.post');
+        Route::delete('/user-delete/{id}', [PageController::class, 'destroy'])->name('user.destroy');
+        Route::post('/make-admin', [PageController::class, 'makeAdmin'])->name('user.makeAdmin');
     });
 
     Route::prefix('profile')->group(function(){
         // Main Frame Route
-        Route::get('/',[\App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
-        Route::post('/change-password',[\App\Http\Controllers\ProfileController::class, 'changePassword'])->name('profile.changePassword');
-        Route::post('/change-name',[\App\Http\Controllers\ProfileController::class, 'changeName'])->name('profile.changeName');
-        Route::post('/change-email',[\App\Http\Controllers\ProfileController::class, 'changeEmail'])->name('profile.changeEmail');
-        Route::post('/change-photo',[\App\Http\Controllers\ProfileController::class, 'changePhoto'])->name('profile.changePhoto');
-        Route::post('/signature_thumbnails',[\App\Http\Controllers\ProfileController::class, 'signature'])->name('profile.signature_thumbnails');
+        Route::get('/',[ProfileController::class, 'profile'])->name('profile');
+        Route::post('/change-password',[ProfileController::class, 'changePassword'])->name('profile.changePassword');
+        Route::post('/change-name',[ProfileController::class, 'changeName'])->name('profile.changeName');
+        Route::post('/change-email',[ProfileController::class, 'changeEmail'])->name('profile.changeEmail');
+        Route::post('/change-photo',[ProfileController::class, 'changePhoto'])->name('profile.changePhoto');
+        Route::post('/signature_thumbnails',[ProfileController::class, 'signature'])->name('profile.signature_thumbnails');
     });
+
+    // 404 page
+    Route::get('/denied',[PageController::class,'denied'])->name('denied');
 
 });

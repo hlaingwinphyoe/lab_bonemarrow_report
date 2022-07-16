@@ -28,13 +28,14 @@
     @yield('head')
 </head>
 <body class="bg-body">
-<div class="d-flex justify-content-center align-items-center vh-100 loader-container">
-    <span class="loader"></span>
-</div>
 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
     @csrf
 </form>
 <div class="container-fluid">
+    <div id="spinner"
+         class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <span class="loader"></span>
+    </div>
     <div class="row">
         @include('layouts.sidebar')
         <div class="col-12 col-lg-9 col-xl-10 vh-100 py-3 content">

@@ -12,7 +12,7 @@
                                 <i class="fa-solid fa-th-list text-primary me-1"></i>
                                 Aspirate Report Lists
                             </h4>
-                            <h5 class="mb-0 badge bg-primary ms-1">{{ $aspirates->total() }}</h5>
+                            <h5 class="mb-0 badge bg-primary ms-1 p-2">{{ $aspirates->total() }}</h5>
                         </div>
                         <button type="button" class="btn btn-outline-secondary btn-sm full-screen-btn" >
                             <i class="fa-solid fa-maximize" title="maximize"></i>
@@ -119,7 +119,7 @@
                                 <i class="fa-solid fa-th-list text-primary me-1"></i>
                                 Trephine Report Lists
                             </h4>
-                            <h5 class="mb-0 badge bg-primary ms-1">{{ $trephines->total() }}</h5>
+                            <h5 class="mb-0 badge bg-primary ms-1 p-2">{{ $trephines->total() }}</h5>
                         </div>
                         <button type="button" class="btn btn-outline-secondary btn-sm full-screen-btn" >
                             <i class="fa-solid fa-maximize" title="maximize"></i>
@@ -226,7 +226,7 @@
                                 <i class="fa-solid fa-th-list text-primary me-1"></i>
                                 Histo Report Lists
                             </h4>
-                            <h5 class="mb-0 badge bg-primary ms-1">{{ $histos->total() }}</h5>
+                            <h5 class="mb-0 badge bg-primary ms-1 p-2">{{ $histos->total() }}</h5>
                         </div>
                         <button type="button" class="btn btn-outline-secondary btn-sm full-screen-btn" >
                             <i class="fa-solid fa-maximize" title="maximize"></i>
@@ -335,7 +335,7 @@
                                 <i class="fa-solid fa-th-list text-primary me-1"></i>
                                 Cyto Report Lists
                             </h4>
-                            <h5 class="mb-0 badge bg-primary ms-1">{{ $cytos->total() }}</h5>
+                            <h5 class="mb-0 badge bg-primary ms-1 p-2">{{ $cytos->total() }}</h5>
                         </div>
                         <button type="button" class="btn btn-outline-secondary btn-sm full-screen-btn" >
                             <i class="fa-solid fa-maximize" title="maximize"></i>

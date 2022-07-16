@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTrephineRequest;
 use App\Http\Requests\UpdateTrephineRequest;
 use App\Models\TrephinePhoto;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -19,7 +20,7 @@ class TrephineController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('index');
     }
 
     /**
@@ -126,6 +127,7 @@ class TrephineController extends Controller
      */
     public function edit(Trephine $trephine)
     {
+        Gate::authorize('update',$trephine);
         return view('trephine.edit',compact('trephine'));
     }
 
