@@ -4,7 +4,7 @@
             <i class="fas fa-bars fa-2x"></i>
         </button>
         <div class="d-flex d-none d-md-flex align-items-center">
-            <a href="{{ route('index') }}" class="mb-0 text-white h4 ms-1">{{ env("APP_NAME") }}</a>
+            <a href="{{ route('index') }}" class="mb-0 text-white h4 ms-1">550 MCH Biopsy Reports</a>
         </div>
         <div class="">
             <div class="dropdown">
