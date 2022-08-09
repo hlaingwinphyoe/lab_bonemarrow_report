@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Print : Aspirate Report</title>
+    <title>{{ $patientFact->patient_name }} : Aspirate Report</title>
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <style>
         .print-table tr{
@@ -15,15 +15,15 @@
         .print-header span{
             font-size: 12px !important;
         }
+
+        .print-header .first{
+            font-weight: bold;
+        }
         @media print{
             @page{
                 size: A4;
                 margin: 2in 0.2in 0.2in 0.2in !important;
             }
-        }
-
-        .print-header .first{
-            font-weight: bold;
         }
 
         ::-webkit-scrollbar{
@@ -40,12 +40,15 @@
         }
     </style>
 </head>
-<body onload="print()">
+<body onload="print()" oncontextmenu="return false">
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
+                    <div class="position-relative">
+                        <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                    </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="text-capitalize text-center mb-0">
@@ -53,14 +56,14 @@
                             </h3>
                             <h5 class="text-center text-uppercase mb-0">ICSH Guidelines</h5>
                         </div>
-                        <p>
+                        <p class="mb-0">
                             {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/aspirate-print/'.$patientFact->id, 'DATAMATRIX',3,3) !!}
                         </p>
                     </div>
                     <div class="">
                         <p class="mb-0" style="font-size: 14px">Date: {{ date('d M Y') }} ({{ date('h:i A') }})</p>
                     </div>
-                    <div class="row mt-4">
+                    <div class="row mt-2">
                         <div class="col-12">
                             <h6 class="text-uppercase mb-0">Patient's Particulars</h6>
                             <div class="ms-3 mt-2">
@@ -78,7 +81,17 @@
                                     <div class="col-4">
                                         <div class="print-header">
                                             <span class="first">Age: &nbsp;</span>
-                                            <span>{{ $patientFact->age }} {{ $patientFact->age_type }}</span>
+                                            <span>
+                                                @if(!$patientFact->year == 0)
+                                                    {{ $patientFact->year }} Yr,
+                                                @endif
+                                                @if(!$patientFact->month == 0)
+                                                    {{ $patientFact->month }} M,
+                                                @endif
+                                                @if(!$patientFact->day == 0)
+                                                    {{ $patientFact->day }} D
+                                                @endif
+                                            </span>
                                         </div>
                                         <div class="print-header">
                                             <span class="first">Gender: &nbsp;</span>
@@ -104,7 +117,6 @@
                                                 @forelse($patientFact->aspiratePhotos as $key=>$photo)
                                                     <img src="{{ asset('storage/aspirate_thumbnails/'.$photo->name) }}" class="rounded shadow-sm mb-1" height="100" alt="image alt"/>
                                                 @empty
-                                                    <p class="mb-0 text-muted">-</p>
                                                 @endforelse
                                             </span>
                                         </div>
@@ -112,6 +124,10 @@
                                 </div>
                                 <table class="table table-borderless print-table">
                                     <tbody>
+                                    <tr>
+                                        <td class="fw-bold text-capitalize title text-nowrap">Specimen Type</td>
+                                        <td class="result">{{ $patientFact->specimenType->name }}</td>
+                                    </tr>
                                     <tr>
                                         <td class="fw-bold text-capitalize title text-nowrap">Name of institution</td>
                                         <td class="result">{{ $patientFact->hospital->name }}</td>

@@ -40,11 +40,12 @@
         }
     </style>
 </head>
-<body onload="print()">
+<body onload="print()" oncontextmenu="return false">
 <div class="container">
     <div class="row">
         <div class="col-12 px-5 pt-3">
-            <div class="mb-2">
+            <div class="mb-2 position-relative">
+                <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                 <div class="d-flex align-items-center">
                     <div class="">
                         <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
@@ -92,7 +93,17 @@
                                     <div class="col-4">
                                         <div class="print-header">
                                             <span class="first">Age: &nbsp;</span>
-                                            <span>{{ $patientFact->age }} {{ $patientFact->age_type }}</span>
+                                            <span>
+                                                @if(!$patientFact->year == 0)
+                                                    {{ $patientFact->year }} Yr,
+                                                @endif
+                                                @if(!$patientFact->month == 0)
+                                                    {{ $patientFact->month }} M,
+                                                @endif
+                                                @if(!$patientFact->day == 0)
+                                                    {{ $patientFact->day }} D
+                                                @endif
+                                            </span>
                                         </div>
                                         <div class="print-header">
                                             <span class="first">Gender: &nbsp;</span>
@@ -103,6 +114,10 @@
                                         <div class="print-header">
                                             <span class="first">Schedule Date: &nbsp;</span>
                                             <span>{{ date('d / M / Y',strtotime($patientFact->sc_date)) }}</span>
+                                        </div>
+                                        <div class="print-header">
+                                            <span class="first">Procedure</span>
+                                            <span>{{ $patientFact->pro_perform }}</span>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -126,6 +141,10 @@
                                 <table class="table table-borderless print-table">
                                     <tbody>
                                     <tr>
+                                        <td class="fw-bold text-capitalize title text-nowrap">Specimen Type</td>
+                                        <td class="result">{{ $patientFact->specimenType->name }}</td>
+                                    </tr>
+                                    <tr>
                                         <td class="fw-bold text-capitalize title text-nowrap">Name of institution</td>
                                         <td class="result">{{ $patientFact->hospital->name }}</td>
                                     </tr>
@@ -147,10 +166,7 @@
                                         <td class="fw-bold text-capitalize title">Indication for bone marrow examination</td>
                                         <td class="result">{{ $patientFact->bmexamination ?? '-' }}</td>
                                     </tr>
-                                    <tr>
-                                        <td class="fw-bold text-capitalize title">Procedure performed</td>
-                                        <td class="result">{{ $patientFact->pro_perform ?? '-' }}</td>
-                                    </tr>
+
                                     <tr>
                                         <td class="fw-bold text-capitalize title">Anatomic site of aspirate/biopsy</td>
                                         <td class="result">{{ $patientFact->anatomic_site_aspirate ?? '-' }}</td>

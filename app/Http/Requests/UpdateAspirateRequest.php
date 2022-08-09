@@ -26,12 +26,11 @@ class UpdateAspirateRequest extends FormRequest
     {
         return [
             "sc_date" => 'required|date',
-            "lab_access" => 'required|numeric',
+            "lab_access" => 'required|integer|gt:0',
             "patient_name" => 'required|min:3',
-            "age" => 'required|numeric|max:100',
-            "age_type" => 'required',
-            "specimen_type" => "required|min:3",
-            "price" => "required|numeric",
+            "year" => "required|integer|min:0",
+            "month" => "required|integer|min:0",
+            "day" => "required|integer|min:0",
             "gender" => 'required',
             "contact_detail" => 'nullable|min:3',
             "physician_name" => 'required|min:3',
@@ -61,7 +60,8 @@ class UpdateAspirateRequest extends FormRequest
             "conclusion" => 'nullable|min:3',
             "classification" => 'nullable|min:3',
             "disease_code" => 'nullable|min:3',
-            "hospital" => 'required|integer|exists:hospitals,id'
+            "hospital" => 'required|integer|exists:hospitals,id',
+            "specimen_type" => 'required|integer|exists:specimen_types,id'
         ];
     }
 }

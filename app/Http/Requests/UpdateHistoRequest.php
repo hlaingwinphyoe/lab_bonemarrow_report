@@ -27,10 +27,9 @@ class UpdateHistoRequest extends FormRequest
         return [
             "hospital" => 'required|integer|exists:hospitals,id',
             "name" => 'required|min:3',
-            "age" => 'required|numeric|max:100',
-            "age_type" => 'required',
-            "specimen_type" => 'required|min:3',
-            "price" => 'required|numeric',
+            "year" => "required|integer|min:0",
+            "month" => "required|integer|min:0",
+            "day" => "required|integer|min:0",
             "gender" => 'required',
             "doctor" => 'required|min:3',
             "bio_receive_date" => 'required|date',
@@ -39,7 +38,8 @@ class UpdateHistoRequest extends FormRequest
             "specimen" => 'nullable|min:3',
             "gross" => 'nullable|min:3',
             "description" => 'nullable|min:3',
-            "remark" => 'nullable|min:3'
+            "remark" => 'nullable|min:3',
+            "specimen_type" => 'required|integer|exists:specimen_types,id'
         ];
     }
 }

@@ -24,7 +24,7 @@ class StoreHistoPhotoRequest extends FormRequest
     public function rules()
     {
         return [
-            "histo_id" => "required|exists:histos,id",
+            "histo_id" => "required|integer|exists:histos,id",
             "histo_photos" => 'required',
             "histo_photos.*" => 'file|max:5000|mimes:png,jpg,jpeg'
         ];

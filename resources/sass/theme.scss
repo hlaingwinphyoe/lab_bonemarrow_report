@@ -1,8 +1,8 @@
-@import "~bootstrap/scss/bootstrap";
+$primary : #003eff;
+// Bootstrap
+@import 'mdb-ui-kit/src/scss/mdb.free';
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 @import "sweetalert2/dist/sweetalert2.min.css";
-
-$primary : #6f42c1;
 
 // Variables
 @import 'variables';
@@ -12,12 +12,25 @@ $primary : #6f42c1;
         size: A4;
         margin: 10px 0.2in !important;
     }
+
+    .back-btn{
+        display: none !important;
+    }
 }
 
 .print-table tr td{
     padding: 1.2px 0.5rem !important;
 }
 
+.card{
+    box-shadow: none !important;
+}
+
+.back-btn{
+    position: absolute;
+    left: -77px;
+    top: 0;
+}
 //.print-table tr .title{
 //    width: 370px;
 //}

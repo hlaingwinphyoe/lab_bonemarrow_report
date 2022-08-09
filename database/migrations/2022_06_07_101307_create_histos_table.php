@@ -17,8 +17,9 @@ class CreateHistosTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->integer('age');
-            $table->char('age_type',2);
+            $table->integer('day');
+            $table->integer('month');
+            $table->integer('year');
             $table->char('gender',7);
             $table->string('doctor');
             $table->longText('specimen')->nullable();
@@ -28,8 +29,7 @@ class CreateHistosTable extends Migration
             $table->longText('gross')->nullable();
             $table->longText('description')->nullable();
             $table->longText('remark')->nullable();
-            $table->text('specimen_type');
-            $table->integer('price');
+            $table->foreignId('specimen_type_id')->constrained()->cascadeOnDelete()->cascadeOnDelete();
             $table->foreignId('hospital_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

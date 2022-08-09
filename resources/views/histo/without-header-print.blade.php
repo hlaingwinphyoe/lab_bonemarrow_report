@@ -42,12 +42,15 @@
         }
     </style>
 </head>
-<body onload="print()">
+<body onload="print()" oncontextmenu="return false">
 <div class="container">
     <div class="row vh-100 position-relative">
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
+                    <div class="position-relative">
+                        <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                    </div>
                     <div class="row">
                         <div class="col-12">
                             <div class="mt-2">
@@ -70,7 +73,17 @@
                                     <div class="col-4">
                                         <div class="print-header">
                                             <span class="first">Age: &nbsp;</span>
-                                            <span class="second">{{ $patientFact->age }} {{ $patientFact->age_type }}</span>
+                                            <span class="second">
+                                                @if(!$patientFact->year == 0)
+                                                    {{ $patientFact->year }} Yr
+                                                @endif
+                                                @if(!$patientFact->month == 0)
+                                                    {{ $patientFact->month }} M
+                                                @endif
+                                                @if(!$patientFact->day == 0)
+                                                    {{ $patientFact->day }} D
+                                                @endif
+                                            </span>
                                         </div>
                                         <div class="print-header">
                                             <span class="first">Hospital: &nbsp;</span>
@@ -92,7 +105,6 @@
                                             <span class="first">Received Date: &nbsp;</span>
                                             <span class="second">{{ date('d / M / Y',strtotime($patientFact->bio_receive_date)) }}</span>
                                         </div>
-
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h3 class="text-uppercase text-center my-1">
@@ -104,14 +116,31 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="print-header">
+                                            <span class="first">Specimen Type: &nbsp;</span>
+                                            <span class="second">{{ $patientFact->specimenType->name }}</span>
+                                        </div>
+                                        <div class="print-header my-1">
+                                            <span class="first d-block text-decoration-underline">Specimen</span>
+                                            <span class="second">{{ $patientFact->specimen ?? '-' }}</span>
+                                        </div>
+                                        <div class="print-header my-1">
                                             <span class="first d-block text-decoration-underline">Gross</span>
-                                            <span class="second">{{ $patientFact->gross ?? '-' }}</span>
+                                            <div>
+                                                @forelse($patientFact->grossPhotos as $key=>$photo)
+                                                    <img src="{{ asset('storage/gross_thumbnails/'.$photo->name) }}" class="rounded mb-1" height="130" alt="Histo Image"/>
+                                                @empty
+
+                                                @endforelse
+                                            </div>
+                                            <div class="">
+                                                {{ $patientFact->gross ?? '-' }}
+                                            </div>
                                         </div>
                                         <div class="print-header my-1">
                                             <span class="first d-block mb-1 text-decoration-underline">Microscopic</span>
                                             <div class="">
                                                 @forelse($patientFact->histoPhotos as $key=>$photo)
-                                                    <img src="{{ asset('storage/histo_thumbnails/'.$photo->name) }}" class="rounded shadow-sm mb-1" height="130" alt="image alt"/>
+                                                    <img src="{{ asset('storage/histo_thumbnails/'.$photo->name) }}" class="rounded mb-1" height="130" alt="image alt"/>
                                                 @empty
 
                                                 @endforelse

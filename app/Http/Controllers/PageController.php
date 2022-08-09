@@ -17,21 +17,12 @@ class PageController extends Controller
         $aspirates = Aspirate::when(isset(request()->aspirateSearch),function ($query){
             $aspirateSearch = request()->aspirateSearch;
             $query->where('patient_name','LIKE',"%$aspirateSearch%")->orwhere('sc_date','LIKE',"%$aspirateSearch%");
-        })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))->latest('id')->paginate(5,['*'],'aspiratePage');
-        $trephines = Trephine::when(isset(request()->trephineSearch),function ($query){
-            $trephineSearch = request()->trephineSearch;
-            $query->where('patient_name','LIKE',"%$trephineSearch%")->orwhere('sc_date','LIKE',"%$trephineSearch%");
-        })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))->latest('id')->paginate(5,['*'],'trephinePage');
-        $histos = Histo::when(isset(request()->histoSearch),function ($query){
-            $histoSearch = request()->histoSearch;
-            $query->where('name','LIKE',"%$histoSearch%")->orwhere('bio_receive_date','LIKE',"%$histoSearch%")->orwhere('bio_cut_date','LIKE',"%$histoSearch%")->orwhere('bio_report_date','LIKE',"%$histoSearch%");
-        })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))->latest('id')->paginate(5,['*'],'histoPage');
-        $cytos = Cyto::when(isset(request()->cytoSearch),function ($query){
-            $cytoSearch = request()->cytoSearch;
-            $query->where('name','LIKE',"%$cytoSearch%")->orwhere('bio_receive_date','LIKE',"%$cytoSearch%")->orwhere('bio_cut_date','LIKE',"%$cytoSearch%")->orwhere('bio_report_date','LIKE',"%$cytoSearch%");
-        })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))->latest('id')->paginate(5,['*'],'cytoPage');
+        })->when(Auth::user()->isUser(),fn($q)=>$q
+            ->where('user_id',Auth::id()))
+            ->latest('id')
+            ->paginate(10,['*'],'aspiratePage');
 
-        return view('index',['aspirates'=>$aspirates,'trephines'=>$trephines,'histos'=>$histos,'cytos'=>$cytos]);
+        return view('index',['aspirates'=>$aspirates]);
     }
 
     public function users(){
@@ -51,7 +42,7 @@ class PageController extends Controller
         $data = $request->all();
         $check = $this->create($data);
 
-        return redirect()->back()->with('status',"User Created Successful.");
+        return redirect()->back()->with('status',"Successfully Created!");
     }
 
     public function create(array $data)
@@ -83,6 +74,11 @@ class PageController extends Controller
     // 404 Page
     public function denied(){
         return view('denied');
+    }
+
+    // total sales
+    public function totalSales(){
+
     }
 
 }

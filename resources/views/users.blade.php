@@ -13,26 +13,34 @@
             <div class="card shadow">
                 <div class="card-body">
                     <div class="">
-                        <h4 class="text-capitalize fw-bold">
+                        <h5 class="text-capitalize fw-bold">
                             <i class="fa-solid fa-users me-1 text-primary"></i>
                             Users
-                        </h4>
+                        </h5>
                     </div>
                     <hr>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary mb-2 text-uppercase" style="border-radius: 0.2rem;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#userModal" style="width: 125px">
                         <i class="fa-solid fa-plus fa-fw" title="create"></i> Create
                     </button>
-                    <!-- Create Hospital Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                <!-- Modal -->
+                    <div class="modal fade" id="userModal" tabindex="-1" data-mdb-backdrop="static" aria-labelledby="userModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel"><i class="fa-solid fa-plus text-primary me-1"></i>Create User</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <h5 class="modal-title" id="userModalLabel"><i class="fa-solid fa-plus me-1"></i>Create User</h5>
+                                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('register.post') }}" id="createHospitalForm" method="post">
+                                    <form action="{{ route('register.post') }}" id="createUserForm" method="post">
                                         @csrf
                                         <div class="mb-3">
                                             <div class="form-floating">
@@ -64,8 +72,8 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger text-white text-uppercase" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary text-uppercase" form="createHospitalForm"><i class="fa-solid fa-save me-1"></i>Register</button>
+                                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary" form="createUserForm">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -96,11 +104,11 @@
                                         <input type="hidden" name="id" value="{{ $user->id }}">
                                     </form>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-outline-primary btn-sm" title="Delete" form="delForm{{ $user->id }}" onclick="return askConfirm({{ $user->id }})">
-                                            <i class="fa-regular fa-trash-alt fa-fw" ></i> Delete
+                                        <button type="button" class="btn btn-light btn-sm" data-mdb-toggle="tooltip" data-mdb-placement="top" title="Delete" form="delForm{{ $user->id }}" onclick="return askConfirm({{ $user->id }})">
+                                            <i class="fa-regular fa-trash-alt fa-fw" ></i>
                                         </button>
-                                        <button type="button" class="btn btn-outline-primary btn-sm" title="Change Role" onclick="return makeAdmin({{ $user->id }})">
-                                            <i class="fa-solid fa-user-edit fa-fw"></i> Make Admin
+                                        <button type="button" class="btn btn-light btn-sm" data-mdb-toggle="tooltip" data-mdb-placement="top" title="Making Admin" onclick="return makeAdmin({{ $user->id }})">
+                                            <i class="fa-solid fa-user-edit fa-fw"></i>
                                         </button>
                                     </div>
                                 </td>

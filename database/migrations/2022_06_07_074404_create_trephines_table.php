@@ -19,8 +19,9 @@ class CreateTrephinesTable extends Migration
             $table->integer('lab_access');
             $table->string('patient_name');
             $table->string('slug');
-            $table->integer('age');
-            $table->char('age_type',2);
+            $table->integer('day');
+            $table->integer('month');
+            $table->integer('year');
             $table->char('gender',7);
             $table->longText('contact_detail')->nullable();
             $table->string('physician_name');
@@ -48,8 +49,7 @@ class CreateTrephinesTable extends Migration
             $table->longText('investigation')->nullable();
             $table->longText('conclusion')->nullable();
             $table->longText('disease_code')->nullable();
-            $table->text('specimen_type');
-            $table->integer('price');
+            $table->foreignId('specimen_type_id')->constrained()->cascadeOnDelete()->cascadeOnDelete();
             $table->foreignId('hospital_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

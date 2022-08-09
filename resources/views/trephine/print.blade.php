@@ -41,11 +41,12 @@
         }
     </style>
 </head>
-<body onload="print()">
+<body onload="print()" oncontextmenu="return false">
 <div class="container">
     <div class="row">
         <div class="col-12 px-5 pt-3">
-            <div class="mb-2">
+            <div class="mb-2 position-relative">
+                <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                 <div class="d-flex align-items-center">
                     <div class="">
                         <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
@@ -90,7 +91,17 @@
                                     <div class="col-4">
                                         <div class="print-header">
                                             <span class="first">Age: &nbsp;</span>
-                                            <span>{{ $patientFact->age }} {{ $patientFact->age_type }}</span>
+                                            <span>
+                                                @if(!$patientFact->year == 0)
+                                                    {{ $patientFact->year }} Yr
+                                                @endif
+                                                @if(!$patientFact->month == 0)
+                                                    {{ $patientFact->month }} M
+                                                @endif
+                                                @if(!$patientFact->day == 0)
+                                                    {{ $patientFact->day }} D
+                                                @endif
+                                            </span>
                                         </div>
                                         <div class="print-header">
                                             <span class="first">Gender: &nbsp;</span>
@@ -101,6 +112,10 @@
                                         <div class="print-header">
                                             <span class="first">Schedule Date: &nbsp;</span>
                                             <span>{{ date('d / M / Y',strtotime($patientFact->sc_date)) }}</span>
+                                        </div>
+                                        <div class="print-header">
+                                            <span class="first">Procedure</span>
+                                            <span>{{ $patientFact->pro_perform }}</span>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -124,6 +139,10 @@
                                 <table class="table table-borderless print-table">
                                     <tbody>
                                     <tr>
+                                        <td class="fw-bold text-capitalize title text-nowrap">Specimen Type</td>
+                                        <td class="result">{{ $patientFact->specimenType->name }}</td>
+                                    </tr>
+                                    <tr>
                                         <td class="fw-bold text-capitalize title text-nowrap">Name of institution</td>
                                         <td class="result">{{ $patientFact->hospital->name }}</td>
                                     </tr>
@@ -146,75 +165,71 @@
                                         <td class="result">{{ $patientFact->bmexamination ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Procedure performed</td>
-                                        <td class="result">{{ $patientFact->pro_perform ?? '-' }}</td>
-                                    </tr>
-                                    <tr>
                                         <td class="fw-bold text-capitalize title">Anatomic site of aspirate/biopsy</td>
                                         <td class="result">{{ $patientFact->anatomic_site_trephine ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Ease/difficulty of aspiration</td>
+                                        <td class="fw-bold text-capitalize title">Aggregate Length Of Biopsy Core</td>
                                         <td class="result">{{ $patientFact->biopsy_core ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Blood count</td>
+                                        <td class="fw-bold text-capitalize title">Adequacy And Macroscopic Appearance Of Core</td>
                                         <td class="result">{{ $patientFact->ade_macro_appearance ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Blood smear description and diagnostic conclusion</td>
+                                        <td class="fw-bold text-capitalize title">Percentage And Pattern Of Cellularity</td>
                                         <td class="result">{{ $patientFact->percentage_cellularity ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Cellularity of particles and cell trails</td>
+                                        <td class="fw-bold text-capitalize title">Bone Architecture</td>
                                         <td class="result">{{ $patientFact->bone_architecture ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Nucleated differential cell count</td>
+                                        <td class="fw-bold text-capitalize title">Location</td>
                                         <td class="result">{{ $patientFact->path ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Total number of cells counted</td>
+                                        <td class="fw-bold text-capitalize title">Trephine Number</td>
                                         <td class="result">{{ $patientFact->tre_number ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Myeloid:erythroid ratio</td>
+                                        <td class="fw-bold text-capitalize title">Morphology And Pattern of Differentiation For Erythroid</td>
                                         <td class="result">{{ $patientFact->erythroid ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Erythropoiesis</td>
+                                        <td class="fw-bold text-capitalize title">Myeloid Lineages</td>
                                         <td class="result">{{ $patientFact->myeloid ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Myelopoiesis</td>
+                                        <td class="fw-bold text-capitalize title">Megakaryocytic Lineages</td>
                                         <td class="result">{{ $patientFact->megaka ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Megakaryocytes</td>
+                                        <td class="fw-bold text-capitalize title">Lymphoid Cells</td>
                                         <td class="result">{{ $patientFact->lymphoid ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Lymphocytes</td>
+                                        <td class="fw-bold text-capitalize title">Plasma cells</td>
                                         <td class="result">{{ $patientFact->plasma_cell ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Plasma cells</td>
+                                        <td class="fw-bold text-capitalize title">Macrophages</td>
                                         <td class="result">{{ $patientFact->macrophages ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Other haemopoietic cells</td>
+                                        <td class="fw-bold text-capitalize title">Abnormal cells and/or infiltrates</td>
                                         <td class="result">{{ $patientFact->abnormal_cell ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Abnormal cells</td>
+                                        <td class="fw-bold text-capitalize title">Reticulin Stain</td>
                                         <td class="result">{{ $patientFact->reticulin_stain ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Iron Stain</td>
+                                        <td class="fw-bold text-capitalize title">Immunohistochemistry</td>
                                         <td class="result">{{ $patientFact->immunohistochemistry ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Cytochemistry</td>
+                                        <td class="fw-bold text-capitalize title">Histochemistry</td>
                                         <td class="result">{{ $patientFact->histochemistry ?? '-' }}</td>
                                     </tr>
                                     <tr>

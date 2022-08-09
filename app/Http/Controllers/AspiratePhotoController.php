@@ -41,6 +41,11 @@ class AspiratePhotoController extends Controller
     {
         if (request()->hasFile('aspirate_photos')){
             foreach (request()->file('aspirate_photos') as $photo){
+
+                if (!Storage::exists('public/aspirate_thumbnails')){
+                    Storage::makeDirectory('public/aspirate_thumbnails');
+                }
+
                 $newName =uniqid()."_aspirate.".$photo->extension();
                 $photo->storeAs('public/aspirate_photos/',$newName);
 
@@ -57,7 +62,7 @@ class AspiratePhotoController extends Controller
                 $photo->user_id = Auth::id();
                 $photo->save();
             }
-            return redirect()->back()->with('status','Photos Added Successful.');
+            return redirect()->back()->with('status','Successfully Added!');
         }
     }
 
@@ -109,6 +114,6 @@ class AspiratePhotoController extends Controller
 
         // delete in db
         $aspiratePhoto->delete();
-        return redirect()->back()->with('status','Photo Deleted Successful');
+        return redirect()->back()->with('status','Successfully Deleted!');
     }
 }

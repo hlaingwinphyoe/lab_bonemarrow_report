@@ -9,16 +9,21 @@ class Histo extends Model
 {
     use HasFactory;
 
-    protected $with = ['user'];
-
     public function user(){
         return $this->belongsTo(User::class);
     }
     public function histoPhotos(){
         return $this->hasMany(HistoPhoto::class);
     }
+    public function grossPhotos(){
+        return $this->hasMany(HistoGross::class);
+    }
     public function hospital(){
         return $this->belongsTo(Hospital::class);
+    }
+
+    public function specimenType(){
+        return $this->belongsTo(SpecimenType::class);
     }
 
 }
