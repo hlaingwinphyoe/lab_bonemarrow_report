@@ -6,8 +6,11 @@ use App\Models\Aspirate;
 use App\Http\Requests\StoreAspirateRequest;
 use App\Http\Requests\UpdateAspirateRequest;
 use App\Models\AspiratePhoto;
+use App\Models\Hospital;
+use App\Models\SpecimenType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -30,7 +33,9 @@ class AspirateController extends Controller
      */
     public function create()
     {
-        return view('aspirate.create');
+        $hospitals = Hospital::all();
+        $specimens = SpecimenType::all();
+        return view('aspirate.create',['hospitals'=>$hospitals,'specimens'=>$specimens]);
     }
 
     /**
@@ -46,10 +51,9 @@ class AspirateController extends Controller
         $aspirate->lab_access = $request->lab_access;
         $aspirate->patient_name = $request->patient_name;
         $aspirate->slug = Str::slug($request->patient_name,'-');
-        $aspirate->age = $request->age;
-        $aspirate->age_type = $request->age_type;
-        $aspirate->specimen_type = $request->specimen_type;
-        $aspirate->price = $request->price;
+        $aspirate->year = $request->year;
+        $aspirate->month = $request->month;
+        $aspirate->day = $request->day;
         $aspirate->gender = $request->gender;
         $aspirate->contact_detail = $request->contact_detail;
         $aspirate->physician_name = $request->physician_name;
@@ -79,6 +83,7 @@ class AspirateController extends Controller
         $aspirate->conclusion = $request->conclusion;
         $aspirate->classification = $request->classification;
         $aspirate->disease_code = $request->disease_code;
+        $aspirate->specimen_type_id = $request->specimen_type;
         $aspirate->hospital_id = $request->hospital;
         $aspirate->user_id = Auth::id();
         $aspirate->save();
@@ -86,6 +91,10 @@ class AspirateController extends Controller
         if ($request->hasFile('aspirate_photos')){
             foreach ($request->file('aspirate_photos') as $photo){
                 //store file
+                if (!Storage::exists('public/aspirate_thumbnails')){
+                    Storage::makeDirectory('public/aspirate_thumbnails');
+                }
+
                 $newName =uniqid()."_aspirate.".$photo->extension();
                 $photo->storeAs('public/aspirate_photos/',$newName);
 
@@ -106,7 +115,7 @@ class AspirateController extends Controller
         }
 
 
-        return redirect()->route('index')->with('status',"Aspirate Report Submitted.");
+        return redirect()->route('index')->with('status',"Successfully Created!");
     }
 
     /**
@@ -117,7 +126,7 @@ class AspirateController extends Controller
      */
     public function show(Aspirate $aspirate)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -129,7 +138,9 @@ class AspirateController extends Controller
     public function edit(Aspirate $aspirate)
     {
         Gate::authorize('update',$aspirate);
-        return view('aspirate.edit',compact('aspirate'));
+        $hospitals = Hospital::all();
+        $specimens = SpecimenType::all();
+        return view('aspirate.edit',['aspirate'=>$aspirate,'hospitals'=>$hospitals,'specimens'=>$specimens]);
     }
 
     /**
@@ -145,10 +156,9 @@ class AspirateController extends Controller
         $aspirate->lab_access = $request->lab_access;
         $aspirate->patient_name = $request->patient_name;
         $aspirate->slug = Str::slug($request->patient_name,'-');
-        $aspirate->age = $request->age;
-        $aspirate->age_type = $request->age_type;
-        $aspirate->specimen_type = $request->specimen_type;
-        $aspirate->price = $request->price;
+        $aspirate->year = $request->year;
+        $aspirate->month = $request->month;
+        $aspirate->day = $request->day;
         $aspirate->gender = $request->gender;
         $aspirate->contact_detail = $request->contact_detail;
         $aspirate->physician_name = $request->physician_name;
@@ -179,9 +189,10 @@ class AspirateController extends Controller
         $aspirate->classification = $request->classification;
         $aspirate->disease_code = $request->disease_code;
         $aspirate->hospital_id = $request->hospital;
+        $aspirate->specimen_type_id = $request->specimen_type;
         $aspirate->update();
 
-        return redirect()->route('index')->with('status','Report Updated Successful.');
+        return redirect()->route('index')->with('status','Successfully Updated!');
     }
 
     /**
@@ -192,7 +203,9 @@ class AspirateController extends Controller
      */
     public function destroy(Aspirate $aspirate)
     {
-        //
+        Gate::authorize('delete',$aspirate);
+        $aspirate->delete();
+        return redirect()->back()->with('status','Successfully Deleted!');
     }
 
     // Print Section

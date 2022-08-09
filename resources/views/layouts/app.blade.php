@@ -76,7 +76,6 @@
         })
 
         Toast.fire({
-            icon: 'success',
             title: '{{ session('status') }}'
         })
     </script>
@@ -126,7 +125,7 @@
             text: "ဖျက်မှာသေချာပါသလား?",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: '#6f42c1',
+            confirmButtonColor: '#1266f1',
             cancelButtonColor: '#ff0000',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
@@ -142,7 +141,7 @@
             text: "Role ပြောင်းလဲလိုက်လျှင် Admin လုပ်ပိုင်ခွင့်များရရှိသွားမှာဖြစ်ပါတယ်။",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: '#6f42c1',
+            confirmButtonColor: '#1266f1',
             cancelButtonColor: '#ff0000',
             confirmButtonText: 'Yes, I Agree'
         }).then((result) => {
@@ -159,7 +158,7 @@
             text: "အချက်အလက်ပြောင်းမှာ သေချာပါသလား?",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: '#6f42c1',
+            confirmButtonColor: '#1266f1',
             cancelButtonColor: '#ff0000',
             confirmButtonText: 'Yes, change it!'
         }).then((result) => {

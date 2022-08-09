@@ -18,7 +18,8 @@ class HistoPhotoController extends Controller
      */
     public function index()
     {
-        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
+        return abort(404);
+
     }
 
     /**
@@ -28,7 +29,8 @@ class HistoPhotoController extends Controller
      */
     public function create()
     {
-        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
+        return abort(404);
+
     }
 
     /**
@@ -40,6 +42,9 @@ class HistoPhotoController extends Controller
     public function store(StoreHistoPhotoRequest $request)
     {
         if ($request->hasFile('histo_photos')){
+            if (!Storage::exists('public/histo_thumbnails')){
+                Storage::makeDirectory('public/histo_thumbnails');
+            }
             foreach ($request->file('histo_photos') as $photo){
                 //store file
                 $newName =uniqid()."_histo.".$photo->extension();
@@ -61,7 +66,7 @@ class HistoPhotoController extends Controller
             }
         }
 
-        return redirect()->route('index')->with('status','Photos Added Successful.');
+        return redirect()->back()->with('status','Successfully Added!');
     }
 
     /**
@@ -72,7 +77,7 @@ class HistoPhotoController extends Controller
      */
     public function show(HistoPhoto $histoPhoto)
     {
-        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
+        return abort(404);
     }
 
     /**
@@ -83,7 +88,7 @@ class HistoPhotoController extends Controller
      */
     public function edit(HistoPhoto $histoPhoto)
     {
-        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
+        return abort(404);
     }
 
     /**
@@ -95,7 +100,7 @@ class HistoPhotoController extends Controller
      */
     public function update(UpdateHistoPhotoRequest $request, HistoPhoto $histoPhoto)
     {
-        return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
+        return abort(404);
     }
 
     /**
@@ -112,6 +117,6 @@ class HistoPhotoController extends Controller
 
         // delete in db
         $histoPhoto->delete();
-        return redirect()->back()->with('status','Photo Deleted Successful');
+        return redirect()->back()->with('status','Successfully Deleted!');
     }
 }

@@ -42,6 +42,11 @@ class TrephinePhotoController extends Controller
         if ($request->hasFile('trephine_photos')){
             foreach ($request->file('trephine_photos') as $photo){
                 //store file
+
+                if (!Storage::exists('public/trephine_thumbnails')){
+                    Storage::makeDirectory('public/trephine_thumbnails');
+                }
+
                 $newName =uniqid()."_trephine.".$photo->extension();
                 $photo->storeAs('public/trephine_photos/',$newName);
 
@@ -62,7 +67,7 @@ class TrephinePhotoController extends Controller
         }
 
 
-        return redirect()->back()->with('status',"Photos Added Successful.");
+        return redirect()->back()->with('status',"Successfully Added!");
     }
 
     /**
@@ -113,6 +118,6 @@ class TrephinePhotoController extends Controller
 
         // delete in db
         $trephinePhoto->delete();
-        return redirect()->back()->with('status','Photo Deleted Successful');
+        return redirect()->back()->with('status','Successfully Deleted!');
     }
 }

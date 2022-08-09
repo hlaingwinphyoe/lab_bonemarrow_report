@@ -61,7 +61,7 @@ class CytoPhotoController extends Controller
             }
         }
 
-        return redirect()->back()->with('status','Photos Added Successful.');
+        return redirect()->back()->with('status','Successfully Added!');
     }
 
     /**
@@ -112,6 +112,6 @@ class CytoPhotoController extends Controller
 
         // delete in db
         $cytoPhoto->delete();
-        return redirect()->back()->with('status','Photo Deleted Successful');
+        return redirect()->back()->with('status','Successfully Deleted!');
     }
 }

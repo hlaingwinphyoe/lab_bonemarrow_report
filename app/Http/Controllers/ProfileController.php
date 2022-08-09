@@ -48,7 +48,7 @@ class ProfileController extends Controller
 
             // login again
             Auth::logout();
-            return redirect()->route("login")->with('status',"Password Changed Successful.");
+            return redirect()->route("login")->with('status',"Successfully Changed!");
         }
 
     }
@@ -63,7 +63,7 @@ class ProfileController extends Controller
         $user->name = $request->name;
         $user->update();
 
-        return redirect()->back()->with("success","Profile Name Updated.");
+        return redirect()->back()->with("success","Successfully Changed!");
     }
 
     public function changeEmail(Request $request){
@@ -75,7 +75,7 @@ class ProfileController extends Controller
         $user->email = $request->email;
         $user->update();
 
-        return redirect()->back()->with("success","Profile Email changed.");
+        return redirect()->back()->with("success","Successfully Changed!");
 
     }
 
@@ -99,7 +99,7 @@ class ProfileController extends Controller
         $user = User::find(Auth::id());
         $user->photo = $newName;
         $user->update();
-        return redirect()->back()->with("success","Profile Photo Updated.");
+        return redirect()->back()->with("success","Successfully Changed!");
     }
 
     public function signature(Request $request){
@@ -122,7 +122,7 @@ class ProfileController extends Controller
         $user = User::find(Auth::id());
         $user->signature = $newName;
         $user->update();
-        return redirect()->back()->with("success","Signature Photo Added.");
+        return redirect()->back()->with("success","Successfully Added!");
     }
 
 }

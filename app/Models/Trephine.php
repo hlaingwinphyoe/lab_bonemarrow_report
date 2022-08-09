@@ -9,8 +9,6 @@ class Trephine extends Model
 {
     use HasFactory;
 
-    protected $with = ['user'];
-
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -19,6 +17,10 @@ class Trephine extends Model
     }
     public function hospital(){
         return $this->belongsTo(Hospital::class);
+    }
+
+    public function specimenType(){
+        return $this->belongsTo(SpecimenType::class);
     }
 
 }

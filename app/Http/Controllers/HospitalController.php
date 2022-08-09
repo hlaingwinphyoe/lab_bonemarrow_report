@@ -17,7 +17,7 @@ class HospitalController extends Controller
      */
     public function index()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -46,7 +46,7 @@ class HospitalController extends Controller
         $hospital->name = $request->name;
         $hospital->user_id = Auth::id();
         $hospital->save();
-        return redirect()->back()->with('status',"Hospital Created Successful.");
+        return redirect()->back()->with('status',"Successfully Created!");
     }
 
     /**
@@ -68,7 +68,7 @@ class HospitalController extends Controller
      */
     public function edit(Hospital $hospital)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -83,7 +83,7 @@ class HospitalController extends Controller
         $hospital->name = $request->name;
         $hospital->user_id = Auth::id();
         $hospital->update();
-        return redirect()->back()->with('status',"Hospital Updated Successful.");
+        return redirect()->back()->with('status',"Successfully Updated!");
     }
 
     /**
@@ -95,6 +95,6 @@ class HospitalController extends Controller
     public function destroy(Hospital $hospital)
     {
         $hospital->delete();
-        return redirect()->back()->with('status',$hospital->name." Deleted Successful.");
+        return redirect()->back()->with('status',"Successfully Deleted!");
     }
 }

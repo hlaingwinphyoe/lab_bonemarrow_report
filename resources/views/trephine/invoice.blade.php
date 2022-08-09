@@ -32,13 +32,14 @@
 
     </style>
 </head>
-<body onload="print()">
+<body onload="print()" oncontextmenu="return false">
 <div class="container">
     <div class="row vh-100 position-relative">
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
-                    <div class="mb-2">
+                    <div class="mb-2 position-relative">
+                        <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                         <div class="d-flex align-items-center">
                             <div class="">
                                 <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
@@ -65,7 +66,18 @@
                                     <span class="fw-bold">{{ $invoice->patient_name }}</span>
                                     <br>
                                     <span>Age: </span>
-                                    <span class="fw-bold">{{ $invoice->age }} {{ $invoice->age_type }} ({{ $invoice->gender }})</span>
+                                    <span class="fw-bold">
+                                        @if(!$invoice->year == 0)
+                                            {{ $invoice->year }} Yr,
+                                        @endif
+                                        @if(!$invoice->month == 0)
+                                            {{ $invoice->month }} M,
+                                        @endif
+                                        @if(!$invoice->day == 0)
+                                            {{ $invoice->day }} D,
+                                        @endif
+                                         ({{ $invoice->gender }})
+                                    </span>
                                 </div>
                                 <div class="">
                                     <span>Date: &nbsp;</span>
@@ -82,12 +94,12 @@
                                         <th class="text-end">Price</th>
                                     </tr>
                                     <tr>
-                                        <td>{{ $invoice->specimen_type }}</td>
-                                        <td class="text-end">{{ $invoice->price }}</td>
+                                        <td>{{ $invoice->specimenType->name }}</td>
+                                        <td class="text-end">{{ $invoice->specimenType->price }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="text-end" style="border: none">Total - </td>
-                                        <td class="text-end" style="border: none">{{ $invoice->price }}</td>
+                                        <td class="text-end fw-bold" style="border: none">Total - </td>
+                                        <td class="text-end fw-bold" style="border: none">{{ $invoice->specimenType->price }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="text-center text-uppercase fw-bold fst-italic" style="border: none;">"Thanks For Choosing Our Lab"</td>

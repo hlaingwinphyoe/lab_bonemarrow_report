@@ -6,6 +6,8 @@ use App\Models\Cyto;
 use App\Http\Requests\StoreCytoRequest;
 use App\Http\Requests\UpdateCytoRequest;
 use App\Models\CytoPhoto;
+use App\Models\Hospital;
+use App\Models\SpecimenType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -20,7 +22,14 @@ class CytoController extends Controller
      */
     public function index()
     {
-        return redirect()->route('denied');
+        $cytos = Cyto::when(isset(request()->cytoSearch),function ($query){
+            $cytoSearch = request()->cytoSearch;
+            $query->where('name','LIKE',"%$cytoSearch%")->orwhere('bio_receive_date','LIKE',"%$cytoSearch%")->orwhere('bio_cut_date','LIKE',"%$cytoSearch%")->orwhere('bio_report_date','LIKE',"%$cytoSearch%");
+        })->when(Auth::user()->isUser(),fn($q)=>$q
+            ->where('user_id',Auth::id()))
+            ->latest('id')
+            ->paginate(10,['*'],'cytoPage');
+        return view('cyto.index',['cytos'=>$cytos]);
     }
 
     /**
@@ -30,7 +39,9 @@ class CytoController extends Controller
      */
     public function create()
     {
-        return view('cyto.create');
+        $hospitals = Hospital::all();
+        $specimens = SpecimenType::all();
+        return view('cyto.create',['hospitals'=>$hospitals,'specimens'=>$specimens]);
     }
 
     /**
@@ -44,10 +55,9 @@ class CytoController extends Controller
         $cyto = new Cyto();
         $cyto->name = $request->name;
         $cyto->slug = Str::slug($request->name,'-');
-        $cyto->age = $request->age;
-        $cyto->age_type = $request->age_type;
-        $cyto->specimen_type = $request->specimen_type;
-        $cyto->price = $request->price;
+        $cyto->year = $request->year;
+        $cyto->month = $request->month;
+        $cyto->day = $request->day;
         $cyto->gender = $request->gender;
         $cyto->doctor = $request->doctor;
         $cyto->bio_receive_date = $request->bio_receive_date;
@@ -56,6 +66,7 @@ class CytoController extends Controller
         $cyto->specimen = $request->specimen;
         $cyto->morphology = $request->morphology;
         $cyto->cyto_diagnosis = $request->cyto_diagnosis;
+        $cyto->specimen_type_id = $request->specimen_type;
         $cyto->hospital_id = $request->hospital;
         $cyto->user_id = Auth::id();
         $cyto->save();
@@ -82,7 +93,7 @@ class CytoController extends Controller
             }
         }
 
-        return redirect()->route('index')->with('status','Cyto Report Created.');
+        return redirect()->route('cyto.index')->with('status','Successfully Created!');
     }
 
     /**
@@ -105,7 +116,9 @@ class CytoController extends Controller
     public function edit(Cyto $cyto)
     {
         Gate::authorize('update',$cyto);
-        return view('cyto.edit',compact('cyto'));
+        $hospitals = Hospital::all();
+        $specimens = SpecimenType::all();
+        return view('cyto.edit',compact('cyto','hospitals','specimens'));
     }
 
     /**
@@ -119,11 +132,10 @@ class CytoController extends Controller
     {
         $cyto->name = $request->name;
         $cyto->slug = Str::slug($request->name,'-');
-        $cyto->age = $request->age;
-        $cyto->age_type = $request->age_type;
+        $cyto->year = $request->year;
+        $cyto->month = $request->month;
+        $cyto->day = $request->day;
         $cyto->gender = $request->gender;
-        $cyto->specimen_type = $request->specimen_type;
-        $cyto->price = $request->price;
         $cyto->doctor = $request->doctor;
         $cyto->bio_receive_date = $request->bio_receive_date;
         $cyto->bio_cut_date = $request->bio_cut_date;
@@ -131,10 +143,11 @@ class CytoController extends Controller
         $cyto->specimen = $request->specimen;
         $cyto->morphology = $request->morphology;
         $cyto->cyto_diagnosis = $request->cyto_diagnosis;
+        $cyto->specimen_type_id = $request->specimen_type;
         $cyto->hospital_id = $request->hospital;
         $cyto->user_id = Auth::id();
         $cyto->update();
-        return redirect()->route('index')->with('status',"Report Updated Successful.");
+        return redirect()->route('cyto.index')->with('status',"Successfully Updated!");
     }
 
     /**
@@ -145,7 +158,9 @@ class CytoController extends Controller
      */
     public function destroy(Cyto $cyto)
     {
-        //
+        Gate::authorize('delete',$cyto);
+        $cyto->delete();
+        return redirect()->back()->with('status',"Successfully Deleted!");
     }
 
     public function print($id){

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hospital;
+use App\Models\SpecimenType;
 use App\Models\Trephine;
 use App\Http\Requests\StoreTrephineRequest;
 use App\Http\Requests\UpdateTrephineRequest;
 use App\Models\TrephinePhoto;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -20,7 +23,14 @@ class TrephineController extends Controller
      */
     public function index()
     {
-        return redirect()->route('index');
+        $trephines = Trephine::when(isset(request()->trephineSearch),function ($query){
+            $trephineSearch = request()->trephineSearch;
+            $query->where('patient_name','LIKE',"%$trephineSearch%")->orwhere('sc_date','LIKE',"%$trephineSearch%");
+        })->when(Auth::user()->isUser(),fn($q)=>$q
+            ->where('user_id',Auth::id()))
+            ->latest('id')
+            ->paginate(10,['*'],'trephinePage');
+        return view('trephine.index',['trephines'=>$trephines]);
     }
 
     /**
@@ -30,7 +40,10 @@ class TrephineController extends Controller
      */
     public function create()
     {
-        return view('trephine.create');
+        $hospitals = Hospital::all();
+        $specimens = SpecimenType::all();
+
+        return view('trephine.create',['hospitals'=>$hospitals,'specimens'=>$specimens]);
     }
 
     /**
@@ -46,10 +59,9 @@ class TrephineController extends Controller
         $trephine->lab_access = $request->lab_access;
         $trephine->patient_name = $request->patient_name;
         $trephine->slug = Str::slug($request->patient_name,'-');
-        $trephine->age = $request->age;
-        $trephine->age_type = $request->age_type;
-        $trephine->specimen_type = $request->specimen_type;
-        $trephine->price = $request->price;
+        $trephine->year = $request->year;
+        $trephine->month = $request->month;
+        $trephine->day = $request->day;
         $trephine->gender = $request->gender;
         $trephine->contact_detail = $request->contact_detail;
         $trephine->physician_name = $request->physician_name;
@@ -78,12 +90,18 @@ class TrephineController extends Controller
         $trephine->conclusion = $request->conclusion;
         $trephine->disease_code = $request->disease_code;
         $trephine->hospital_id = $request->hospital;
+        $trephine->specimen_type_id = $request->specimen_type;
         $trephine->user_id = Auth::id();
         $trephine->save();
 
         if ($request->hasFile('trephine_photos')){
             foreach ($request->file('trephine_photos') as $photo){
                 //store file
+
+                if (!Storage::exists('public/trephine_thumbnails')){
+                    Storage::makeDirectory('public/trephine_thumbnails');
+                }
+
                 $newName =uniqid()."_trephine.".$photo->extension();
                 $photo->storeAs('public/trephine_photos/',$newName);
 
@@ -104,7 +122,7 @@ class TrephineController extends Controller
         }
 
 
-        return redirect()->route('index')->with('status',"Trephine Report Submitted.");
+        return redirect()->route('trephine.index')->with('status',"Successfully Created!");
 
     }
 
@@ -116,7 +134,7 @@ class TrephineController extends Controller
      */
     public function show(Trephine $trephine)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -128,7 +146,10 @@ class TrephineController extends Controller
     public function edit(Trephine $trephine)
     {
         Gate::authorize('update',$trephine);
-        return view('trephine.edit',compact('trephine'));
+        $hospitals = Hospital::all();
+        $specimens = SpecimenType::all();
+
+        return view('trephine.edit',['trephine'=>$trephine,'hospitals'=>$hospitals,'specimens'=>$specimens]);
     }
 
     /**
@@ -144,10 +165,9 @@ class TrephineController extends Controller
         $trephine->lab_access = $request->lab_access;
         $trephine->patient_name = $request->patient_name;
         $trephine->slug = Str::slug($request->patient_name,'-');
-        $trephine->age = $request->age;
-        $trephine->age_type = $request->age_type;
-        $trephine->specimen_type = $request->specimen_type;
-        $trephine->price = $request->price;
+        $trephine->year = $request->year;
+        $trephine->month = $request->month;
+        $trephine->day = $request->day;
         $trephine->gender = $request->gender;
         $trephine->contact_detail = $request->contact_detail;
         $trephine->physician_name = $request->physician_name;
@@ -175,10 +195,11 @@ class TrephineController extends Controller
         $trephine->investigation = $request->investigation;
         $trephine->conclusion = $request->conclusion;
         $trephine->disease_code = $request->disease_code;
+        $trephine->specimen_type_id = $request->specimen_type;
         $trephine->hospital_id = $request->hospital;
         $trephine->update();
 
-        return redirect()->route('index')->with('status',"Report Updated Successful.");
+        return redirect()->route('trephine.index')->with('status',"Successfully Updated!");
     }
 
     /**
@@ -189,7 +210,10 @@ class TrephineController extends Controller
      */
     public function destroy(Trephine $trephine)
     {
-        //
+        Gate::authorize('delete',$trephine);
+        $trephine->delete();
+        return redirect()->back()->with('status',"Successfully Deleted!");
+
     }
 
     public function print($id){

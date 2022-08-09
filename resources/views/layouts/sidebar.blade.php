@@ -1,12 +1,12 @@
 <div class="col-12 col-lg-3 col-xl-2 vh-100 sidebar">
     <div class="d-flex justify-content-between align-items-center py-2 mt-3 nav-brand">
-        <div class="d-flex align-items-center">
+        <a href="{{ route('index') }}" class="d-flex align-items-center">
             <span class="p-2 rounded d-flex justify-content-center align-items-center me-2">
 <!--                <i class="fas fa-user text-white h4 mb-0"></i>-->
                 <img src="{{ asset('images/logo.jpg') }}" style="width: 60px" alt="">
             </span>
             <span class="fw-bolder h4 mb-0  text-primary ms-2">Biopsy Reports</span>
-        </div>
+        </a>
         <button class="hide-sidebar-btn btn btn-light d-block d-lg-none">
             <i class="fa fa-times text-primary" style="font-size: 2em;"></i>
         </button>
@@ -21,11 +21,40 @@
 
             <x-side-bar-title title="Report Listings" />
 
-            <li class="menu-item">
-                <x-side-bar-link name="Listings" link="{{ route('index') }}" />
-            </li>
+            <div class="item">
+                <a href="#" class="menu-item-link sub-btn mb-1">
+                    Dashboard
+                    <i class="fa-solid fa-chevron-down float-end custom-dropdown"></i>
+                </a>
+                <div class="sub-menu ms-4">
+                    <a href="{{ route('index') }}" class="dropdown-item {{ route('index') == request()->url() ? 'active':'' }}">
+                        <i class="fa-solid fa-chevron-right me-3" style="font-size: 10px"></i>
+                        Aspirate List
+                    </a>
+                    <a href="{{ route('trephine.index') }}" class="dropdown-item {{ route('trephine.index') == request()->url() ? 'active':'' }}">
+                        <i class="fa-solid fa-chevron-right me-3" style="font-size: 10px"></i>
+                        Trephine List
+                    </a>
+                    <a href="{{ route('histo.index') }}" class="dropdown-item {{ route('histo.index') == request()->url() ? 'active':'' }}">
+                        <i class="fa-solid fa-chevron-right me-3" style="font-size: 10px"></i>
+                        Histo List
+                    </a>
+                    <a href="{{ route('cyto.index') }}" class="dropdown-item {{ route('cyto.index') == request()->url() ? 'active':'' }}">
+                        <i class="fa-solid fa-chevron-right me-3" style="font-size: 10px"></i>
+                        Cyto List
+                    </a>
+                </div>
+            </div>
 
             <li class="menu-spacer"></li>
+
+{{--            <x-side-bar-title title="Sales" />--}}
+
+{{--            <li class="menu-item">--}}
+{{--                <x-side-bar-link name="Total Sales" link="{{ route('aspirate.create') }}" />--}}
+{{--            </li>--}}
+
+{{--            <li class="menu-spacer"></li>--}}
 
             <x-side-bar-title title="Report Form" />
 
@@ -45,6 +74,10 @@
 
             @if(auth()->user()->role == 0)
             <x-side-bar-title title="Manage Setting" />
+
+            <li class="menu-item">
+                <x-side-bar-link name="Specimen Type" link="{{ route('specimen_type.create') }}" />
+            </li>
 
             <li class="menu-item">
                 <x-side-bar-link name="Hospitals" link="{{ route('hospital.create') }}" />

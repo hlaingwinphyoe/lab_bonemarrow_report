@@ -11,6 +11,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrephineController;
 use App\Http\Controllers\TrephinePhotoController;
+use App\Http\Controllers\SpecimenTypeController;
+use App\Http\Controllers\HistoGrossController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 
+// public access
 Route::get('/aspirate-print/{id}',[AspirateController::class, 'print'])->name('aspirate.print');
 Route::get('/aspirate-print/without-header/{id}',[AspirateController::class, 'withoutHeaderPrint'])->name('aspirate.without.print');
 
@@ -39,24 +42,27 @@ Route::get('/cyto-print/{id}',[CytoController::class, 'print'])->name('cyto.prin
 Route::get('/cyto-print/without-header/{id}',[CytoController::class, 'withoutHeaderPrint'])->name('cyto.without.print');
 
 
+// only auth user access
 Route::middleware('auth')->group(function(){
     Route::get('/',[PageController::class,'index'])->name('index');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('/hospital',HospitalController::class)->except('show');
+    Route::resource('/specimen_type',SpecimenTypeController::class)->except('show');
 
-    Route::resource('/aspirate',AspirateController::class)->except('show','destroy');
+    Route::resource('/aspirate',AspirateController::class)->except('show');
     Route::get('/aspirate-invoice/{id}',[AspirateController::class, 'invoice'])->name('aspirate.invoice');
     Route::resource('/aspirate_photos',AspiratePhotoController::class);
 
-    Route::resource('/trephine',TrephineController::class)->except('show','destroy');
+    Route::resource('/trephine',TrephineController::class)->except('show');
     Route::get('/trephine-invoice/{id}',[TrephineController::class, 'invoice'])->name('trephine.invoice');
     Route::resource('/trephine_photos',TrephinePhotoController::class);
 
-    Route::resource('/histo',HistoController::class)->except('show','destroy');
+    Route::resource('/histo',HistoController::class)->except('show');
     Route::get('/histo-invoice/{id}',[HistoController::class, 'invoice'])->name('histo.invoice');
     Route::resource('/histo_photos',HistoPhotoController::class);
+    Route::resource('/histo_gross',HistoGrossController::class);
 
-    Route::resource('/cyto',CytoController::class)->except('show','destroy');
+    Route::resource('/cyto',CytoController::class)->except('show');
     Route::get('/cyto-invoice/{id}',[CytoController::class, 'invoice'])->name('cyto.invoice');
     Route::resource('/cyto_photos',CytoPhotoController::class);
 
