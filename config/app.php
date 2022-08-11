@@ -177,6 +177,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Ladumor\LaravelPwa\PWAServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -236,6 +237,7 @@ return [
         'LaravelPwa' => \Ladumor\LaravelPwa\LaravelPwa::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
