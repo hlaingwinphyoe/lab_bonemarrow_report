@@ -36,7 +36,7 @@
             <div class="card border-0">
                 <div class="card-body">
                     <div class="mb-2 position-relative">
-                        <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                        <a href="{{ route('histo.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                         <div class="d-flex align-items-center">
                             <div class="">
                                 <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">

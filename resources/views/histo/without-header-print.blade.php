@@ -49,7 +49,7 @@
             <div class="card border-0">
                 <div class="card-body">
                     <div class="position-relative">
-                        <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                        <a href="{{ route('histo.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                     </div>
                     <div class="row">
                         <div class="col-12">

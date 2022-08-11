@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\HistosExport;
 use App\Models\Histo;
 use App\Http\Requests\StoreHistoRequest;
 use App\Http\Requests\UpdateHistoRequest;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Maatwebsite\Excel\Facades\Excel;
 use Milon\Barcode\DNS2D;
 
 class HistoController extends Controller
@@ -213,6 +215,10 @@ class HistoController extends Controller
     public function invoice($id){
         $invoice = Histo::where('id',$id)->first();
         return view('histo.invoice',compact('invoice'));
+    }
+
+    public function export(){
+        return Excel::download(new HistosExport, 'histos.xlsx');
     }
 
 }

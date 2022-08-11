@@ -53,24 +53,26 @@ Route::middleware('auth')->group(function(){
     Route::resource('/aspirate',AspirateController::class)->except('show');
     Route::get('/aspirate-invoice/{id}',[AspirateController::class, 'invoice'])->name('aspirate.invoice');
     Route::resource('/aspirate_photos',AspiratePhotoController::class);
-    Route::get('aspirates/export', [AspirateController::class, 'export'])->name('aspirate.export');
+    Route::get('aspirate/export', [AspirateController::class, 'export'])->name('aspirate.export');
 
     // trephine
     Route::resource('/trephine',TrephineController::class)->except('show');
     Route::get('/trephine-invoice/{id}',[TrephineController::class, 'invoice'])->name('trephine.invoice');
     Route::resource('/trephine_photos',TrephinePhotoController::class);
+    Route::get('trephine/export', [TrephineController::class, 'export'])->name('trephine.export');
 
     // histo
     Route::resource('/histo',HistoController::class)->except('show');
     Route::get('/histo-invoice/{id}',[HistoController::class, 'invoice'])->name('histo.invoice');
     Route::resource('/histo_photos',HistoPhotoController::class);
     Route::resource('/histo_gross',HistoGrossController::class);
+    Route::get('histo/export', [HistoController::class, 'export'])->name('histo.export');
 
     // cyto
     Route::resource('/cyto',CytoController::class)->except('show');
     Route::get('/cyto-invoice/{id}',[CytoController::class, 'invoice'])->name('cyto.invoice');
     Route::resource('/cyto_photos',CytoPhotoController::class);
-
+    Route::get('cyto/export', [CytoController::class, 'export'])->name('cyto.export');
 
     Route::get('/search',[PageController::class,'search']);
     Route::get('/reports/sales',[PageController::class,'totalSales'])->name('report.sale');

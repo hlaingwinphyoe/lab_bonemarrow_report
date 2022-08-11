@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TrephinesExport;
 use App\Models\Hospital;
 use App\Models\SpecimenType;
 use App\Models\Trephine;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TrephineController extends Controller
 {
@@ -229,6 +231,10 @@ class TrephineController extends Controller
     public function invoice($id){
         $invoice = Trephine::where('id','=',$id)->first();
         return view('trephine.invoice',compact('invoice'));
+    }
+
+    public function export(){
+        return Excel::download(new TrephinesExport, 'trephines.xlsx');
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CytosExport;
 use App\Models\Cyto;
 use App\Http\Requests\StoreCytoRequest;
 use App\Http\Requests\UpdateCytoRequest;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CytoController extends Controller
 {
@@ -177,6 +179,10 @@ class CytoController extends Controller
     public function invoice($id){
         $invoice = Cyto::where('id','=',$id)->first();
         return view('cyto.invoice',compact('invoice'));
+    }
+
+    public function export(){
+        return Excel::download(new CytosExport, 'cytos.xlsx');
     }
 
 }
