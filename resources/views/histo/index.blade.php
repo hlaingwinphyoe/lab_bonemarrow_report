@@ -21,7 +21,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="me-2">
                             <a href="{{ route('histo.create') }}" class="btn btn-primary mb-3" style="width: 125px"><i class="fa fa-plus me-1"></i> Create</a>
-
+                            <a href="{{ route('histo.export') }}" class="btn btn-success mb-3" style="width: 125px"><i class="fa fa-file-excel me-1"></i> Export</a>
                         </div>
                         <div class="mb-2">
                             <form method="get" class="">

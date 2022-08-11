@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col-12 px-5 pt-3">
             <div class="mb-2 position-relative">
-                <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="{{ route('trephine.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                 <div class="d-flex align-items-center">
                     <div class="">
                         <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
@@ -165,7 +165,7 @@
                                         <td class="result">{{ $patientFact->bmexamination ?? '-' }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold text-capitalize title">Anatomic site of aspirate/biopsy</td>
+                                        <td class="fw-bold text-capitalize title">Anatomic site of trephine/biopsy</td>
                                         <td class="result">{{ $patientFact->anatomic_site_trephine ?? '-' }}</td>
                                     </tr>
                                     <tr>
