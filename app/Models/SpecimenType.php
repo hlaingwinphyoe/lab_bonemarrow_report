@@ -13,4 +13,20 @@ class SpecimenType extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function aspirates(){
+        return $this->hasMany(Aspirate::class);
+    }
+
+    public function trephines(){
+        return $this->hasMany(Trephine::class);
+    }
+
+    public function histos(){
+        return $this->hasMany(Histo::class);
+    }
+
+    public function cytos(){
+        return $this->hasMany(Cyto::class);
+    }
+
 }

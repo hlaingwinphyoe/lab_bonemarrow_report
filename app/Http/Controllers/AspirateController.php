@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AspiratesExport;
 use App\Models\Aspirate;
 use App\Http\Requests\StoreAspirateRequest;
 use App\Http\Requests\UpdateAspirateRequest;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AspirateController extends Controller
 {
@@ -222,6 +224,10 @@ class AspirateController extends Controller
     public function invoice($id){
         $invoice = Aspirate::where('id','=',$id)->first();
         return view('aspirate.invoice',compact('invoice'));
+    }
+
+    public function export(){
+        return Excel::download(new AspiratesExport, 'aspirates.xlsx');
     }
 
 }

@@ -149,6 +149,9 @@
                                 <td>{{ $specimen->created_at->diffForHumans() }}</td>
                             </tr>
                         @empty
+                            <tr>
+                                <td colspan="5" class="text-center fw-bold">There's no specimen type!</td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>

@@ -1,9 +1,6 @@
 @extends('layouts.app')
 @section('title') Aspirate : 550MCH Biopsy Reports @endsection
 
-@section('head')
-@endsection
-
 @section('content')
     <div class="row align-items-end">
         <div class="col-12">
@@ -24,7 +21,6 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="me-2">
                             <a href="{{ route('aspirate.create') }}" class="btn btn-primary mb-3" style="width: 125px"><i class="fa fa-plus me-1"></i> Create</a>
-                            <a href="{{ route('aspirate.export') }}" class="btn btn-success mb-3" style="width: 125px"><i class="fa fa-file-excel me-1"></i> Export</a>
                         </div>
                         <div class="mb-2">
                             <form method="get" class="">
@@ -124,12 +120,10 @@
                         </tbody>
                     </table>
                     {{ $aspirates->appends(request()->all())->onEachSide(1)->links() }}
+
                 </div>
             </div>
         </div>
     </div>
 @stop
-
-@push('script')
-@endpush
 

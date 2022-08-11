@@ -19,15 +19,9 @@
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
-                        <div>
+                        <div class="me-2">
                             <a href="{{ route('trephine.create') }}" class="btn btn-primary mb-3" style="width: 125px"><i class="fa fa-plus me-1"></i> Create</a>
-                            @isset(request()->trephineSearch)
-                                <a href="{{ route("trephine.index") }}" class="btn btn-secondary btn-sm mb-3 me-2">
-                                    <i class="feather-list"></i>
-                                    All Reports
-                                </a>
-                                <span>Search By : <b>" {{ request()->trephineSearch }} "</b></span>
-                            @endisset
+
                         </div>
                         <div class="mb-2">
                             <form method="get" class="">
@@ -40,7 +34,16 @@
                             </form>
                         </div>
                     </div>
-                    <table class="table table-hover  mb-3">
+                    @isset(request()->trephineSearch)
+                        <div class="d-flex align-items-center">
+                            <a href="{{ route("trephine.index") }}" class="btn btn-secondary mb-3 me-2">
+                                <i class="feather-list"></i>
+                                All Reports
+                            </a>
+                            <p>Search By : <b>" {{ request()->trephineSearch }} "</b></p>
+                        </div>
+                    @endisset
+                    <table class="table table-hover mb-3">
                         <thead>
                         <tr>
                             <th>Name</th>
@@ -111,7 +114,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center fw-bold">There's no reports. 📜</td>
+                                <td colspan="8" class="text-center fw-bold">There's no reports. 📜</td>
                             </tr>
                         @endforelse
                         </tbody>

@@ -7,8 +7,8 @@
             </span>
             <span class="fw-bolder h4 mb-0  text-primary ms-2">Biopsy Reports</span>
         </a>
-        <button class="hide-sidebar-btn btn btn-light d-block d-lg-none">
-            <i class="fa fa-times text-primary" style="font-size: 2em;"></i>
+        <button class="hide-sidebar-btn btn btn-link d-block d-lg-none">
+            <i class="fa fa-times text-danger" style="font-size: 2em;"></i>
         </button>
     </div>
     <div class="nav-menu">
@@ -48,27 +48,27 @@
 
             <li class="menu-spacer"></li>
 
-{{--            <x-side-bar-title title="Sales" />--}}
+            <x-side-bar-title title="Sales" />
 
-{{--            <li class="menu-item">--}}
-{{--                <x-side-bar-link name="Total Sales" link="{{ route('aspirate.create') }}" />--}}
-{{--            </li>--}}
+            <li class="menu-item">
+                <x-side-bar-link name="Total Sales" link="{{ route('report.sale') }}" />
+            </li>
 
-{{--            <li class="menu-spacer"></li>--}}
+            <li class="menu-spacer"></li>
 
             <x-side-bar-title title="Report Form" />
 
             <li class="menu-item">
-                <x-side-bar-link name="Aspirate Report" link="{{ route('aspirate.create') }}" />
+                <x-side-bar-link name="Aspirate Form" link="{{ route('aspirate.create') }}" />
             </li>
             <li class="menu-item">
-                <x-side-bar-link name="Trephine Report" link="{{ route('trephine.create') }}" />
+                <x-side-bar-link name="Trephine Form" link="{{ route('trephine.create') }}" />
             </li>
             <li class="menu-item">
-                <x-side-bar-link name="Histo Report" link="{{ route('histo.create') }}" />
+                <x-side-bar-link name="Histo Form" link="{{ route('histo.create') }}" />
             </li>
             <li class="menu-item">
-                <x-side-bar-link name="Cyto Report" link="{{ route('cyto.create') }}" />
+                <x-side-bar-link name="Cyto Form" link="{{ route('cyto.create') }}" />
             </li>
             <li class="menu-spacer"></li>
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Aspirate;
 use App\Models\Cyto;
 use App\Models\Histo;
+use App\Models\SpecimenType;
 use App\Models\Trephine;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -78,7 +80,25 @@ class PageController extends Controller
 
     // total sales
     public function totalSales(){
+        // for one month data
+//        $aspirates = Aspirate::whereMonth('created_at', Carbon::now()->month)->get();
+//        $trephines = Trephine::whereMonth('created_at', Carbon::now()->month)->get();
+//        $histos = Histo::whereMonth('created_at', Carbon::now()->month)->get();
+//        $cytos = Cyto::whereMonth('created_at', Carbon::now()->month)->get();
 
+        $aspirates = Aspirate::all();
+        $trephines = Trephine::all();
+        $histos = Histo::all();
+        $cytos = Cyto::all();
+
+//        $currentDate = date('d-m-Y');
+//        $first = Carbon::createFromFormat('d-m-Y', $currentDate)
+//                        ->firstOfMonth()
+//                        ->format('d-m-Y');
+
+        $specimens = SpecimenType::withCount(['aspirates','trephines','histos','cytos'])->get();
+
+        return view('sales',['aspirates'=>$aspirates,'trephines'=>$trephines,'histos'=>$histos,'cytos'=>$cytos,'specimens'=>$specimens]);
     }
 
 }

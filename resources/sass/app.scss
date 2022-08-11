@@ -31,6 +31,7 @@ $secondary:#6c757d;
 
 *{
     font-family: 'Quicksand','Padauk', sans-serif;
+    transition: all 0.3s ease-out;
 }
 
 .loader {
@@ -122,7 +123,7 @@ $secondary:#6c757d;
 .nav-brand{
     position: sticky;
     top: 0;
-    background: #eee;
+    background-color: rgba(18,102,241,.05) !important;
 }
 .nav-menu{
 
@@ -224,7 +225,7 @@ a{
 .header{
     position: sticky;
     top: 0.2rem;
-    z-index: 2009;
+    z-index: 1050;
     border-radius: 2px;
 }
 
@@ -236,7 +237,7 @@ a{
 
 .sidebar{
     overflow-y: scroll;
-    background: var(--bs-white);
+    background: #fff;
 }
 
 
@@ -246,12 +247,103 @@ a{
 
 .card{
     border:none;
-    border-top: 2px solid #003eff;
+    border-radius: 4px !important;
+    border-top: 2px solid #cccccc;
 }
 
-.card-none{
-    border-top: 0 !important;
+// sale card start
+.sale-card {
+    display: block;
+    top: 0px;
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 4px;
+    padding: 12px 24px;
+    margin: 12px;
+    text-decoration: none;
+    overflow: hidden;
+    border: 1px solid #cccccc;
+
+    .go-corner {
+        //background-color: #00838d;
+        height: 100%;
+        width: 21px;
+        padding-right: 9px;
+        border-radius: 0;
+        transform: skew(8deg);
+        margin-right: -36px;
+        align-items: start;
+        background: #1488CC;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, #003eff, #0039ea);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #003eff, #0039ea); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    }
+
+    .go-arrow {
+        transform: skew(-6deg);
+        margin-left: -2px;
+        margin-top: 9px;
+        opacity: 0;
+    }
+
+    &:hover {
+        border: 1px solid #003eff;
+    }
+
+    h3 {margin-top: 8px;}
 }
+
+.sale-card:hover {
+    .go-corner {
+        margin-right: -12px;
+    }
+    .go-arrow {
+        opacity: 1;
+    }
+}
+
+h3 {
+    color: #262626;
+    font-size: 17px;
+    line-height: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+p {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #666666;
+
+    &.small {
+        font-size: 14px;
+    }
+}
+
+.go-corner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    background-color: #003eff;
+    border-radius: 0 4px 0 32px;
+}
+
+.go-arrow {
+    margin-top: -4px;
+    margin-right: -4px;
+    color: white;
+    font-family: courier, sans;
+}
+
+// sale card end
 
 
 .full-screen-card{
@@ -440,9 +532,9 @@ a{
     .sidebar{
         position: fixed;
         width: 300px;
-        z-index: 2001;
+        z-index: 2020;
         display: block !important;
-        background: var(--bs-white);
+        background: #fff;
         margin-left: -100%;
     }
     .right-divider{
