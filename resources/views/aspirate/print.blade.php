@@ -45,7 +45,7 @@
     <div class="row">
         <div class="col-12 px-5 pt-3">
             <div class="mb-2 position-relative">
-                <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="{{ route('aspirate.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                 <div class="d-flex align-items-center">
                     <div class="">
                         <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">

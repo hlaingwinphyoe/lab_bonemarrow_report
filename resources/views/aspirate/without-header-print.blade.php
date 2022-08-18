@@ -47,7 +47,7 @@
             <div class="card border-0">
                 <div class="card-body">
                     <div class="position-relative">
-                        <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                        <a href="{{ route('aspirate.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div>

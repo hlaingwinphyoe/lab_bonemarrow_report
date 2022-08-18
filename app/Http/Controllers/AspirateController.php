@@ -25,7 +25,15 @@ class AspirateController extends Controller
      */
     public function index()
     {
-        return redirect()->route('denied');
+        $aspirates = Aspirate::when(isset(request()->aspirateSearch),function ($query){
+            $aspirateSearch = request()->aspirateSearch;
+            $query->where('patient_name','LIKE',"%$aspirateSearch%")->orwhere('sc_date','LIKE',"%$aspirateSearch%");
+        })->when(Auth::user()->isUser(),fn($q)=>$q
+            ->where('user_id',Auth::id()))
+            ->latest('id')
+            ->paginate(10,['*'],'aspiratePage');
+
+        return view('aspirate.index',['aspirates'=>$aspirates]);
     }
 
     /**
@@ -117,7 +125,7 @@ class AspirateController extends Controller
         }
 
 
-        return redirect()->route('index')->with('status',"Successfully Created!");
+        return redirect()->route('aspirate.index')->with('status',"Successfully Created!");
     }
 
     /**
@@ -194,7 +202,7 @@ class AspirateController extends Controller
         $aspirate->specimen_type_id = $request->specimen_type;
         $aspirate->update();
 
-        return redirect()->route('index')->with('status','Successfully Updated!');
+        return redirect()->route('aspirate.index')->with('status','Successfully Updated!');
     }
 
     /**

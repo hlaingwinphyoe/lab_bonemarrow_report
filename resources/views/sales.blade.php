@@ -15,7 +15,7 @@
                 <div class="col-xxl-3 col-lg-6 mb-4">
                     <a class="sale-card" href="{{ route('index') }}">
                         <h3>Aspirate</h3>
-                        <p class="small mb-1">Total Sales - <span class="fw-bold aspirate"></span></p>
+                        <p class="small mb-1">Total Sales - <span class="fw-bold aspirate">0 Ks</span></p>
                         <p class="small mb-1">Total Reports - <span class="fw-bold">{{ $aspirates->count() }}</span></p>
                         <div class="dimmer"></div>
                         <div class="go-corner" href="{{ route('index') }}">
@@ -28,7 +28,7 @@
                 <div class="col-xxl-3 col-lg-6 mb-4">
                     <a class="sale-card" href="{{ route('trephine.index') }}">
                         <h3>Trephine</h3>
-                        <p class="small mb-1">Total Sales - <span class="fw-bold trephine"></span></p>
+                        <p class="small mb-1">Total Sales - <span class="fw-bold trephine">0 Ks</span></p>
                         <p class="small mb-1">Total Reports - <span class="fw-bold">{{ $trephines->count() }}</span></p>
                         <div class="dimmer"></div>
                         <div class="go-corner" href="{{ route('trephine.index') }}">
@@ -41,7 +41,7 @@
                 <div class="col-xxl-3 col-lg-6 mb-4">
                     <a class="sale-card" href="{{ route('histo.index') }}">
                         <h3>Histo</h3>
-                        <p class="small mb-1">Total Sales - <span class="fw-bold histo"></span></p>
+                        <p class="small mb-1">Total Sales - <span class="fw-bold histo">0 Ks</span></p>
                         <p class="small mb-1">Total Reports - <span class="fw-bold">{{ $histos->count() }}</span></p>
                         <div class="dimmer"></div>
                         <div class="go-corner" href="{{ route('histo.index') }}">
@@ -54,7 +54,7 @@
                 <div class="col-xxl-3 col-lg-6 mb-4">
                     <a class="sale-card" href="{{ route('cyto.index') }}">
                         <h3>Cyto</h3>
-                        <p class="small mb-1">Total Sales - <span class="fw-bold cyto"></span></p>
+                        <p class="small mb-1">Total Sales - <span class="fw-bold cyto">0 Ks</span></p>
                         <p class="small mb-1">Total Reports - <span class="fw-bold">{{ $cytos->count() }}</span></p>
                         <div class="dimmer"></div>
                         <div class="go-corner" href="{{ route('cyto.index') }}">
@@ -83,6 +83,7 @@
 {{--                </div>--}}
 {{--            </div>--}}
             <div class="row">
+                @if($aspirates->count() > 0)
                 <div class="col-12 col-lg-6">
                     <div class="card mb-4">
                         <div class="card-header">
@@ -104,7 +105,7 @@
                                         <td>{{ $specimen->name }}</td>
                                         <td class="text-end" id="price">{{ $specimen->price }}</td>
                                         <td class="text-end" id="count">{{ $specimen->aspirates_count }}</td>
-                                        <td id="loop" class="text-end">{{ $specimen->aspirates_count * $specimen->price }} Ks</td>
+                                        <td id="loop" class="text-end">{{ $specimen->price * $specimen->aspirates_count }}</td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -121,6 +122,9 @@
                         </div>
                     </div>
                 </div>
+                @endif
+
+                @if($trephines->count() > 0)
                 <div class="col-12 col-lg-6">
                     <div class="card mb-4">
                         <div class="card-header">
@@ -159,6 +163,9 @@
                         </div>
                     </div>
                 </div>
+                @endif
+
+                @if($histos->count() > 0)
                 <div class="col-12 col-lg-6">
                     <div class="card mb-4">
                         <div class="card-header">
@@ -197,6 +204,9 @@
                         </div>
                     </div>
                 </div>
+                @endif
+
+                @if($cytos->count() > 0)
                 <div class="col-12 col-lg-6">
                     <div class="card mb-4">
                         <div class="card-header">
@@ -235,6 +245,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
@@ -245,13 +256,30 @@
         $(function() {
 
             let total = 0;
+
             $("tr #loop").each(function (index,value){
                currentRow = parseFloat($(this).text());
                total += currentRow;
             });
 
-            document.getElementById('total').innerHTML = total.toLocaleString('en-US') +" Ks";
-            $(".sale-card .aspirate").html(total.toLocaleString('en-US') + " Ks")
+            document.getElementById('total').innerHTML = Math.abs(Number(total)) >= 1.0e+9
+                                                        ? Math.abs(Number(total)) / 1.0e+9 + "B"
+                                                        // Six Zeroes for Millions
+                                                        : Math.abs(Number(total)) >= 1.0e+6
+                                                            ? Math.abs(Number(total)) / 1.0e+6 + "M"
+                                                            // Three Zeroes for Thousands
+                                                            : Math.abs(Number(total)) >= 1.0e+3
+                                                                ? Math.abs(Number(total)) / 1.0e+3 + "K"
+                                                                : Math.abs(Number(total));
+            $(".sale-card .aspirate").html(Math.abs(Number(total)) >= 1.0e+9
+                                            ? Math.abs(Number(total)) / 1.0e+9 + "B"
+                                            // Six Zeroes for Millions
+                                            : Math.abs(Number(total)) >= 1.0e+6
+                                                ? Math.abs(Number(total)) / 1.0e+6 + "M"
+                                                // Three Zeroes for Thousands
+                                                : Math.abs(Number(total)) >= 1.0e+3
+                                                    ? Math.abs(Number(total)) / 1.0e+3 + "K"
+                                                    : Math.abs(Number(total)))
 
         });
 
@@ -263,8 +291,24 @@
                 tre_total += currentRow;
             });
 
-            document.getElementById('tre_total').innerHTML = tre_total.toLocaleString('en-US') +" Ks";
-            $(".sale-card .trephine").html(tre_total.toLocaleString('en-US') + " Ks")
+            document.getElementById('tre_total').innerHTML = Math.abs(Number(tre_total)) >= 1.0e+9
+                                                            ? Math.abs(Number(tre_total)) / 1.0e+9 + "B"
+                                                            // Six Zeroes for Millions
+                                                            : Math.abs(Number(tre_total)) >= 1.0e+6
+                                                                ? Math.abs(Number(tre_total)) / 1.0e+6 + "M"
+                                                                // Three Zeroes for Thousands
+                                                                : Math.abs(Number(tre_total)) >= 1.0e+3
+                                                                    ? Math.abs(Number(tre_total)) / 1.0e+3 + "K"
+                                                                    : Math.abs(Number(tre_total));
+            $(".sale-card .trephine").html(Math.abs(Number(tre_total)) >= 1.0e+9
+                                            ? Math.abs(Number(tre_total)) / 1.0e+9 + "B"
+                                            // Six Zeroes for Millions
+                                            : Math.abs(Number(tre_total)) >= 1.0e+6
+                                                ? Math.abs(Number(tre_total)) / 1.0e+6 + "M"
+                                                // Three Zeroes for Thousands
+                                                : Math.abs(Number(tre_total)) >= 1.0e+3
+                                                    ? Math.abs(Number(tre_total)) / 1.0e+3 + "K"
+                                                    : Math.abs(Number(tre_total)))
 
         });
 
@@ -276,8 +320,24 @@
                 histo_total += currentRow;
             });
 
-            document.getElementById('histo_total').innerHTML = histo_total.toLocaleString('en-US') +" Ks";
-            $(".sale-card .histo").html(histo_total.toLocaleString('en-US') + " Ks")
+            document.getElementById('histo_total').innerHTML = Math.abs(Number(histo_total)) >= 1.0e+9
+                                                                ? Math.abs(Number(histo_total)) / 1.0e+9 + "B"
+                                                                // Six Zeroes for Millions
+                                                                : Math.abs(Number(histo_total)) >= 1.0e+6
+                                                                    ? Math.abs(Number(histo_total)) / 1.0e+6 + "M"
+                                                                    // Three Zeroes for Thousands
+                                                                    : Math.abs(Number(histo_total)) >= 1.0e+3
+                                                                        ? Math.abs(Number(histo_total)) / 1.0e+3 + "K"
+                                                                        : Math.abs(Number(histo_total));
+            $(".sale-card .histo").html(Math.abs(Number(histo_total)) >= 1.0e+9
+                                        ? Math.abs(Number(histo_total)) / 1.0e+9 + "B"
+                                        // Six Zeroes for Millions
+                                        : Math.abs(Number(histo_total)) >= 1.0e+6
+                                            ? Math.abs(Number(histo_total)) / 1.0e+6 + "M"
+                                            // Three Zeroes for Thousands
+                                            : Math.abs(Number(histo_total)) >= 1.0e+3
+                                                ? Math.abs(Number(histo_total)) / 1.0e+3 + "K"
+                                                : Math.abs(Number(histo_total)))
 
         });
 
@@ -289,8 +349,24 @@
                 cyto_total += currentRow;
             });
 
-            document.getElementById('cyto_total').innerHTML = cyto_total.toLocaleString('en-US') +" Ks";
-            $(".sale-card .cyto").html(cyto_total.toLocaleString('en-US') + " Ks")
+            document.getElementById('cyto_total').innerHTML = Math.abs(Number(cyto_total)) >= 1.0e+9
+                                                            ? Math.abs(Number(cyto_total)) / 1.0e+9 + "B"
+                                                            // Six Zeroes for Millions
+                                                            : Math.abs(Number(cyto_total)) >= 1.0e+6
+                                                                ? Math.abs(Number(cyto_total)) / 1.0e+6 + "M"
+                                                                // Three Zeroes for Thousands
+                                                                : Math.abs(Number(cyto_total)) >= 1.0e+3
+                                                                    ? Math.abs(Number(cyto_total)) / 1.0e+3 + "K"
+                                                                    : Math.abs(Number(cyto_total));
+            $(".sale-card .cyto").html(Math.abs(Number(cyto_total)) >= 1.0e+9
+                                        ? Math.abs(Number(cyto_total)) / 1.0e+9 + "B"
+                                        // Six Zeroes for Millions
+                                        : Math.abs(Number(cyto_total)) >= 1.0e+6
+                                            ? Math.abs(Number(cyto_total)) / 1.0e+6 + "M"
+                                            // Three Zeroes for Thousands
+                                            : Math.abs(Number(cyto_total)) >= 1.0e+3
+                                                ? Math.abs(Number(cyto_total)) / 1.0e+3 + "K"
+                                                : Math.abs(Number(cyto_total)))
 
         });
     </script>

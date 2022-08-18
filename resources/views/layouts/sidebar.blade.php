@@ -27,7 +27,7 @@
                     <i class="fa-solid fa-chevron-down float-end custom-dropdown"></i>
                 </a>
                 <div class="sub-menu ms-4">
-                    <a href="{{ route('index') }}" class="dropdown-item {{ route('index') == request()->url() ? 'active':'' }}">
+                    <a href="{{ route('aspirate.index') }}" class="dropdown-item {{ route('aspirate.index') == request()->url() ? 'active':'' }}">
                         <i class="fa-solid fa-chevron-right me-3" style="font-size: 10px"></i>
                         Aspirate List
                     </a>
@@ -45,6 +45,15 @@
                     </a>
                 </div>
             </div>
+
+            <li class="menu-spacer"></li>
+
+            <x-side-bar-title title="Index" />
+
+            <li class="menu-item">
+                <x-side-bar-link name="Outside Panel" link="{{ route('index') }}" />
+            </li>
+
 
             <li class="menu-spacer"></li>
 

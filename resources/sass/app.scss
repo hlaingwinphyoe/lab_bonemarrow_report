@@ -276,8 +276,6 @@ a{
         background: #1488CC;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to top, #003eff, #0039ea);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to top, #003eff, #0039ea); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
     }
 
     .go-arrow {
@@ -351,7 +349,7 @@ p {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 2020;
+    z-index: 2300;
     height: 100vh;
     overflow: scroll;
 }
