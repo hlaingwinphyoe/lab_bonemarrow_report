@@ -1,4 +1,8 @@
-$primary : #003eff;
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Quicksand:wght@500;600;700&display=swap');
+
+$primary:#003eff;
+$secondary:#6c757d;
 // Bootstrap
 @import 'mdb-ui-kit/src/scss/mdb.free';
 @import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -7,6 +11,11 @@ $primary : #003eff;
 // Variables
 @import 'variables';
 
+*{
+    font-family: 'Quicksand','Padauk', sans-serif;
+    transition: all 0.3s ease-out;
+}
+
 @media print{
     @page{
         size: A4;
@@ -14,6 +23,10 @@ $primary : #003eff;
     }
 
     .back-btn{
+        display: none !important;
+    }
+
+    .btn{
         display: none !important;
     }
 }
@@ -31,6 +44,39 @@ $primary : #003eff;
     left: -77px;
     top: 0;
 }
+
+.table tr td{
+    vertical-align: middle !important;
+    //font-size: 12px;
+}
+
+.table > :not(caption) > * > *{
+    padding: 0.8rem 1rem !important;
+}
+
+.table th{
+    font-weight: 900 !important;
+    font-size: 15px !important;
+}
+
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .nav-link.active{
+    border-bottom: 2px solid black;
+}
+
+::-webkit-scrollbar{
+    position: absolute;
+    top: 0;
+    float: right;
+    width: 6px;
+    height: 8px;
+    background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgb(66, 66, 66);
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
 //.print-table tr .title{
 //    width: 370px;
 //}

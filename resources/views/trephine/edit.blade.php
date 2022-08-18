@@ -43,8 +43,8 @@
                                             <button class="btn btn-primary">Upload</button>
                                         </form>
 
-                                        <div class="border border-2 rounded border-primary uploader-ui me-1 d-flex justify-content-center align-items-center px-4" id="photoUploadUi">
-                                            <i class="fa-solid fa-camera text-primary fa-2x fa-fw"></i>
+                                        <div class="border border-2 rounded border-secondary uploader-ui me-1 d-flex justify-content-center align-items-center px-4" id="photoUploadUi">
+                                            <i class="fa-solid fa-camera text-secondary fa-2x fa-fw"></i>
                                         </div>
 
                                         @forelse($trephine->trephinePhotos as $photo)

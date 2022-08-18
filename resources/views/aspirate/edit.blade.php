@@ -4,7 +4,7 @@
 @section('content')
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('index') }}">Aspirate</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('aspirate.index') }}">Aspirate</a></li>
             <li class="breadcrumb-item active" aria-current="page">Edit</li>
         </ol>
     </nav>
@@ -43,8 +43,8 @@
                                         <button class="btn btn-primary">Upload</button>
                                     </form>
 
-                                    <div class="border border-2 rounded border-primary uploader-ui me-1 d-flex justify-content-center align-items-center px-4" id="photoUploadUi">
-                                        <i class="fa-solid fa-camera text-primary fa-2x fa-fw"></i>
+                                    <div class="border border-2 rounded border-secondary uploader-ui me-1 d-flex justify-content-center align-items-center px-4" id="photoUploadUi">
+                                        <i class="fa-solid fa-camera text-secondary fa-2x fa-fw"></i>
                                     </div>
 
                                     @forelse($aspirate->aspiratePhotos as $photo)

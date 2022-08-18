@@ -17,6 +17,17 @@ $('.sub-btn').click(function () {
     $(this).find('.custom-dropdown').toggleClass('rotate')
 })
 
+$(".full-screen-btn").click(function () {
+    console.log('click')
+    let current = $(this).closest(".card");
+    current.toggleClass("full-screen-card");
+    if(current.hasClass("full-screen-card")){
+        $(this).html(`<i class="fa fa-compress" style="font-size: 16px"></i>`);
+    }else{
+        $(this).html(`<i class="fa fa-expand" style="font-size: 16px"></i>`);
+    }
+});
+
 // loader
 let spinner = function () {
     setTimeout(function () {
@@ -67,16 +78,6 @@ Array.prototype.forEach.call(
         });
     }
 );
-
-$(".full-screen-btn").click(function () {
-    let current = $(this).closest(".card");
-    current.toggleClass("full-screen-card");
-    if(current.hasClass("full-screen-card")){
-        $(this).html(`<i class="fa-solid fa-compress" style="font-size: 16px"></i>`);
-    }else{
-        $(this).html(`<i class="fa-solid fa-expand" style="font-size: 16px"></i>`);
-    }
-});
 
 // profile
 let upload = document.getElementById("upload");

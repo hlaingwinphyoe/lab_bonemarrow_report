@@ -15,17 +15,6 @@ use Illuminate\Support\Facades\Hash;
 
 class PageController extends Controller
 {
-    public function index(){
-        $aspirates = Aspirate::when(isset(request()->aspirateSearch),function ($query){
-            $aspirateSearch = request()->aspirateSearch;
-            $query->where('patient_name','LIKE',"%$aspirateSearch%")->orwhere('sc_date','LIKE',"%$aspirateSearch%");
-        })->when(Auth::user()->isUser(),fn($q)=>$q
-            ->where('user_id',Auth::id()))
-            ->latest('id')
-            ->paginate(10,['*'],'aspiratePage');
-
-        return view('index',['aspirates'=>$aspirates]);
-    }
 
     public function users(){
         $users = User::where('role','1')->get();

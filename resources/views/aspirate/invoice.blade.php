@@ -16,30 +16,21 @@
             }
         }
 
-
-        ::-webkit-scrollbar{
-            position: absolute;
-            top: 0;
-            float: right;
-            width: 6px;
-            background-clip: padding-box;
-        }
-        ::-webkit-scrollbar-thumb{
-            background-color: rgb(66, 66, 66);
-            border: 1px solid rgb(255, 255, 255);
-            border-radius: 5px;
-        }
-
     </style>
 </head>
-<body onload="print()" oncontextmenu="return false">
+<body oncontextmenu="return false">
 <div class="container">
     <div class="row vh-100 position-relative">
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
                     <div class="mb-2 position-relative">
-                        <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                        @guest
+                            <a href="{{ route('index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                        @endguest
+                        @auth
+                            <a href="{{ route('aspirate.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                        @endauth
                         <div class="d-flex align-items-center">
                             <div class="">
                                 <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
@@ -95,14 +86,19 @@
                                     </tr>
                                     <tr>
                                         <td>{{ $invoice->specimenType->name }}</td>
-                                        <td class="text-end">{{ $invoice->specimenType->price }}</td>
+                                        <td class="text-end">{{ $invoice->specimenType->price }} Ks</td>
                                     </tr>
                                     <tr>
                                         <td class="text-end fw-bold" style="border: none">Total - </td>
-                                        <td class="text-end fw-bold" style="border: none">{{ $invoice->specimenType->price }}</td>
+                                        <td class="text-end fw-bold" style="border: none">{{ $invoice->specimenType->price }} Ks</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" class="text-center text-uppercase fw-bold fst-italic" style="border: none;">"Thanks For Choosing Our Lab"</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-end" style="border: none;">
+                                            <button class="btn btn-primary" onclick="return print()"><i class="fa-solid fa-print me-1"></i>Print</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
