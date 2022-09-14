@@ -21,15 +21,13 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(PermissionSeeder::class);
 
-//        User::create([
-//            'name' => "Hlaing Win Phyoe",
-//            'email' => "hlaingwinphyoedev@gmail.com",
-//            'email_verified_at' => now(),
-//            'password' => Hash::make('venom29502') ,
-//            'remember_token' => Str::random(10),
-//        ])->assignRole('Admin')->givePermissionTo(Permission::all());
-//
-
+        User::create([
+            'name' => "Hlaing Win Phyoe",
+            'email' => "hlaingwinphyoedev@gmail.com",
+            'email_verified_at' => now(),
+            'password' => Hash::make('venom29502') ,
+            'remember_token' => Str::random(10),
+        ])->assignRole('Admin')->givePermissionTo(Permission::all());
 
     }
 }
