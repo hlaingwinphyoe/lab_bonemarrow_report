@@ -130,6 +130,7 @@
                     </div>
                 </div>
             </div>
+            @role('Admin|Gross_doctor|Micro_doctor|Reporter')
             <div class="card shadow mb-3">
                 <div class="card-body">
                     <div class="">
@@ -158,6 +159,7 @@
                     </div>
                 </div>
             </div>
+            @endrole
         </div>
 
     </div>

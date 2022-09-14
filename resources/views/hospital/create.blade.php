@@ -19,11 +19,11 @@
                     </div>
                     <hr>
                     <!-- Button trigger modal -->
-                    @if(auth()->user()->role == 0)
+                    @can('write hospital')
                         <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#hospitalModal" style="width: 125px">
                             <i class="fa-solid fa-plus fa-fw" title="create"></i> Create
                         </button>
-                @endif
+                    @endcan
 
                 <!-- Modal -->
                     <div class="modal fade" id="hospitalModal" tabindex="-1" data-mdb-backdrop="static" aria-labelledby="hospitalModalLabel" aria-hidden="true">
@@ -64,7 +64,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse(\App\Models\Hospital::all() as $hospital)
+                        @forelse($hospitals as $hospital)
                             <tr>
                                 <td>{{ $hospital->name }}</td>
                                 <td>{{ $hospital->user->name }}</td>
@@ -74,12 +74,12 @@
                                         @method('delete')
                                     </form>
                                     <div class="btn-group" role="group">
-                                        @can('delete',$hospital)
+                                        @can('delete hospital')
                                             <a href="#" class="btn btn-sm btn-light" form="delForm{{ $hospital->id }}" onclick="return askConfirm({{ $hospital->id }})"  data-mdb-toggle="tooltip" data-mdb-placement="top" title="Delete">
                                                 <i class="fa-regular fa-trash-alt fa-fw"></i>
                                             </a>
                                         @endcan
-                                        @can('update',$hospital)
+                                        @can('edit hospital')
                                             <!-- Button trigger modal -->
                                                 <a href="#" class="btn btn-sm btn-light" data-mdb-toggle="modal" data-mdb-target="#editHospitalModal{{ $hospital->id }}">
                                                     <i class="fa-solid fa-pen fa-fw"  data-mdb-toggle="tooltip" data-mdb-placement="top" title="Edit"></i>

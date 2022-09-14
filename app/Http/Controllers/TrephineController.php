@@ -9,8 +9,11 @@ use App\Models\Trephine;
 use App\Http\Requests\StoreTrephineRequest;
 use App\Http\Requests\UpdateTrephineRequest;
 use App\Models\TrephinePhoto;
+use App\Models\User;
+use App\Notifications\TrephineApproveNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -18,6 +21,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class TrephineController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:access trephine'], ['only' => ['index']]);
+        $this->middleware(['permission:write trephine'], ['only' => ['create']]);
+        $this->middleware(['permission:edit trephine'], ['only' => ['edit']]);
+        $this->middleware(['permission:delete trephine'], ['only' => ['destroy']]);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,14 +37,10 @@ class TrephineController extends Controller
      */
     public function index()
     {
-        $trephines = Trephine::when(isset(request()->trephineSearch),function ($query){
-            $trephineSearch = request()->trephineSearch;
-            $query->where('patient_name','LIKE',"%$trephineSearch%")->orwhere('sc_date','LIKE',"%$trephineSearch%");
-        })->when(Auth::user()->isUser(),fn($q)=>$q
-            ->where('user_id',Auth::id()))
-            ->latest('id')
-            ->paginate(10,['*'],'trephinePage');
-        return view('trephine.index',['trephines'=>$trephines]);
+        $trephines = Trephine::search()->latest('id')
+            ->paginate(10);
+        $specimens = SpecimenType::all();
+        return view('trephine.index',['trephines'=>$trephines,'specimens'=>$specimens]);
     }
 
     /**
@@ -96,6 +104,9 @@ class TrephineController extends Controller
         $trephine->user_id = Auth::id();
         $trephine->save();
 
+        $users = User::role(['User'])->get();
+        Notification::send($users,new TrephineApproveNotification($trephine));
+
         if ($request->hasFile('trephine_photos')){
             foreach ($request->file('trephine_photos') as $photo){
                 //store file
@@ -124,7 +135,7 @@ class TrephineController extends Controller
         }
 
 
-        return redirect()->route('trephine.index')->with('status',"Successfully Created!");
+        return redirect()->route('trephine.index')->with(['status'=>'Successfully Updated!','create'=>$trephine->patient_name.' report အား အတည်ပြုပြီးဖြစ်ပါသည်။']);
 
     }
 
@@ -147,7 +158,6 @@ class TrephineController extends Controller
      */
     public function edit(Trephine $trephine)
     {
-        Gate::authorize('update',$trephine);
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
 
@@ -212,7 +222,6 @@ class TrephineController extends Controller
      */
     public function destroy(Trephine $trephine)
     {
-        Gate::authorize('delete',$trephine);
         $trephine->delete();
         return redirect()->back()->with('status',"Successfully Deleted!");
 

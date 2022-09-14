@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class SpecimenTypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:access specimen'], ['only' => ['create']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

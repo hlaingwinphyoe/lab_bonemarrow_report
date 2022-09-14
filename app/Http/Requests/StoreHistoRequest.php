@@ -24,10 +24,6 @@ class StoreHistoRequest extends FormRequest
     public function rules()
     {
         return [
-            "gross_photos" => 'nullable',
-            "gross_photos.*" => 'file|max:5000|mimes:png,jpg,jpeg',
-            "micro_photos" => 'nullable',
-            "micro_photos.*" => 'file|max:5000|mimes:png,jpg,jpeg',
             "hospital" => 'required|integer|exists:hospitals,id',
             "name" => 'required|min:3',
             "year" => "required|integer|min:0",
@@ -36,12 +32,6 @@ class StoreHistoRequest extends FormRequest
             "gender" => 'required',
             "doctor" => 'required|min:3',
             "bio_receive_date" => 'required|date',
-            "bio_cut_date" => 'required|date',
-            "bio_report_date" => 'required|date',
-            "specimen" => 'nullable|min:3',
-            "gross" => 'nullable|min:3',
-            "description" => 'nullable|min:3',
-            "remark" => 'nullable|min:3',
             "specimen_type" => 'required|integer|exists:specimen_types,id'
         ];
     }

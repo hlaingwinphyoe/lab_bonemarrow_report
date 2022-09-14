@@ -14,7 +14,7 @@ class UpdateCytoRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::authorize('update',$this->route('cyto'));
+        return true;
     }
 
     /**
@@ -32,13 +32,11 @@ class UpdateCytoRequest extends FormRequest
             "day" => "required|integer|min:0",
             "gender" => 'required',
             "doctor" => 'required|min:3',
-            "bio_receive_date" => 'required|date',
-            "bio_cut_date" => 'required|date',
-            "bio_report_date" => 'required|date',
-            "specimen" => 'nullable|min:3',
-            "gross" => 'nullable|min:3',
+            "bio_receive_date" => 'nullable|date',
+            "bio_cut_date" => 'nullable|date',
+            "bio_report_date" => 'nullable|date',
+            "morphology" => 'nullable|min:3',
             "cyto_diagnosis" => 'nullable|min:3',
-            "remark" => 'nullable|min:3',
             "specimen_type" => 'required|integer|exists:specimen_types,id'
         ];
     }

@@ -1,13 +1,10 @@
 require('./bootstrap');
 
 $(".show-sidebar-btn").click(function () {
-    console.log('click');
-
     $(".sidebar").animate({marginLeft:0});
 });
 
 $(".hide-sidebar-btn").click(function () {
-    console.log('click');
     $(".sidebar").animate({marginLeft:"-100%"});
 });
 
@@ -18,7 +15,7 @@ $('.sub-btn').click(function () {
 })
 
 $(".full-screen-btn").click(function () {
-    console.log('click')
+    // console.log('click')
     let current = $(this).closest(".card");
     current.toggleClass("full-screen-card");
     if(current.hasClass("full-screen-card")){

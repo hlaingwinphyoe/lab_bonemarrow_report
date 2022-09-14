@@ -10,16 +10,6 @@ class CytoPolicy
 {
     use HandlesAuthorization;
 
-    // admin all access
-    public function before(User $user){
-        if ($user->role == 0){
-            return true;
-        }
-
-        return null;
-
-    }
-
     /**
      * Determine whether the user can view any models.
      *
@@ -63,7 +53,7 @@ class CytoPolicy
      */
     public function update(User $user, Cyto $cyto)
     {
-        return $user->id == $cyto->user_id;
+
     }
 
     /**
@@ -75,7 +65,7 @@ class CytoPolicy
      */
     public function delete(User $user, Cyto $cyto)
     {
-        return $user->id == $cyto->user_id;
+
     }
 
     /**

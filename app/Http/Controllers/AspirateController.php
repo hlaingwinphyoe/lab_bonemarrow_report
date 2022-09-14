@@ -9,8 +9,11 @@ use App\Http\Requests\UpdateAspirateRequest;
 use App\Models\AspiratePhoto;
 use App\Models\Hospital;
 use App\Models\SpecimenType;
+use App\Models\User;
+use App\Notifications\AspirateApproveNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -18,6 +21,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AspirateController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:access aspirate'], ['only' => ['index']]);
+        $this->middleware(['permission:write aspirate'], ['only' => ['create']]);
+        $this->middleware(['permission:edit aspirate'], ['only' => ['edit']]);
+        $this->middleware(['permission:delete aspirate'], ['only' => ['destroy']]);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,15 +37,10 @@ class AspirateController extends Controller
      */
     public function index()
     {
-        $aspirates = Aspirate::when(isset(request()->aspirateSearch),function ($query){
-            $aspirateSearch = request()->aspirateSearch;
-            $query->where('patient_name','LIKE',"%$aspirateSearch%")->orwhere('sc_date','LIKE',"%$aspirateSearch%");
-        })->when(Auth::user()->isUser(),fn($q)=>$q
-            ->where('user_id',Auth::id()))
-            ->latest('id')
-            ->paginate(10,['*'],'aspiratePage');
-
-        return view('aspirate.index',['aspirates'=>$aspirates]);
+        $aspirates = Aspirate::search()->latest('id')
+            ->paginate(10);
+        $specimens = SpecimenType::all();
+        return view('aspirate.index',['aspirates'=>$aspirates,'specimens'=>$specimens]);
     }
 
     /**
@@ -98,6 +105,9 @@ class AspirateController extends Controller
         $aspirate->user_id = Auth::id();
         $aspirate->save();
 
+        $users = User::role(['User'])->get();
+        Notification::send($users,new AspirateApproveNotification($aspirate));
+
         if ($request->hasFile('aspirate_photos')){
             foreach ($request->file('aspirate_photos') as $photo){
                 //store file
@@ -124,8 +134,7 @@ class AspirateController extends Controller
             }
         }
 
-
-        return redirect()->route('aspirate.index')->with('status',"Successfully Created!");
+        return redirect()->route('aspirate.index')->with(['status'=>'Successfully Updated!','create'=>$aspirate->patient_name.' report အား အတည်ပြုပြီးဖြစ်ပါသည်။']);
     }
 
     /**
@@ -147,7 +156,6 @@ class AspirateController extends Controller
      */
     public function edit(Aspirate $aspirate)
     {
-        Gate::authorize('update',$aspirate);
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
         return view('aspirate.edit',['aspirate'=>$aspirate,'hospitals'=>$hospitals,'specimens'=>$specimens]);
@@ -213,7 +221,6 @@ class AspirateController extends Controller
      */
     public function destroy(Aspirate $aspirate)
     {
-        Gate::authorize('delete',$aspirate);
         $aspirate->delete();
         return redirect()->back()->with('status','Successfully Deleted!');
     }

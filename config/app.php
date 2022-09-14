@@ -178,6 +178,7 @@ return [
         Ladumor\LaravelPwa\PWAServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

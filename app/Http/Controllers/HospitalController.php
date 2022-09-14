@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Gate;
 
 class HospitalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:access hospital'], ['only' => ['create']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,11 +32,8 @@ class HospitalController extends Controller
      */
     public function create()
     {
-        if (auth()->user()->role == 0){
-            return view('hospital.create');
-        }else{
-            return redirect()->route('index')->with('denied',"You Can Not Access This Page. Only Admin Access!");
-        }
+        $hospitals = Hospital::latest('id')->get();
+        return view('hospital.create',compact('hospitals'));
     }
 
     /**

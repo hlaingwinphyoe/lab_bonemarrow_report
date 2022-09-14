@@ -1,12 +1,13 @@
-<div class="header bg-primary mb-3 py-2 px-3">
-    <div class="d-flex justify-content-between">
+<div class="header bg-primary mb-3 py-2 px-3 shadow">
+    <div class="d-flex justify-content-between p-1">
         <button class="btn btn-link btn-sm d-block d-lg-none show-sidebar-btn" id="showSidebar">
             <i class="fas fa-bars fa-2x text-white"></i>
         </button>
         <div class="d-flex d-none d-md-flex align-items-center">
-            <a href="{{ route('index') }}" class="mb-0 text-white h4 ms-1">550 MCH Biopsy Reports</a>
+            <a href="" class="mb-0 text-white h4 ms-1">550 MCH Biopsy Reports</a>
         </div>
-        <div class="">
+        <div class="d-flex align-items-center">
+            @include('layouts.notification')
             <div class="dropdown">
                 <a
                     class="dropdown-toggle d-flex align-items-center hidden-arrow"

@@ -1,14 +1,15 @@
 window._ = require('lodash');
-import 'jquery-ui/dist/jquery-ui.min'
+import 'jquery-ui/dist/jquery-ui.min';
 
 try {
     // require('bootstrap');
-    window.mdb = require('mdb-ui-kit')
+    window.mdb = require('mdb-ui-kit');
     window.$ = require('jquery');
     window.Swal = require('sweetalert2');
     window.VenoBox = require('venobox');
     window.select2 = require('select2');
-    window.datepicker = require('jquery-ui/ui/widgets/datepicker')
+    window.Chart = require('chart.js/dist/chart.min');
+    window.datepicker = require('jquery-ui/ui/widgets/datepicker');
 } catch (e) {}
 
 /**

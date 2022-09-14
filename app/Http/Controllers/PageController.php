@@ -12,13 +12,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PageController extends Controller
 {
 
     public function users(){
-        $users = User::where('role','1')->get();
-        return view('users',compact('users'));
+        $users = User::query()->whereHas("roles", function($q){ $q->whereNotIn("name", ["admin"]); })->get();
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('user.users',compact('users','roles','permissions'));
     }
 
 
@@ -28,38 +32,46 @@ class PageController extends Controller
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
+            'role' => 'required|integer|exists:roles,id',
         ]);
 
-        $data = $request->all();
-        $check = $this->create($data);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+        $user->assignRole($request->role);
 
+//        $user->permissions()->attach($request->permissions);
         return redirect()->back()->with('status',"Successfully Created!");
     }
 
-    public function create(array $data)
+    public function edit(User $user)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password'])
-        ]);
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('user.edit',compact('user','roles','permissions'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $user->removeRole($user->roles()->detach());
+
+        $user->assignRole($request->role);
+//        $user->permissions()->detach();
+//
+//        $user->permissions()->attach($request->permissions);
+
+        return redirect()->route('users')->with('status',"Successfully Updated!");
     }
 
     public function destroy($id){
         $currentUser = User::findOrFail($id);
         $currentName = $currentUser->name;
+//        $currentUser->permissions()->detach();
         $currentUser->delete();
         return redirect()->back()->with('success',$currentName." User has been deleted.");
 
-    }
-
-    public function makeAdmin(Request $request){
-        $currentUser = User::findOrFail($request->id);
-        if ($currentUser->role == 1){
-            $currentUser->role = '0';
-            $currentUser->update();
-        }
-        return redirect()->back()->with('success',$currentUser->name." has been changed to Admin");
     }
 
     // 404 Page
@@ -67,23 +79,11 @@ class PageController extends Controller
         return view('denied');
     }
 
-    // total sales
     public function totalSales(){
-        // for one month data
-//        $aspirates = Aspirate::whereMonth('created_at', Carbon::now()->month)->get();
-//        $trephines = Trephine::whereMonth('created_at', Carbon::now()->month)->get();
-//        $histos = Histo::whereMonth('created_at', Carbon::now()->month)->get();
-//        $cytos = Cyto::whereMonth('created_at', Carbon::now()->month)->get();
-
         $aspirates = Aspirate::all();
         $trephines = Trephine::all();
         $histos = Histo::all();
         $cytos = Cyto::all();
-
-//        $currentDate = date('d-m-Y');
-//        $first = Carbon::createFromFormat('d-m-Y', $currentDate)
-//                        ->firstOfMonth()
-//                        ->format('d-m-Y');
 
         $specimens = SpecimenType::withCount(['aspirates','trephines','histos','cytos'])->get();
 

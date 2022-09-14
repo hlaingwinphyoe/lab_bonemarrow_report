@@ -9,14 +9,26 @@ use App\Http\Requests\UpdateCytoRequest;
 use App\Models\CytoPhoto;
 use App\Models\Hospital;
 use App\Models\SpecimenType;
+use App\Models\User;
+use App\Notifications\CytoJobCreatedNotification;
+use App\Notifications\CytoResultAddNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CytoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:access cyto'], ['only' => ['index']]);
+        $this->middleware(['permission:write cyto'], ['only' => ['create']]);
+        $this->middleware(['permission:edit cyto'], ['only' => ['edit']]);
+        $this->middleware(['permission:delete cyto'], ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,14 +36,13 @@ class CytoController extends Controller
      */
     public function index()
     {
-        $cytos = Cyto::when(isset(request()->cytoSearch),function ($query){
-            $cytoSearch = request()->cytoSearch;
-            $query->where('name','LIKE',"%$cytoSearch%")->orwhere('bio_receive_date','LIKE',"%$cytoSearch%")->orwhere('bio_cut_date','LIKE',"%$cytoSearch%")->orwhere('bio_report_date','LIKE',"%$cytoSearch%");
-        })->when(Auth::user()->isUser(),fn($q)=>$q
-            ->where('user_id',Auth::id()))
+        $cytos = Cyto::with('specimenType')->search()
+            ->where('is_complete','!=','0')
             ->latest('id')
-            ->paginate(10,['*'],'cytoPage');
-        return view('cyto.index',['cytos'=>$cytos]);
+            ->paginate(10);
+
+        $specimens = SpecimenType::all();
+        return view('cyto.index',['cytos'=>$cytos,'specimens'=>$specimens]);
     }
 
     /**
@@ -63,39 +74,14 @@ class CytoController extends Controller
         $cyto->gender = $request->gender;
         $cyto->doctor = $request->doctor;
         $cyto->bio_receive_date = $request->bio_receive_date;
-        $cyto->bio_cut_date = $request->bio_cut_date;
-        $cyto->bio_report_date = $request->bio_report_date;
-        $cyto->specimen = $request->specimen;
-        $cyto->morphology = $request->morphology;
-        $cyto->cyto_diagnosis = $request->cyto_diagnosis;
         $cyto->specimen_type_id = $request->specimen_type;
         $cyto->hospital_id = $request->hospital;
         $cyto->user_id = Auth::id();
         $cyto->save();
 
-        if ($request->hasFile('cyto_photos')){
-            foreach ($request->file('cyto_photos') as $photo){
-                //store file
-                $newName =uniqid()."_cyto.".$photo->extension();
-                $photo->storeAs('public/cyto_photos/',$newName);
-
-                // making thumbnail
-                $img = Image::make($photo);
-                // reduce size
-                $img->fit(200,200);
-                $img->save('storage/cyto_thumbnails/'.$newName);  // public folder
-
-                // store db
-                $photo = new CytoPhoto();
-                $photo->name = $newName;
-                $photo->cyto_id = $cyto->id;
-                $photo->user_id = Auth::id();
-                $photo->save();
-
-            }
-        }
-
-        return redirect()->route('cyto.index')->with('status','Successfully Created!');
+        $users = User::role(['Admin','Gross_doctor','Micro_doctor'])->get();
+        Notification::send($users,new CytoJobCreatedNotification($cyto));
+        return redirect()->route('cyto.index')->with(['status'=>'Successfully Created!','create'=>$cyto->name.' အား Tests စစ်ဆေးပေးရန်ရှိပါသည်။']);
     }
 
     /**
@@ -117,7 +103,6 @@ class CytoController extends Controller
      */
     public function edit(Cyto $cyto)
     {
-        Gate::authorize('update',$cyto);
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
         return view('cyto.edit',compact('cyto','hospitals','specimens'));
@@ -142,14 +127,30 @@ class CytoController extends Controller
         $cyto->bio_receive_date = $request->bio_receive_date;
         $cyto->bio_cut_date = $request->bio_cut_date;
         $cyto->bio_report_date = $request->bio_report_date;
-        $cyto->specimen = $request->specimen;
         $cyto->morphology = $request->morphology;
         $cyto->cyto_diagnosis = $request->cyto_diagnosis;
         $cyto->specimen_type_id = $request->specimen_type;
         $cyto->hospital_id = $request->hospital;
         $cyto->user_id = Auth::id();
+        if ($cyto->morphology == null || $cyto->cyto_diagnosis == null){
+            if (isset($cyto->morphology) || isset($cyto->cyto_diagnosis))
+            {
+                $cyto->is_complete = '1';
+            }
+            else{
+                $cyto->is_complete = '2';
+            }
+        }else{
+            $cyto->is_complete = '0';
+        }
         $cyto->update();
-        return redirect()->route('cyto.index')->with('status',"Successfully Updated!");
+        if ($cyto->is_complete == '0'){
+            $users = User::role('Admin')->get();
+            Notification::send($users,new CytoResultAddNotification($cyto));
+            return redirect()->route('cyto.index')->with(['status'=>'Successfully Updated!','create'=>$cyto->name.' report အား အတည်ပြုပေးရန်ရှိပါသည်။']);
+        }else{
+            return redirect()->route('cyto.index')->with('status',"Successfully Updated!");
+        }
     }
 
     /**
@@ -160,7 +161,6 @@ class CytoController extends Controller
      */
     public function destroy(Cyto $cyto)
     {
-        Gate::authorize('delete',$cyto);
         $cyto->delete();
         return redirect()->back()->with('status',"Successfully Deleted!");
     }

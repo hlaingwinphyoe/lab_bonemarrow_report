@@ -10,14 +10,6 @@ class SpecimenTypePolicy
 {
     use HandlesAuthorization;
 
-    // admin all access
-    public function before(User $user){
-        if ($user->role === 0){
-            return true;
-        }
-        return null;
-
-    }
 
     /**
      * Determine whether the user can view any models.
@@ -61,7 +53,7 @@ class SpecimenTypePolicy
      */
     public function update(User $user, SpecimenType $specimenType)
     {
-        return $user->id === $specimenType->user_id;
+
 
     }
 
@@ -74,7 +66,7 @@ class SpecimenTypePolicy
      */
     public function delete(User $user, SpecimenType $specimenType)
     {
-        return $user->id === $specimenType->user_id;
+
 
     }
 

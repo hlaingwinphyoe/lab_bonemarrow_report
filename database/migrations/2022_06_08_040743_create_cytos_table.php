@@ -23,11 +23,13 @@ class CreateCytosTable extends Migration
             $table->char('gender',7);
             $table->string('doctor');
             $table->longText('specimen')->nullable();
-            $table->date('bio_receive_date');
-            $table->date('bio_cut_date');
-            $table->date('bio_report_date');
+            $table->date('bio_receive_date')->nullable();
+            $table->date('bio_cut_date')->nullable();
+            $table->date('bio_report_date')->nullable();
             $table->longText('morphology')->nullable();
             $table->longText('cyto_diagnosis')->nullable();
+            $table->enum('is_complete',[0,1,2])->default(2);
+            $table->enum('is_approve',[0,1])->default(1);
             $table->foreignId('specimen_type_id')->constrained()->cascadeOnDelete()->cascadeOnDelete();
             $table->foreignId('hospital_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
