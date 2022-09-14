@@ -6,11 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title',env('APP_NAME'))</title>
-    <link rel="icon" href="{{ asset('images/logo.jpg') }}">
+    <link rel="icon" href="{{ asset('images/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- PWA  -->
     <meta name="theme-color" content="#ffffff"/>
-    <link rel="apple-touch-icon" href="{{ asset('images/logo.jpg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- Primary Meta Tags -->
@@ -38,7 +38,7 @@
     </div>
     <div class="row">
         @include('layouts.sidebar')
-        <div class="col-12 col-lg-9 col-xl-10 vh-100 py-3 content">
+        <div class="col-12 col-lg-9 col-xl-10 vh-100 py-1 content">
             @include('layouts.header')
             <div class="container-fluid px-0">
                 @yield('content')
@@ -50,6 +50,7 @@
 
 @yield('foot')
 <script src="{{ asset("js/app.js") }}"></script>
+<script src="{{ asset('assets/js/push.min.js') }}"></script>
 <script src="{{ asset('/sw.js') }}"></script>
 <script>
     if (!navigator.serviceWorker.controller) {
@@ -78,6 +79,18 @@
         Toast.fire({
             title: '{{ session('status') }}'
         })
+
+        @if(session('create'))
+        Push.create('Bone Marrow Report',{
+            body:"{{ session('create') }}",
+            timeout:5000,
+            icon: '{{ asset('images/logo.png') }}',
+            onClick: function () {
+                window.focus();
+                this.close();
+            }
+        })
+        @endif
     </script>
 
 @endif
@@ -125,7 +138,7 @@
             text: "ဖျက်မှာသေချာပါသလား?",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: '#1266f1',
+            confirmButtonColor: '#003eff',
             cancelButtonColor: '#ff0000',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
@@ -135,30 +148,13 @@
         })
     }
 
-    function makeAdmin(id){
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Role ပြောင်းလဲလိုက်လျှင် Admin လုပ်ပိုင်ခွင့်များရရှိသွားမှာဖြစ်ပါတယ်။",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#1266f1',
-            cancelButtonColor: '#ff0000',
-            confirmButtonText: 'Yes, I Agree'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $('#makeAdminForm' + id).submit();
-            }
-        })
-    }
-
-
     function changeConfirm(){
         Swal.fire({
             title: 'Are you sure?',
             text: "အချက်အလက်ပြောင်းမှာ သေချာပါသလား?",
             icon: 'question',
             showCancelButton: true,
-            confirmButtonColor: '#1266f1',
+            confirmButtonColor: '#003eff',
             cancelButtonColor: '#ff0000',
             confirmButtonText: 'Yes, change it!'
         }).then((result) => {

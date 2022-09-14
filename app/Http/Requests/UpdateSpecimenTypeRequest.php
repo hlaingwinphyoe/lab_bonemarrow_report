@@ -14,7 +14,7 @@ class UpdateSpecimenTypeRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::authorize('update',$this->route('specimen_type'));
+        return true;
     }
 
     /**

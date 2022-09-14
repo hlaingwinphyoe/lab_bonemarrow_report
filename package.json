@@ -22,11 +22,16 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.1.1",
+        "chart.js": "^3.9.1",
+        "counterup": "^1.0.2",
+        "counterup2": "^2.0.2",
         "jquery": "^3.6.0",
         "jquery-ui": "^1.13.2",
         "mdb-ui-kit": "^4.4.0",
+        "push.js": "^1.0.12",
         "select2": "^4.1.0-rc.0",
         "sweetalert2": "^11.4.17",
-        "venobox": "^2.0.4"
+        "venobox": "^2.0.4",
+        "waypoints": "^4.0.1"
     }
 }

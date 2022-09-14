@@ -81,7 +81,7 @@
                                 <div class="mb-4">
                                     <label class="form-label" for="lab_access">Laboratory Accession Number</label>
                                     <div class="">
-                                        <input type="number" name="lab_access" form="trephineUpdateForm" class="form-control @error('lab_access') is-invalid @enderror" id="lab_access" placeholder="Enter Lab Accession Number" value="{{ old('lab_access',$trephine->lab_access) }}">
+                                        <input type="number" name="lab_access" min="0" form="trephineUpdateForm" class="form-control @error('lab_access') is-invalid @enderror" id="lab_access" placeholder="Enter Lab Accession Number" value="{{ old('lab_access',$trephine->lab_access) }}">
                                         @error('lab_access')
                                         <small class="invalid-feedback">{{ $message }}</small>
                                         @enderror

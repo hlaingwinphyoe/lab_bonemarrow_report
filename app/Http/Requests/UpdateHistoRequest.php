@@ -14,7 +14,7 @@ class UpdateHistoRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::authorize('update',$this->route('histo'));
+        return true;
     }
 
     /**
@@ -32,9 +32,9 @@ class UpdateHistoRequest extends FormRequest
             "day" => "required|integer|min:0",
             "gender" => 'required',
             "doctor" => 'required|min:3',
-            "bio_receive_date" => 'required|date',
-            "bio_cut_date" => 'required|date',
-            "bio_report_date" => 'required|date',
+            "bio_receive_date" => 'nullable|date',
+            "bio_cut_date" => 'nullable|date',
+            "bio_report_date" => 'nullable|date',
             "specimen" => 'nullable|min:3',
             "gross" => 'nullable|min:3',
             "description" => 'nullable|min:3',

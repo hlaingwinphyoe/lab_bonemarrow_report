@@ -10,15 +10,6 @@ class HistoPolicy
 {
     use HandlesAuthorization;
 
-    // admin all access
-    public function before(User $user){
-        if ($user->role == 0){
-            return true;
-        }
-
-        return null;
-
-    }
     /**
      * Determine whether the user can view any models.
      *
@@ -50,7 +41,7 @@ class HistoPolicy
      */
     public function create(User $user)
     {
-        //
+
     }
 
     /**
@@ -62,7 +53,7 @@ class HistoPolicy
      */
     public function update(User $user, Histo $histo)
     {
-        return $user->id == $histo->user_id;
+
     }
 
     /**
@@ -74,7 +65,7 @@ class HistoPolicy
      */
     public function delete(User $user, Histo $histo)
     {
-        return $user->id == $histo->user_id;
+
     }
 
     /**

@@ -42,19 +42,24 @@
         }
     </style>
 </head>
-<body onload="print()" oncontextmenu="return false">
+<body oncontextmenu="return false">
 <div class="container">
     <div class="row vh-100 position-relative">
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
                     <div class="position-relative">
-                        <a href="{{ route('cyto.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+                        <a href="{{ route('cyto') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="ms-5 mt-2">
                                 <div class="row mb-2">
+                                    @if($patientFact->is_approve == '0')
+                                        <div class="text-end">
+                                            <button class="btn btn-primary" onclick="return print()"><i class="fa-solid fa-print me-1"></i>Print</button>
+                                        </div>
+                                    @endif
                                     <div class="col-4">
                                         <div class="print-header">
                                             <span class="first">Name: &nbsp;</span>

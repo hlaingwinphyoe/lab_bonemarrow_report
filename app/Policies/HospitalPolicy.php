@@ -10,15 +10,6 @@ class HospitalPolicy
 {
     use HandlesAuthorization;
 
-    // admin all access
-    public function before(User $user){
-        if ($user->role == 0){
-            return true;
-        }
-
-        return null;
-
-    }
     /**
      * Determine whether the user can view any models.
      *
@@ -62,7 +53,7 @@ class HospitalPolicy
      */
     public function update(User $user, Hospital $hospital)
     {
-        return $user->id == $hospital->user_id;
+
     }
 
     /**
@@ -74,7 +65,7 @@ class HospitalPolicy
      */
     public function delete(User $user, Hospital $hospital)
     {
-        return $user->id == $hospital->user_id;
+
     }
 
     /**

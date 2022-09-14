@@ -68,16 +68,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
-                                <div class="mb-4">
-                                    <label class="form-label" for="datepicker1">Cutting Date</label>
-                                    <div class="">
-                                        <input type="text" class="form-control @error('bio_cut_date') is-invalid @enderror" id="datepicker1" placeholder="dd/MM/YYYY" name="bio_cut_date" value="{{ old('bio_cut_date') }}">
-                                        @error('bio_cut_date')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="mb-4">
@@ -98,16 +88,6 @@
                                     <div class="mb-4">
                                         <input type="number" name="day" min="0" class="form-control @error('day') is-invalid @enderror" id="day" placeholder="Day" value="{{ old('day',0) }}">
                                         @error('day')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label class="form-label" for="datepicker2">Report Date</label>
-                                    <div class="">
-                                        <input type="text" class="form-control @error('bio_report_date') is-invalid @enderror" id="datepicker2" placeholder="dd/MM/YYYY" name="bio_report_date" value="{{ old('bio_report_date') }}">
-                                        @error('bio_report_date')
                                         <small class="invalid-feedback">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -137,78 +117,6 @@
                                     @enderror
                                 </div>
 
-                            </div>
-
-                            <div class="col-12 col-lg-6">
-                                <div class="mb-4">
-                                    <div class="file-upload ">
-
-                                        <button class="file-upload__button btn btn-danger" type="button">Choose File(s)</button>
-                                        <span class="file-upload__label"></span>
-
-                                        <input type="file" name="gross_photos[]" id="inputPhotos" class="file-upload__input @error('gross_photos') is-invalid @enderror" multiple accept="image/jpeg,image/png">
-                                        @error('gross_photos')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                        @error('gross_photos.*')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="gross" class="form-label">Gross</label>
-                                    <div class="mb-4">
-                                        <textarea class="form-control @error('gross') is-invalid @enderror" name="gross" id="gross" placeholder="Enter Gross" style="height: 180px">{{ old('gross') }}</textarea>
-                                        @error('gross')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="specimen" class="form-label">Specimen</label>
-                                    <div class="mb-4">
-                                        <textarea class="form-control @error('specimen') is-invalid @enderror" name="specimen" id="specimen" placeholder="Enter Specimen" style="height: 180px">{{ old('specimen') }}</textarea>
-                                        @error('specimen')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <div class="mb-4">
-                                    <div class="file-upload">
-                                        <button class="file-upload__button btn btn-danger" type="button">Choose File(s)</button>
-                                        <span class="file-upload__label"></span>
-
-                                        <input type="file" name="histo_photos[]" id="inputPhotos" class="file-upload__input @error('histo_photos') is-invalid @enderror" multiple accept="image/jpeg,image/png">
-                                        @error('histo_photos')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                        @error('histo_photos.*')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="description" class="form-label">Microscopic Description</label>
-                                    <div class="mb-4">
-                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" placeholder="Enter Microscopic Description" style="height: 180px">{{ old('description') }}</textarea>
-                                        @error('description')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="remark" class="form-label">Remark</label>
-                                    <div class="mb-4">
-                                        <textarea class="form-control @error('remark') is-invalid @enderror" name="remark" id="remark" placeholder="Enter Remark" style="height: 180px">{{ old('remark') }}</textarea>
-                                        @error('remark')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <hr>

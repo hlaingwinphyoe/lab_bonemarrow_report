@@ -16,24 +16,6 @@
                     <form action="{{ route('cyto.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-12">
-                                <div class="mb-4">
-                                    <div class="file-upload">
-
-                                        <button class="file-upload__button btn btn-danger" type="button">Choose File(s)</button>
-                                        <span class="file-upload__label"></span>
-
-                                        <input type="file" name="cyto_photos[]" id="inputPhotos" class="file-upload__input @error('cyto_photos') is-invalid @enderror" multiple accept="image/jpeg,image/png">
-                                        @error('cyto_photos')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                        @error('cyto_photos.*')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-12 col-lg-3">
                                 <div class="mb-4">
                                     <label for="name" class="form-label">Enter Patient's Name</label>
@@ -81,13 +63,6 @@
                                     <small class="invalid-feedback">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="mb-4">
-                                    <label for="datepicker4" class="form-label">Staining Date</label>
-                                    <input type="text" class="form-control @error('bio_cut_date') is-invalid @enderror" id="datepicker4" placeholder="dd/MM/YYYY" name="bio_cut_date" value="{{ old('bio_cut_date') }}">
-                                    @error('bio_cut_date')
-                                    <small class="invalid-feedback">{{ $message }}</small>
-                                    @enderror
-                                </div>
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="mb-4">
@@ -108,13 +83,6 @@
                                     <input type="number" name="day" min="0" class="form-control @error('day') is-invalid @enderror" id="day" placeholder="Day" value="{{ old('day',0) }}">
 
                                     @error('day')
-                                    <small class="invalid-feedback">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <div class="mb-4">
-                                    <label for="datepicker5" class="form-label">Report Date</label>
-                                    <input type="text" class="form-control @error('bio_report_date') is-invalid @enderror" id="datepicker5" placeholder="dd/MM/YYYY" name="bio_report_date" value="{{ old('bio_report_date') }}">
-                                    @error('bio_report_date')
                                     <small class="invalid-feedback">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -144,38 +112,6 @@
                                 </div>
 
 
-                            </div>
-
-                            <div class="col-12 col-lg-6">
-                                <div class="mb-4">
-                                    <label for="specimen" class="form-label">Specimen</label>
-                                    <div class="mb-4">
-                                        <textarea class="form-control @error('specimen') is-invalid @enderror" name="specimen" id="specimen" placeholder="Enter Specimen" style="height: 180px">{{ old('specimen') }}</textarea>
-                                        @error('specimen')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="cyto_diagnosis" class="form-label">Cytological Diagnosis</label>
-                                    <div class="mb-4">
-                                        <textarea class="form-control @error('cyto_diagnosis') is-invalid @enderror" name="cyto_diagnosis" id="cyto_diagnosis" placeholder="Enter Cytological Diagnosis" style="height: 180px">{{ old('cyto_diagnosis') }}</textarea>
-                                        @error('cyto_diagnosis')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <div class="mb-4">
-                                    <label for="morphology" class="form-label">Morphology</label>
-                                    <div class="mb-4">
-                                        <textarea class="form-control @error('morphology') is-invalid @enderror" name="morphology" id="morphology" placeholder="Enter Morphology" style="height: 180px">{{ old('morphology') }}</textarea>
-                                        @error('morphology')
-                                        <small class="invalid-feedback">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <hr>

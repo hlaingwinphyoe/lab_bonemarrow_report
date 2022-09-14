@@ -22,4 +22,20 @@ class Aspirate extends Model
         return $this->belongsTo(SpecimenType::class);
     }
 
+
+    // query scope local
+    public function scopeSearch($q){
+        if (isset(request()->name)){
+            $name = request()->name;
+            $q->where('patient_name','LIKE',"%$name%");
+        }elseif (isset(request()->specimen_type)){
+            $specimen_type = request()->specimen_type;
+            $q->where('specimen_type_id','=',$specimen_type);
+        }elseif(isset(request()->start_date)){
+            $startDate = request()->start_date;
+            $endDate = request()->end_date;
+            $q->whereBetween('created_at', [$startDate, $endDate]);
+        }
+    }
+
 }

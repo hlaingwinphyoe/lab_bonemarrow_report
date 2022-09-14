@@ -24,12 +24,7 @@
             <div class="card border-0">
                 <div class="card-body">
                     <div class="mb-2 position-relative">
-                        @guest
-                            <a href="{{ route('cyto') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-                        @endguest
-                        @auth
-                            <a href="{{ route('cyto.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-                        @endauth
+                        <a href="{{ route('cyto.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                         <div class="d-flex align-items-center">
                             <div class="">
                                 <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
@@ -47,7 +42,7 @@
                                 <h4 class="text-uppercase mb-0">Receipt</h4>
                                 <p class="mb-0">
                                     scan ဖတ်၍ အဖြေကြည့်ရှုနိုင်ပါသည်။ 👉
-                                    {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/cyto-print/'.$invoice->slug, 'DATAMATRIX',3,3) !!}
+                                    {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/cyto-print/'.$invoice->id, 'DATAMATRIX',3,3) !!}
                                 </p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mb-3">

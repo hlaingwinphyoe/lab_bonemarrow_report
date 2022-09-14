@@ -28,7 +28,7 @@
                                 <div class="mb-4">
                                     <label class="form-label" for="name">Patient's Name</label>
                                     <div class="mb-4">
-                                        <input type="text" name="name" form="histoUpdateForm" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name" value="{{ old('name',$histo->name) }}">
+                                        <input type="text" name="name" readonly form="histoUpdateForm" class="text-black-50 form-control @error('name') is-invalid @enderror" id="name" placeholder="Name" value="{{ old('name',$histo->name) }}">
                                         @error('name')
                                         <small class="invalid-feedback">{{ $message }}</small>
                                         @enderror
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label" for="">Year</label>
-                                    <input type="number" name="year" min="0" form="histoUpdateForm" class="form-control @error('year') is-invalid @enderror" id="year" placeholder="Year" value="{{ old('year',$histo->year) }}">
+                                    <input type="number" name="year" min="0" readonly form="histoUpdateForm" class="text-black-50 form-control @error('year') is-invalid @enderror" id="year" placeholder="Year" value="{{ old('year',$histo->year) }}">
                                     @error('year')
                                     <small class="invalid-feedback">{{ $message }}</small>
                                     @enderror
@@ -45,7 +45,7 @@
                                 <div class="mb-4">
                                     <label class="form-label" for="datepicker">Receive Date</label>
                                     <div class="">
-                                        <input type="text" form="histoUpdateForm" class="form-control @error('bio_receive_date') is-invalid @enderror" id="datepicker" placeholder="dd/MM/YYYY" name="bio_receive_date" value="{{ old('bio_receive_date',$histo->bio_receive_date) }}">
+                                        <input type="text" form="histoUpdateForm" readonly class="text-black-50 form-control @error('bio_receive_date') is-invalid @enderror" placeholder="dd/MM/YYYY" name="bio_receive_date" value="{{ old('bio_receive_date',$histo->bio_receive_date) }}">
                                         @error('bio_receive_date')
                                         <small class="invalid-feedback">{{ $message }}</small>
                                         @enderror
@@ -56,8 +56,8 @@
                             <div class="col-12 col-lg-3">
                                 <div class="mb-4">
                                     <label class="form-label" for="">Hospital</label>
-                                    <select form="histoUpdateForm" class="form-select @error('hospital') is-invalid @enderror" name="hospital" id="hospital-select">
-                                        <option selected disabled>Select Hospital</option>
+                                    <select form="histoUpdateForm" readonly class="text-black-50 disabled form-select @error('hospital') is-invalid @enderror" name="hospital" id="hospital-select">
+                                        <option selected readonly>Select Hospital</option>
                                         @forelse($hospitals as $hospital)
                                             <option value="{{ $hospital->id }}" {{ $hospital->id == old('hospital',$histo->hospital_id) ? 'selected':'' }}>{{ $hospital->name }}</option>
                                         @empty
@@ -70,15 +70,15 @@
                                 <div class="mb-4">
                                     <label class="form-label" for="">Month</label>
                                     <div class="mb-4">
-                                        <input type="number" name="month" min="0" form="histoUpdateForm" class="form-control @error('month') is-invalid @enderror" id="month" placeholder="Month" value="{{ old('month',$histo->month) }}">
+                                        <input type="number" name="month" min="0" readonly form="histoUpdateForm" class="text-black-50 form-control @error('month') is-invalid @enderror" id="month" placeholder="Month" value="{{ old('month',$histo->month) }}">
                                         @error('month')
                                         <small class="invalid-feedback">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-
+                                @role('Admin|Gross_doctor')
                                 <div class="mb-4">
-                                    <label class="form-label" for="datepicker1">Cutting Date</label>
+                                    <label class="form-label text-danger" for="datepicker1">Cutting Date</label>
                                     <div class="">
                                         <input type="text" form="histoUpdateForm" class="form-control @error('bio_cut_date') is-invalid @enderror" id="datepicker1" placeholder="dd/MM/YYYY" name="bio_cut_date" value="{{ old('bio_cut_date',$histo->bio_cut_date) }}">
                                         @error('bio_cut_date')
@@ -86,12 +86,13 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @endrole
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="mb-4">
                                     <label class="form-label" for="">Specimen Type</label>
-                                    <select form="histoUpdateForm" class="form-select @error('specimen_type') is-invalid @enderror" name="specimen_type" id="specimen-select">
-                                        <option selected disabled>Select Specimen Type</option>
+                                    <select form="histoUpdateForm" readonly class="text-black-50 disabled form-select @error('specimen_type') is-invalid @enderror" name="specimen_type" id="specimen-select">
+                                        <option selected readonly>Select Specimen Type</option>
                                         @forelse($specimens as $specimen)
                                             <option value="{{ $specimen->id }}" {{ $specimen->id == old('specimen_type',$histo->specimen_type_id) ? 'selected':'' }}>{{ $specimen->name }}</option>
                                         @empty
@@ -104,15 +105,15 @@
                                 <div class="mb-4">
                                     <label class="form-label" for="">Day</label>
                                     <div class="mb-4">
-                                        <input type="number" name="day" min="0" form="histoUpdateForm" class="form-control @error('day') is-invalid @enderror" id="day" placeholder="Day" value="{{ old('day',$histo->day) }}">
+                                        <input type="number" readonly name="day" min="0" form="histoUpdateForm" class="text-black-50 form-control @error('day') is-invalid @enderror" id="day" placeholder="Day" value="{{ old('day',$histo->day) }}">
                                         @error('day')
                                         <small class="invalid-feedback">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-
+                                @role('Admin|Micro_doctor')
                                 <div class="mb-4">
-                                    <label class="form-label" for="datepicker2">Report Date</label>
+                                    <label class="form-label text-danger" for="datepicker2">Report Date</label>
                                     <div class="">
                                         <input type="text" form="histoUpdateForm" class="form-control @error('bio_report_date') is-invalid @enderror" id="datepicker2" placeholder="dd/MM/YYYY" name="bio_report_date" value="{{ old('bio_report_date',$histo->bio_report_date) }}">
                                         @error('bio_report_date')
@@ -120,16 +121,17 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @endrole
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="mb-4">
                                     <label class="form-label" for="">Gender</label><br>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" form="histoUpdateForm" {{ old('gender',$histo->gender) == 'Male' ? 'checked':'' }} type="radio" name="gender" id="genderM" value="Male">
+                                        <input class="form-check-input disabled" readonly form="histoUpdateForm" {{ old('gender',$histo->gender) == 'Male' ? 'checked':'' }} type="radio" name="gender" id="genderM" value="Male">
                                         <label class="form-check-label" for="genderM">Male</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" form="histoUpdateForm" {{ old('gender',$histo->gender) == 'Female' ? 'checked':'' }} type="radio" name="gender" id="genderF" value="Female">
+                                        <input class="form-check-input disabled" readonly form="histoUpdateForm" {{ old('gender',$histo->gender) == 'Female' ? 'checked':'' }} type="radio" name="gender" id="genderF" value="Female">
                                         <label class="form-check-label" for="genderF">Female</label>
                                     </div>
                                     <br>
@@ -139,14 +141,16 @@
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label" for="doctor">Referring Doctor</label>
-                                    <input type="text" name="doctor" form="histoUpdateForm" class="form-control @error('doctor') is-invalid @enderror" id="doctor" placeholder="Refer Doctor" value="{{ old('doctor',$histo->doctor) }}">
+                                    <input type="text" name="doctor" readonly form="histoUpdateForm" class="text-black-50 form-control @error('doctor') is-invalid @enderror" id="doctor" placeholder="Refer Doctor" value="{{ old('doctor',$histo->doctor) }}">
                                     @error('doctor')
                                     <small class="invalid-feedback">{{ $message }}</small>
                                     @enderror
                                 </div>
 
                             </div>
+                            <div class="my-2"></div>
 
+                            @role('Admin|Gross_doctor')
                             <div class="col-12 col-lg-6">
                                 <div class="mb-4">
                                     <label class="form-label">Photos</label>
@@ -209,6 +213,8 @@
                                 </div>
 
                             </div>
+                            @endrole
+                            @role('Admin|Micro_doctor')
                             <div class="col-12 col-lg-6">
                                 <div class="mb-4">
                                     <label class="form-label">Photos</label>
@@ -270,6 +276,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endrole
                         </div>
                         <hr>
                         <button class="btn btn-primary text-uppercase text-white" form="histoUpdateForm"><i class="fa fa-save me-2"></i>Update</button>
@@ -305,14 +312,6 @@
         photoInput2.addEventListener('change',function (){
             photoUploadForm2.submit();
         })
-
-        // select2
-        $('#specimen-select').select2();
-        $('#hospital-select').select2();
-
-        $('#datepicker').datepicker({
-            dateFormat : 'yy-mm-dd'
-        });
         $('#datepicker1').datepicker({
             dateFormat : 'yy-mm-dd'
         });

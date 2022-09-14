@@ -14,7 +14,7 @@ class UpdateAspirateRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::authorize('update',$this->route('aspirate'));
+        return true;
     }
 
     /**

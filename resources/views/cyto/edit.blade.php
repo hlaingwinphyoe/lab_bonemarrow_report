@@ -9,7 +9,7 @@
         </ol>
     </nav>
     <div class="row">
-        <div class="col-10">
+        <div class="col-12">
             <div class="card shadow">
                 <div class="card-body">
                     <div class="">
@@ -25,34 +25,38 @@
                     <div class="row">
                         <div class="col-12 col-lg-3">
                             <div class="mb-4">
-                                <label for="name" class="form-label">Enter Patient's Name</label>
-                                <input type="text" name="name" form="cytoUpdateForm" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name" value="{{ old('name',$cyto->name) }}">
+                                <label class="form-label" for="name">Patient's Name</label>
+                                <div class="mb-4">
+                                    <input type="text" name="name" readonly form="cytoUpdateForm" class="text-black-50 form-control @error('name') is-invalid @enderror" id="name" placeholder="Name" value="{{ old('name',$cyto->name) }}">
+                                    @error('name')
+                                    <small class="invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
 
-                                @error('name')
-                                <small class="invalid-feedback">{{ $message }}</small>
-                                @enderror
                             </div>
                             <div class="mb-4">
-                                <label for="year" class="form-label ">Enter Year</label>
-                                <input type="number" name="year" min="0" form="cytoUpdateForm" class="form-control @error('year') is-invalid @enderror" id="year" placeholder="Year" value="{{ old('year',$cyto->year) }}">
-
+                                <label class="form-label" for="">Year</label>
+                                <input type="number" name="year" min="0" readonly form="cytoUpdateForm" class="text-black-50 form-control @error('year') is-invalid @enderror" id="year" placeholder="Year" value="{{ old('year',$cyto->year) }}">
                                 @error('year')
                                 <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="mb-4">
-                                <label for="datepicker3" class="form-label">Receive Date</label>
-                                <input type="text" form="cytoUpdateForm" class="form-control @error('bio_receive_date') is-invalid @enderror" id="datepicker3" placeholder="dd/MM/YYYY" name="bio_receive_date" value="{{ old('bio_receive_date',$cyto->bio_receive_date) }}">
-                                @error('bio_receive_date')
-                                <small class="invalid-feedback">{{ $message }}</small>
-                                @enderror
+                                <label class="form-label" for="datepicker">Receive Date</label>
+                                <div class="">
+                                    <input type="text" form="cytoUpdateForm" readonly class="text-black-50 form-control @error('bio_receive_date') is-invalid @enderror" placeholder="dd/MM/YYYY" name="bio_receive_date" value="{{ old('bio_receive_date',$cyto->bio_receive_date) }}">
+                                    @error('bio_receive_date')
+                                    <small class="invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
+
                         </div>
                         <div class="col-12 col-lg-3">
                             <div class="mb-4">
-                                <label for="" class="form-label">Hospital</label>
-                                <select form="cytoUpdateForm" class="form-select @error('hospital') is-invalid @enderror" name="hospital" aria-label="Default select example" id="hospital-select">
-                                    <option selected disabled>Select Hospital</option>
+                                <label class="form-label" for="">Hospital</label>
+                                <select form="cytoUpdateForm" readonly class="disabled text-black-50 form-select @error('hospital') is-invalid @enderror" name="hospital" id="hospital-select">
+                                    <option selected readonly>Select Hospital</option>
                                     @forelse($hospitals as $hospital)
                                         <option value="{{ $hospital->id }}" {{ $hospital->id == old('hospital',$cyto->hospital_id) ? 'selected':'' }}>{{ $hospital->name }}</option>
                                     @empty
@@ -63,26 +67,31 @@
                                 @enderror
                             </div>
                             <div class="mb-4">
-                                <label for="month" class="form-label">Enter Month</label>
-                                <input type="number" name="month" min="0" form="cytoUpdateForm" class="form-control @error('month') is-invalid @enderror" id="month" placeholder="Month" value="{{ old('month',$cyto->month) }}">
-
-                                @error('month')
-                                <small class="invalid-feedback">{{ $message }}</small>
-                                @enderror
+                                <label class="form-label" for="">Month</label>
+                                <div class="mb-4">
+                                    <input type="number" name="month" min="0" readonly form="cytoUpdateForm" class="text-black-50 form-control @error('month') is-invalid @enderror" id="month" placeholder="Month" value="{{ old('month',$cyto->month) }}">
+                                    @error('month')
+                                    <small class="invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
+                            @role('Admin|Gross_doctor')
                             <div class="mb-4">
-                                <label for="datepicker4" class="form-label">Staining Date</label>
-                                <input type="text" form="cytoUpdateForm" class="form-control @error('bio_cut_date') is-invalid @enderror" id="datepicker4" placeholder="dd/MM/YYYY" name="bio_cut_date" value="{{ old('bio_cut_date',$cyto->bio_cut_date) }}">
-                                @error('bio_cut_date')
-                                <small class="invalid-feedback">{{ $message }}</small>
-                                @enderror
+                                <label class="form-label text-danger" for="datepicker1">Staining Date</label>
+                                <div class="">
+                                    <input type="text" form="cytoUpdateForm" class="form-control @error('bio_cut_date') is-invalid @enderror" id="datepicker1" placeholder="dd/MM/YYYY" name="bio_cut_date" value="{{ old('bio_cut_date',$cyto->bio_cut_date) }}">
+                                    @error('bio_cut_date')
+                                    <small class="invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
+                            @endrole
                         </div>
                         <div class="col-12 col-lg-3">
                             <div class="mb-4">
-                                <label for="" class="form-label">Specimen Type</label>
-                                <select form="cytoUpdateForm" class="form-select @error('specimen_type') is-invalid @enderror" name="specimen_type" id="specimen-select">
-                                    <option selected disabled>Select Specimen Type</option>
+                                <label class="form-label" for="">Specimen Type</label>
+                                <select form="cytoUpdateForm" readonly class="text-black-50 disabled form-select @error('specimen_type') is-invalid @enderror" name="specimen_type" id="specimen-select">
+                                    <option selected readonly>Select Specimen Type</option>
                                     @forelse($specimens as $specimen)
                                         <option value="{{ $specimen->id }}" {{ $specimen->id == old('specimen_type',$cyto->specimen_type_id) ? 'selected':'' }}>{{ $specimen->name }}</option>
                                     @empty
@@ -93,31 +102,36 @@
                                 @enderror
                             </div>
                             <div class="mb-4">
-                                <label for="day" class="form-label">Enter Day</label>
-                                <input type="number" name="day" min="0" form="cytoUpdateForm" class="form-control @error('day') is-invalid @enderror" id="day" placeholder="Day" value="{{ old('day',$cyto->day) }}">
-
-                                @error('day')
-                                <small class="invalid-feedback">{{ $message }}</small>
-                                @enderror
+                                <label class="form-label" for="">Day</label>
+                                <div class="mb-4">
+                                    <input type="number" readonly name="day" min="0" form="cytoUpdateForm" class="text-black-50 form-control @error('day') is-invalid @enderror" id="day" placeholder="Day" value="{{ old('day',$cyto->day) }}">
+                                    @error('day')
+                                    <small class="invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
+                            @role('Admin|Micro_doctor')
                             <div class="mb-4">
-                                <label for="datepicker5" class="form-label">Report Date</label>
-                                <input type="text" form="cytoUpdateForm" class="form-control @error('bio_report_date') is-invalid @enderror" id="datepicker5" placeholder="dd/MM/YYYY" name="bio_report_date" value="{{ old('bio_report_date',$cyto->bio_report_date) }}">
-                                @error('bio_report_date')
-                                <small class="invalid-feedback">{{ $message }}</small>
-                                @enderror
+                                <label class="form-label text-danger" for="datepicker2">Report Date</label>
+                                <div class="">
+                                    <input type="text" form="cytoUpdateForm" class="form-control @error('bio_report_date') is-invalid @enderror" id="datepicker2" placeholder="dd/MM/YYYY" name="bio_report_date" value="{{ old('bio_report_date',$cyto->bio_report_date) }}">
+                                    @error('bio_report_date')
+                                    <small class="invalid-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
+                            @endrole
                         </div>
                         <div class="col-12 col-lg-3">
                             <div class="mb-4">
-                                <label for="" class="form-label">Gender</label><br>
+                                <label class="form-label text-black-50" for="">Gender</label><br>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" form="cytoUpdateForm" {{ old('gender',$cyto->gender) == 'Male' ? 'checked':'' }} type="radio" name="gender" id="genderM" value="Male">
-                                    <label class="form-check-label" for="genderM">Male</label>
+                                    <input class="form-check-input disabled" form="cytoUpdateForm" {{ old('gender',$cyto->gender) == 'Male' ? 'checked':'' }} type="radio" name="gender" id="genderM" value="Male">
+                                    <label class="text-black-50" for="genderM">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" form="cytoUpdateForm" {{ old('gender',$cyto->gender) == 'Female' ? 'checked':'' }} type="radio" name="gender" id="genderF" value="Female">
-                                    <label class="form-check-label" for="genderF">Female</label>
+                                    <input class="form-check-input disabled" form="cytoUpdateForm" {{ old('gender',$cyto->gender) == 'Female' ? 'checked':'' }} type="radio" name="gender" id="genderF" value="Female">
+                                    <label class="text-black-50" for="genderF">Female</label>
                                 </div>
                                 <br>
                                 @error('gender')
@@ -125,14 +139,15 @@
                                 @enderror
                             </div>
                             <div class="mb-4">
-                                <label for="doctor" class="form-label">Enter Referring Doctor</label>
-                                <input type="text" name="doctor" form="cytoUpdateForm" class="form-control @error('doctor') is-invalid @enderror" id="doctor" placeholder="Refer Doctor" value="{{ old('doctor',$cyto->doctor) }}">
+                                <label class="form-label" for="doctor">Referring Doctor</label>
+                                <input type="text" name="doctor" readonly form="cytoUpdateForm" class="text-black-50 form-control @error('doctor') is-invalid @enderror" id="doctor" placeholder="Refer Doctor" value="{{ old('doctor',$cyto->doctor) }}">
                                 @error('doctor')
                                 <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
                             </div>
 
                         </div>
+                        <div class="my-2"></div>
 
                         <div class="col-12 col-lg-6">
                             <div class="mb-3">
@@ -176,27 +191,22 @@
 
                                 </div>
                             </div>
-                            <div class="mb-4">
-                                <label for="specimen" class="form-label">Specimen</label>
-                                <div class="mb-4">
-                                    <textarea form="cytoUpdateForm" class="form-control @error('specimen') is-invalid @enderror" name="specimen" id="specimen" placeholder="Enter Specimen" style="height: 180px">{{ old('specimen',$cyto->specimen) }}</textarea>
-                                    @error('specimen')
-                                    <small class="invalid-feedback">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-12 col-lg-6">
+                            @role('Admin|Gross_doctor')
                             <div class="mb-4">
                                 <label for="cyto_diagnosis" class="form-label">Cytological Diagnosis</label>
                                 <div class="mb-4">
-                                    <textarea form="cytoUpdateForm" class="form-control @error('cyto_diagnosis') is-invalid @enderror" name="cyto_diagnosis" id="cyto_diagnosis" placeholder="Enter Cytological Diagnosis" style="height: 180px">{{ old('cyto_diagnosis',$cyto->diagnosis) }}</textarea>
+                                    <textarea form="cytoUpdateForm" class="form-control @error('cyto_diagnosis') is-invalid @enderror" name="cyto_diagnosis" id="cyto_diagnosis" placeholder="Enter Cytological Diagnosis" style="height: 180px">{{ old('cyto_diagnosis',$cyto->cyto_diagnosis) }}</textarea>
                                     @error('cyto_diagnosis')
                                     <small class="invalid-feedback">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
+                            @endrole
+
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            @role('Admin|Micro_doctor')
                             <div class="mb-4">
                                 <label for="morphology" class="form-label">Morphology</label>
                                 <div class="mb-4">
@@ -206,8 +216,9 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            @endrole
                         </div>
+
                     </div>
                     <hr>
                     <button class="btn btn-primary text-uppercase text-white" form="cytoUpdateForm"><i class="fa fa-save me-2"></i>Update</button>
@@ -232,17 +243,10 @@
             photoUploadForm.submit();
         })
 
-        // select2
-        $('#specimen-select').select2();
-        $('#hospital-select').select2();
-
-        $('#datepicker3').datepicker({
+        $('#datepicker1').datepicker({
             dateFormat : 'yy-mm-dd'
         });
-        $('#datepicker4').datepicker({
-            dateFormat : 'yy-mm-dd'
-        });
-        $('#datepicker5').datepicker({
+        $('#datepicker2').datepicker({
             dateFormat : 'yy-mm-dd'
         });
 

@@ -40,7 +40,7 @@
         }
     </style>
 </head>
-<body onload="print()" oncontextmenu="return false">
+<body oncontextmenu="return false">
 <div class="container">
     <div class="row">
         <div class="col-12 px-5 pt-3">
@@ -80,6 +80,9 @@
                             <h6 class="text-uppercase mb-0">Patient's Particulars</h6>
                             <div class="ms-3 mt-2">
                                 <div class="row mb-2">
+                                    <div class="text-end">
+                                        <button class="btn btn-primary" onclick="return print()"><i class="fa-solid fa-print me-1"></i>Print</button>
+                                    </div>
                                     <div class="col-4">
                                         <div class="print-header">
                                             <span class="first">Name: &nbsp;</span>

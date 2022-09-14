@@ -10,15 +10,6 @@ class TrephinePolicy
 {
     use HandlesAuthorization;
 
-    // admin all access
-    public function before(User $user){
-        if ($user->role == 0){
-            return true;
-        }
-
-        return null;
-
-    }
     /**
      * Determine whether the user can view any models.
      *
@@ -62,7 +53,7 @@ class TrephinePolicy
      */
     public function update(User $user, Trephine $trephine)
     {
-        return $user->id == $trephine->user_id;
+
     }
 
     /**
@@ -74,7 +65,7 @@ class TrephinePolicy
      */
     public function delete(User $user, Trephine $trephine)
     {
-        return $user->id == $trephine->user_id;
+
     }
 
     /**

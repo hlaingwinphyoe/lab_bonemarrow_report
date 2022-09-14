@@ -93,12 +93,12 @@
                                         @method('delete')
                                     </form>
                                     <div class="btn-group" role="group">
-                                        @can('delete',$specimen)
+                                        @can('delete specimen')
                                             <a href="#" class="btn btn-light btn-sm" form="delForm{{ $specimen->id }}" onclick="return askConfirm({{ $specimen->id }})"  data-mdb-toggle="tooltip" data-mdb-placement="top" title="Delete">
                                                 <i class="fa-regular fa-trash-alt fa-fw" title="Delete"></i>
                                             </a>
                                         @endcan
-                                        @can('update',$specimen)
+                                        @can('edit specimen')
                                         <!-- Button trigger modal -->
                                             <a href="#" class="btn btn-light btn-sm" data-mdb-toggle="modal" data-mdb-target="#editSpecimenModal{{ $specimen->id }}">
                                                 <i class="fa-solid fa-pen fa-fw"  data-mdb-toggle="tooltip" data-mdb-placement="top" title="Edit"></i>

@@ -10,16 +10,6 @@ class AspiratePolicy
 {
     use HandlesAuthorization;
 
-    // admin all access
-    public function before(User $user){
-        if ($user->role == 0){
-            return true;
-        }
-
-        return null;
-
-    }
-
     /**
      * Determine whether the user can view any models.
      *
@@ -63,7 +53,7 @@ class AspiratePolicy
      */
     public function update(User $user, Aspirate $aspirate)
     {
-        return $user->id == $aspirate->user_id;
+
     }
 
     /**
@@ -75,7 +65,7 @@ class AspiratePolicy
      */
     public function delete(User $user, Aspirate $aspirate)
     {
-        return $user->id == $aspirate->user_id;
+
     }
 
     /**
