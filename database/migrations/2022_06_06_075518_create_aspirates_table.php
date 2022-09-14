@@ -15,7 +15,7 @@ class CreateAspiratesTable extends Migration
     {
         Schema::create('aspirates', function (Blueprint $table) {
             $table->id();
-            $table->date('sc_date');
+            $table->date('sc_date')->nullable();
             $table->integer('lab_access');
             $table->string('patient_name');
             $table->string('slug');
