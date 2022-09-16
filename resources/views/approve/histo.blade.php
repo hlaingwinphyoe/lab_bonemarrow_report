@@ -154,11 +154,11 @@
                                     {{ date('j M Y',strtotime($histo->bio_receive_date)) }}
                                 </td>
                                 <td>
-                                    @if($cyto->is_complete == '2')
+                                    @if($histo->is_complete == '2')
                                         <span class="badge badge-light my-2">
                                             Registered
                                         </span>
-                                    @elseif($cyto->is_complete == '1')
+                                    @elseif($histo->is_complete == '1')
                                         <span class="badge badge-info my-2">
                                             Partial Completed
                                         </span>
