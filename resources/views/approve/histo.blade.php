@@ -172,9 +172,9 @@
                                     {{ $histo->created_at->format('j M Y') }}
                                 </td>
                                 <td>
-                                    <a href="#" type="button" data-mdb-toggle="modal" data-mdb-target="#detailModal{{ $histo->id }}">
+                                    <button data-mdb-ripple-color="blue" type="button" class="btn btn-white shadow-none" data-mdb-toggle="modal" data-mdb-target="#detailModal{{ $histo->id }}">
                                         <img src="{{ asset('images/detail.png') }}" width="20" alt="" data-mdb-toggle="tooltip" data-mdb-placement="top" title="Detail">
-                                    </a>
+                                    </button>
                                     <div class="modal fade" style="z-index: 2019" id="detailModal{{ $histo->id }}" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-xl modal-dialog-centered">
                                             <div class="modal-content">
@@ -192,13 +192,20 @@
                                                                 {{ $histo->day }}D
                                                             @endif
                                                             ({{ $histo->gender }})
+
+                                                            @can('edit histo')
+                                                                <a href="{{ route('histo.edit',$histo->id) }}" class="btn btn-warning btn-sm ms-2">
+                                                                    Edit
+                                                                </a>
+                                                            @endcan
+
                                                             @if($histo->is_complete == '0')
-                                                                <form action="{{ route('histo.approved',$histo->id) }}" method="post" class="d-inline ms-3" id="approveForm{{ $histo->id }}">
-                                                                        @csrf
-                                                                        <button class="btn btn-success btn-sm" @if($histo->is_approve == '0') disabled @endif id="approveBtn{{ $histo->id }}" onclick="toApprove({{ $histo->id }})">
-                                                                            @if($histo->is_approve == '0') Approved @else Approve @endif
-                                                                        </button>
-                                                                    </form>
+                                                                <form action="{{ route('histo.approved',$histo->id) }}" method="post" class="d-inline ms-2" id="approveForm{{ $histo->id }}">
+                                                                    @csrf
+                                                                    <button class="btn btn-success btn-sm" @if($histo->is_approve == '0') disabled @endif id="approveBtn{{ $histo->id }}" onclick="toApprove({{ $histo->id }})">
+                                                                        @if($histo->is_approve == '0') Approved @else Approve @endif
+                                                                    </button>
+                                                                </form>
                                                             @endif
                                                             </span>
                                                     </h5>
