@@ -23,7 +23,7 @@
     <meta property="og:url" content="https://bonemarrowreport.com">
     <meta property="og:title" content="Biopsy Report With ICSH Guidelines">
     <meta property="og:description" content="Can report for bonemarrow aspirate,bonemarrrow trephine, histological report and cytological report in one place.">
-    <meta property="og:image" content="{{ asset('images/app.png') }}">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
 
     @yield('head')
 </head>
