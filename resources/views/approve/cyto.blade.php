@@ -8,10 +8,10 @@
 
         <div class="mobile-menu">
             @can('write cyto')
-                <a href="{{ route('cyto.create') }}" class="mobile-menu-item plus btn btn-primary"><i class="fa-solid fa-plus"></i></a>
+                <a href="{{ route('cyto.create') }}" class="mobile-menu-item plus btn btn-primary shadow"><i class="fa-solid fa-plus"></i></a>
             @endcan
-            <a href="#" class="mobile-menu-item search btn btn-info" data-mdb-toggle="modal" data-mdb-target="#searchModal"><i class="fa-solid fa-search"></i></a>
-            <a href="{{ route('report.toApproveCyto') }}" class="mobile-menu-item refresh btn btn-success"><i class="fa-solid fa-refresh"></i></a>
+            <a href="#" class="mobile-menu-item search btn btn-info shadow" data-mdb-toggle="modal" data-mdb-target="#searchModal"><i class="fa-solid fa-search"></i></a>
+            <a href="{{ route('report.toApproveCyto') }}" class="mobile-menu-item refresh btn btn-success shadow"><i class="fa-solid fa-refresh"></i></a>
         </div>
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -192,6 +192,13 @@
                                                                 {{ $cyto->day }}D
                                                             @endif
                                                             ({{ $cyto->gender }})
+
+                                                            @can('edit histo')
+                                                                <a href="{{ route('cyto.edit',$cyto->id) }}" class="btn btn-warning btn-sm ms-2">
+                                                                    Edit
+                                                                </a>
+                                                            @endcan
+
                                                             @if($cyto->is_complete == '0')
                                                                 <form action="{{ route('cyto.approved',$cyto->id) }}" method="post" class="d-inline ms-3" id="approveForm{{ $cyto->id }}">
                                                                         @csrf
@@ -206,40 +213,42 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <table class="table">
-                                                        <tr>
-                                                            <th>Hospital</th>
-                                                            <td>{{ $cyto->hospital->name }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Specimen Type</th>
-                                                            <td>{{ $cyto->specimenType->name }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Refer Doctor</th>
-                                                            <td>{{ $cyto->doctor }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Receive Date</th>
-                                                            <td>{{ $cyto->bio_receive_date }}</td>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>Hospital</th>
+                                                                <td>{{ $cyto->hospital->name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Specimen Type</th>
+                                                                <td>{{ $cyto->specimenType->name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Refer Doctor</th>
+                                                                <td>{{ $cyto->doctor }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Receive Date</th>
+                                                                <td>{{ $cyto->bio_receive_date }}</td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Staining Date</th>
-                                                            <td>{{ $cyto->bio_cut_date }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Staining Date</th>
+                                                                <td>{{ $cyto->bio_cut_date }}</td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Report Date</th>
-                                                            <td>{{ $cyto->bio_report_date }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Morphology</th>
-                                                            <td>{{ $cyto->morphology }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Cytological Diagnosis</th>
-                                                            <td>{{ $cyto->cyto_diagnosis }}</td>
-                                                        </tr>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Report Date</th>
+                                                                <td>{{ $cyto->bio_report_date }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Morphology</th>
+                                                                <td>{{ $cyto->morphology }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Cytological Diagnosis</th>
+                                                                <td>{{ $cyto->cyto_diagnosis }}</td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>
