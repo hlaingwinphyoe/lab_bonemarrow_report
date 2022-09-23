@@ -16135,7 +16135,7 @@ a {
   border-radius: 50%;
   width: 57px;
   height: 57px;
-  z-index: 3;
+  z-index: 2010;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16170,12 +16170,11 @@ a {
   border-radius: 50%;
   transition: 0.4s ease-in;
   width: 45px;
-  height: 45px;
+  height: 48px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  box-shadow: 1px 1px 3px grey;
 }
 
 .mobile-menu-item i {
@@ -16209,6 +16208,7 @@ a {
 
 .mobile-menu-active {
   height: 276px;
+  z-index: 2009;
 }
 
 @media screen and (max-width: 860px) {
