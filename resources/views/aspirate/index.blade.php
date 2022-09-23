@@ -100,7 +100,7 @@
                                                 <a href="{{ route('aspirate.create') }}" class="btn btn-primary mb-3 me-2" style="width: 125px"><i class="fa fa-plus me-1"></i> Create</a>
                                             @endcan
                                             @if($aspirates->count() > 0)
-                                                <a href="{{ route('aspirate.export') }}" class="btn btn-success mb-3" style="width: 125px"><i class="fa fa-file-excel me-1"></i> Export</a>
+                                                <a href="{{ route('aspirate.export') }}" class="btn btn-success mb-3" style="width: 125px"><img src="{{ asset('images/excel.png') }}" width="15" alt=""> Export</a>
                                             @endif
                                         </div>
                                     </div>
