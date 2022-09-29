@@ -40,7 +40,7 @@
                                     <h6 class="text-dark small mb-2"><i class="fa-solid fa-dollar me-2"></i>
                                         Total Sales
                                     </h6>
-                                    <h4 class="text-success fw-bold mb-0 aspirate">
+                                    <h4 class="text-success fw-bold mb-0 trephine">
                                         0 Ks
                                     </h4>
                                 </div>
