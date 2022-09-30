@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $patientFact->patient_name }} : Trephine Report</title>
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
-    <link rel="icon" href="{{ asset('images/logo.jpg') }}">
+    <link rel="icon" href="{{ asset('images/logo.png') }}">
     <style>
         .print-table tr{
             font-size: 12px !important;
