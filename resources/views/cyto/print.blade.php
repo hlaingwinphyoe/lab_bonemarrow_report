@@ -127,7 +127,7 @@
                                             Cytopathology report
                                         </h3>
                                         <p>
-                                            {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/cyto-print/'.$patientFact->id, 'DATAMATRIX',3,3) !!}
+                                            {!! DNS2D::getBarcodeSVG(config('app.url').'/cyto-print/'.$patientFact->id, 'DATAMATRIX',3,3) !!}
                                         </p>
                                     </div>
                                     <div class="col-12">

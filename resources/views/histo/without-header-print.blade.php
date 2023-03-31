@@ -116,7 +116,7 @@
                                             Histopathology report
                                         </h3>
                                         <p>
-                                            {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/histo-print/'.$patientFact->id, 'DATAMATRIX',3,3) !!}
+                                            {!! DNS2D::getBarcodeSVG(config('app.url').'/histo-print/'.$patientFact->id, 'DATAMATRIX',3,3) !!}
                                         </p>
                                     </div>
                                     @if($patientFact->is_approve == '0')

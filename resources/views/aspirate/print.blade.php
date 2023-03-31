@@ -70,7 +70,7 @@
                             <h5 class="text-center text-uppercase mb-0">ICSH Guidelines</h5>
                         </div>
                         <p class="mb-0">
-                            {!! DNS2D::getBarcodeSVG('https://bonemarrowreport.com/aspirate-print/'.$patientFact->id, 'DATAMATRIX',3,3) !!}
+                            {!! DNS2D::getBarcodeSVG(config('app.url').'/aspirate-print/'.$patientFact->id, 'DATAMATRIX',3,3) !!}
                         </p>
                     </div>
                     <div class="">
