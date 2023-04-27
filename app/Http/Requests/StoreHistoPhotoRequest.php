@@ -26,7 +26,7 @@ class StoreHistoPhotoRequest extends FormRequest
         return [
             "histo_id" => "required|integer|exists:histos,id",
             "histo_photos" => 'required',
-            "histo_photos.*" => 'file|max:5000|mimes:png,jpg,jpeg'
+            "histo_photos.*" => 'file|max:102400|mimes:png,jpg,jpeg'
         ];
     }
 }

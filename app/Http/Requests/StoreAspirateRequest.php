@@ -25,7 +25,7 @@ class StoreAspirateRequest extends FormRequest
     {
         return [
             "aspirate_photos" => 'nullable',
-            "aspirate_photos.*" => 'file|max:5000|mimes:png,jpg,jpeg',
+            "aspirate_photos.*" => 'file|max:102400|mimes:png,jpg,jpeg',
             "sc_date" => 'required|date',
             "lab_access" => 'required|integer|gt:0',
             "patient_name" => 'required|min:3',

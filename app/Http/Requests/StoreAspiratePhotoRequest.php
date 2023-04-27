@@ -26,7 +26,7 @@ class StoreAspiratePhotoRequest extends FormRequest
         return [
             "aspirate_id" => "required|exists:aspirates,id",
             "aspirate_photos" => 'required',
-            "aspirate_photos.*" => 'file|max:5000|mimes:png,jpg,jpeg'
+            "aspirate_photos.*" => 'file|max:102400|mimes:png,jpg,jpeg'
         ];
     }
 }

@@ -26,7 +26,7 @@ class StoreTrephinePhotoRequest extends FormRequest
         return [
             "trephine_id" => "required|exists:trephines,id",
             "trephine_photos" => 'required',
-            "trephine_photos.*" => 'file|max:5000|mimes:png,jpg,jpeg'
+            "trephine_photos.*" => 'file|max:102400|mimes:png,jpg,jpeg'
         ];
     }
 }
