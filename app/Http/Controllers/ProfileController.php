@@ -87,6 +87,10 @@ class ProfileController extends Controller
 
         Storage::delete($dir.Auth::user()->photo);
 
+        if (!Storage::exists('public/profile_thumbnails')){
+            Storage::makeDirectory('public/profile_thumbnails');
+        }
+
         $newName = uniqid()."_user_photo.".$request->file("profile_photo")->extension();
         $request->file("profile_photo")->storeAs($dir,$newName);
 
