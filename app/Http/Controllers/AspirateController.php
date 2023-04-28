@@ -222,6 +222,7 @@ class AspirateController extends Controller
     public function destroy(Aspirate $aspirate)
     {
         $aspirate->delete();
+        $aspirate->aspiratePhotos()->delete();
         return redirect()->back()->with('status','Successfully Deleted!');
     }
 

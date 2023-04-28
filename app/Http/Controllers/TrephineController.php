@@ -223,6 +223,7 @@ class TrephineController extends Controller
     public function destroy(Trephine $trephine)
     {
         $trephine->delete();
+        $trephine->trephinePhotos()->delete();
         return redirect()->back()->with('status',"Successfully Deleted!");
 
     }

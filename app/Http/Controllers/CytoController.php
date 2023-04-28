@@ -162,6 +162,7 @@ class CytoController extends Controller
     public function destroy(Cyto $cyto)
     {
         $cyto->delete();
+        $cyto->cytoPhotos()->delete();
         return redirect()->back()->with('status',"Successfully Deleted!");
     }
 
