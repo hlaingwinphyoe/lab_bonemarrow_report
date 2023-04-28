@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AspiratePhoto;
+use App\Models\Aspirate;
 use App\Http\Requests\StoreAspiratePhotoRequest;
 use App\Http\Requests\UpdateAspiratePhotoRequest;
 use Illuminate\Support\Facades\Auth;

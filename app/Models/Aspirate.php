@@ -9,11 +9,15 @@ class Aspirate extends Model
 {
     use HasFactory;
 
+    protected $table = 'aspirates';
+
+    protected $guarded = [];
+
     public function user(){
         return $this->belongsTo(User::class);
     }
     public function aspiratePhotos(){
-        return $this->hasMany(AspiratePhoto::class);
+        return $this->hasMany(AspiratePhoto::class, 'aspirate_id', 'id');
     }
     public function hospital(){
         return $this->belongsTo(Hospital::class);

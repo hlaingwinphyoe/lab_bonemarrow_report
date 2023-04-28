@@ -41,6 +41,10 @@ class CytoPhotoController extends Controller
     {
         if ($request->hasFile('cyto_photos')){
             foreach ($request->file('cyto_photos') as $photo){
+                if (!Storage::exists('public/cyto_thumbnails')){
+                    Storage::makeDirectory('public/cyto_thumbnails');
+                }
+                
                 //store file
                 $newName =uniqid()."_cyto.".$photo->extension();
                 $photo->storeAs('public/cyto_photos/',$newName);

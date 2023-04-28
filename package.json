@@ -30,7 +30,7 @@
         "mdb-ui-kit": "^4.4.0",
         "push.js": "^1.0.12",
         "select2": "^4.1.0-rc.0",
-        "sweetalert2": "^11.4.17",
+        "sweetalert2": "^11.4.8",
         "venobox": "^2.0.4",
         "waypoints": "^4.0.1"
     }
