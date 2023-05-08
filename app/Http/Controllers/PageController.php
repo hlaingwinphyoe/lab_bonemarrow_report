@@ -10,7 +10,6 @@ use App\Models\Trephine;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -79,15 +78,83 @@ class PageController extends Controller
         return view('denied');
     }
 
-    public function totalSales(){
-        $aspirates = Aspirate::all();
-        $trephines = Trephine::all();
-        $histos = Histo::all();
-        $cytos = Cyto::all();
+    // public function sale(){
+    //     $aspirates = Aspirate::all();
+    //     $trephines = Trephine::all();
+    //     $histos = Histo::all();
+    //     $cytos = Cyto::all();
 
-        $specimens = SpecimenType::withCount(['aspirates','trephines','histos','cytos'])->get();
+    //     $specimens = SpecimenType::withCount(['aspirates','trephines','histos','cytos'])->get();
 
-        return view('sales',['aspirates'=>$aspirates,'trephines'=>$trephines,'histos'=>$histos,'cytos'=>$cytos,'specimens'=>$specimens]);
+    //     return view('sales',['aspirates'=>$aspirates,'trephines'=>$trephines,'histos'=>$histos,'cytos'=>$cytos,'specimens'=>$specimens]);
+    // }
+
+    public function totalSales()
+    {
+
+        $start = request('start') ? Carbon::parse(request('start')) : now()->startOfMonth();
+
+        $end = request('end') ? Carbon::parse(request('end')) : now();
+
+        // specimen
+        $specimens = SpecimenType::withCount([
+            'aspirates' => function ($q) use ($start, $end) {
+                $q->whereDate('created_at', '>=', $start)->whereDate('created_at', '<=', $end);
+            },
+            'trephines' => function ($q) use ($start, $end) {
+                $q->whereDate('created_at', '>=', $start)->whereDate('created_at', '<=', $end);
+            },
+            'histos' => function ($q) use ($start, $end) {
+                $q->where('is_complete','0')->whereDate('created_at', '>=', $start)->whereDate('created_at', '<=', $end);
+            },
+            'cytos' => function ($q) use ($start, $end) {
+                $q->where('is_complete','0')->whereDate('created_at', '>=', $start)->whereDate('created_at', '<=', $end);
+            }
+        ])->get();
+
+        $aspirateCount = $specimens->sum('aspirates_count');
+
+        $aspirateTotal = $specimens->sum(function ($aspirate) {
+            return $aspirate->price * $aspirate->aspirates_count;
+        });
+
+        $trephineCount = $specimens->sum('trephines_count');
+
+        $trephineTotal = $specimens->sum(function ($trephine) {
+            return $trephine->price * $trephine->trephines_count;
+        });
+
+        $histoCount = $specimens->sum('histos_count');
+
+        $histoTotal = $specimens->sum(function ($histo) {
+            return $histo->price * $histo->histos_count;
+        });
+
+        $cytoCount = $specimens->sum('cytos_count');
+
+        $cytoTotal = $specimens->sum(function ($cyto) {
+            return $cyto->price * $cyto->cytos_count;
+        });
+
+
+        return view('sales')->with([
+            'start' => $start,
+            'end' => $end,
+
+            'aspirateTotal' => $aspirateTotal,
+            'aspirateCount' => $aspirateCount,
+
+            'trephineTotal' => $trephineTotal,
+            'trephineCount' => $trephineCount,
+
+            'histoTotal' => $histoTotal,
+            'histoCount' => $histoCount,
+
+            'cytoTotal' => $cytoTotal,
+            'cytoCount' => $cytoCount,
+
+            'specimens' => $specimens
+        ]);
     }
 
 }

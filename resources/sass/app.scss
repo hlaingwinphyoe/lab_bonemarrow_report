@@ -26,7 +26,6 @@ $secondary:#6c757d;
 @import "jquery-ui/dist/themes/base/jquery-ui.min.css";
 
 
-
 // custom css
 
 *{
@@ -713,9 +712,9 @@ a{
     z-index: 2000;
 }
 
-.select2-search--dropdown{
-    display: none;
-}
+// .select2-search--dropdown{
+//     display: none;
+// }
 
 .select2-container--default .select2-selection--single{
     height: 35px !important;
@@ -860,4 +859,3 @@ a{
 .ui-state-active{
     background: #003eff !important;
 }
-
