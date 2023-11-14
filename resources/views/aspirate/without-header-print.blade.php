@@ -23,26 +23,14 @@
         @media print{
             @page{
                 size: A4;
-                margin: 2in 0in 0in 10px !important;
+                margin-top: 2in;
+                /* margin: 2in 0in 0in 10px !important; */
             }
-        }
-
-        ::-webkit-scrollbar{
-            position: absolute;
-            top: 0;
-            float: right;
-            width: 6px;
-            background-clip: padding-box;
-        }
-        ::-webkit-scrollbar-thumb{
-            background-color: rgb(66, 66, 66);
-            border: 1px solid rgb(255, 255, 255);
-            border-radius: 5px;
         }
     </style>
 </head>
 <body oncontextmenu="return false">
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card border-0">
