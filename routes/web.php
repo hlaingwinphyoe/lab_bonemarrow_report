@@ -119,4 +119,5 @@ Route::middleware('auth')->group(function () {
 
     // 404 page
     Route::get('/denied', [PageController::class, 'denied'])->name('denied');
+
 });
