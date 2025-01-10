@@ -26,7 +26,7 @@ class StoreHistoGrossRequest extends FormRequest
         return [
             "histo_id" => "required|integer|exists:histos,id",
             "gross_photos" => 'required',
-            "gross_photos.*" => 'file|max:5000|mimes:png,jpg,jpeg'
+            "gross_photos.*" => 'file|max:102400|mimes:png,jpg,jpeg'
         ];
     }
 }

@@ -26,7 +26,7 @@ class StoreCytoPhotoRequest extends FormRequest
         return [
             "cyto_id" => "required|exists:cytos,id",
             "cyto_photos" => 'required',
-            "cyto_photos.*" => 'file|max:5000|mimes:png,jpg,jpeg'
+            "cyto_photos.*" => 'file|max:102400|mimes:png,jpg,jpeg'
         ];
     }
 }

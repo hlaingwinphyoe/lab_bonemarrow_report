@@ -25,7 +25,7 @@ class StoreTrephineRequest extends FormRequest
     {
         return [
             "trephine_photos" => 'nullable',
-            "trephine_photos.*" => 'file|max:5000|mimes:png,jpg,jpeg',
+            "trephine_photos.*" => 'file|max:102400|mimes:png,jpg,jpeg',
             "hospital"  => "required|integer|exists:hospitals,id",
             "sc_date" => 'required|date',
             "lab_access" => 'required|integer|gt:0',

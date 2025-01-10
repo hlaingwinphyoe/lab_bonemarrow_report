@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('./fileupload');
 
 $(".show-sidebar-btn").click(function () {
     $(".sidebar").animate({marginLeft:0});
@@ -44,37 +45,6 @@ if (currenMenuHeight > screenHeight*0.8){
         scrollTop: currenMenuHeight-100
     },1000)
 }
-
-
-Array.prototype.forEach.call(
-    document.querySelectorAll(".file-upload__button"),
-    function(button) {
-        const hiddenInput = button.parentElement.querySelector(
-            ".file-upload__input"
-        );
-        const label = button.parentElement.querySelector(".file-upload__label");
-        const defaultLabelText = "No file(s) selected";
-
-        // Set default text for label
-        label.textContent = defaultLabelText;
-        label.title = defaultLabelText;
-
-        button.addEventListener("click", function() {
-            hiddenInput.click();
-        });
-
-        hiddenInput.addEventListener("change", function() {
-            const filenameList = Array.prototype.map.call(hiddenInput.files, function(
-                file
-            ) {
-                return file.name;
-            });
-
-            label.textContent = filenameList.join(", ") || defaultLabelText;
-            label.title = label.textContent;
-        });
-    }
-);
 
 // profile
 let upload = document.getElementById("upload");

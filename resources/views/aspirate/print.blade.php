@@ -19,30 +19,17 @@
         @media print{
             @page{
                 size: A4;
-                margin: 10px 0.2in !important;
+                margin: 10px 0in !important;
             }
         }
 
         .print-header .first{
             font-weight: bold;
         }
-
-        ::-webkit-scrollbar{
-            position: absolute;
-            top: 0;
-            float: right;
-            width: 6px;
-            background-clip: padding-box;
-        }
-        ::-webkit-scrollbar-thumb{
-            background-color: rgb(66, 66, 66);
-            border: 1px solid rgb(255, 255, 255);
-            border-radius: 5px;
-        }
     </style>
 </head>
 <body oncontextmenu="return false">
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12 px-5 pt-3">
             <div class="mb-2 position-relative">

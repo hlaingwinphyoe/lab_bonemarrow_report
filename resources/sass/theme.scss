@@ -17,10 +17,10 @@ $secondary:#6c757d;
 }
 
 @media print{
-    @page{
-        size: A4;
-        margin: 10px 0.2in !important;
-    }
+    // @page{
+    //     size: A4;
+    //     margin: 10px 0in !important;
+    // }
 
     .back-btn{
         display: none !important;
@@ -41,7 +41,7 @@ $secondary:#6c757d;
 
 .back-btn{
     position: absolute;
-    left: -77px;
+    left: 0;
     top: 0;
 }
 

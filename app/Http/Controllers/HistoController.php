@@ -166,6 +166,7 @@ class HistoController extends Controller
     public function destroy(Histo $histo)
     {
         $histo->delete();
+        $histo->histoPhotos()->delete();
         return redirect()->back()->with('status',"Successfully Deleted!");
 
     }
