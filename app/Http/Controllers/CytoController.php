@@ -37,12 +37,12 @@ class CytoController extends Controller
     public function index()
     {
         $cytos = Cyto::with('specimenType')->search()
-            ->where('is_complete','!=','0')
+            ->where('is_complete', '!=', '0')
             ->latest('id')
             ->paginate(10);
 
         $specimens = SpecimenType::all();
-        return view('cyto.index',['cytos'=>$cytos,'specimens'=>$specimens]);
+        return view('cyto.index', ['cytos' => $cytos, 'specimens' => $specimens]);
     }
 
     /**
@@ -54,7 +54,7 @@ class CytoController extends Controller
     {
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
-        return view('cyto.create',['hospitals'=>$hospitals,'specimens'=>$specimens]);
+        return view('cyto.create', ['hospitals' => $hospitals, 'specimens' => $specimens]);
     }
 
     /**
@@ -67,7 +67,7 @@ class CytoController extends Controller
     {
         $cyto = new Cyto();
         $cyto->name = $request->name;
-        $cyto->slug = Str::slug($request->name,'-');
+        $cyto->slug = Str::slug($request->name, '-');
         $cyto->year = $request->year;
         $cyto->month = $request->month;
         $cyto->day = $request->day;
@@ -79,9 +79,9 @@ class CytoController extends Controller
         $cyto->user_id = Auth::id();
         $cyto->save();
 
-        $users = User::role(['Admin','Gross_doctor','Micro_doctor'])->get();
-        Notification::send($users,new CytoJobCreatedNotification($cyto));
-        return redirect()->route('cyto.index')->with(['status'=>'Successfully Created!','create'=>$cyto->name.' အား Tests စစ်ဆေးပေးရန်ရှိပါသည်။']);
+        $users = User::role(['Admin', 'Gross_doctor', 'Micro_doctor'])->get();
+        Notification::send($users, new CytoJobCreatedNotification($cyto));
+        return redirect()->route('cyto.index')->with(['status' => 'Successfully Created!', 'create' => $cyto->name . ' အား Tests စစ်ဆေးပေးရန်ရှိပါသည်။']);
     }
 
     /**
@@ -105,7 +105,7 @@ class CytoController extends Controller
     {
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
-        return view('cyto.edit',compact('cyto','hospitals','specimens'));
+        return view('cyto.edit', compact('cyto', 'hospitals', 'specimens'));
     }
 
     /**
@@ -118,7 +118,7 @@ class CytoController extends Controller
     public function update(UpdateCytoRequest $request, Cyto $cyto)
     {
         $cyto->name = $request->name;
-        $cyto->slug = Str::slug($request->name,'-');
+        $cyto->slug = Str::slug($request->name, '-');
         $cyto->year = $request->year;
         $cyto->month = $request->month;
         $cyto->day = $request->day;
@@ -132,24 +132,22 @@ class CytoController extends Controller
         $cyto->specimen_type_id = $request->specimen_type;
         $cyto->hospital_id = $request->hospital;
         $cyto->user_id = Auth::id();
-        if ($cyto->morphology == null || $cyto->cyto_diagnosis == null){
-            if (isset($cyto->morphology) || isset($cyto->cyto_diagnosis))
-            {
+        if ($cyto->morphology == null || $cyto->cyto_diagnosis == null) {
+            if (isset($cyto->morphology) || isset($cyto->cyto_diagnosis)) {
                 $cyto->is_complete = '1';
-            }
-            else{
+            } else {
                 $cyto->is_complete = '2';
             }
-        }else{
+        } else {
             $cyto->is_complete = '0';
         }
         $cyto->update();
-        if ($cyto->is_complete == '0'){
+        if ($cyto->is_complete == '0') {
             $users = User::role('Admin')->get();
-            Notification::send($users,new CytoResultAddNotification($cyto));
-            return redirect()->route('cyto.index')->with(['status'=>'Successfully Updated!','create'=>$cyto->name.' report အား အတည်ပြုပေးရန်ရှိပါသည်။']);
-        }else{
-            return redirect()->route('cyto.index')->with('status',"Successfully Updated!");
+            Notification::send($users, new CytoResultAddNotification($cyto));
+            return redirect()->route('cyto.index')->with(['status' => 'Successfully Updated!', 'create' => $cyto->name . ' report အား အတည်ပြုပေးရန်ရှိပါသည်။']);
+        } else {
+            return redirect()->route('cyto.index')->with('status', "Successfully Updated!");
         }
     }
 
@@ -163,27 +161,30 @@ class CytoController extends Controller
     {
         $cyto->delete();
         $cyto->cytoPhotos()->delete();
-        return redirect()->back()->with('status',"Successfully Deleted!");
+        return redirect()->back()->with('status', "Successfully Deleted!");
     }
 
-    public function print($id){
-        $patientFact = Cyto::where('id','=',$id)->first();
-        return view('cyto.print',compact('patientFact'));
+    public function print($id)
+    {
+        $patientFact = Cyto::with(['cytoPhotos', 'specimenType', 'hospital'])->where('id', '=', $id)->first();
+        return view('cyto.print', compact('patientFact'));
     }
 
-    public function withoutHeaderPrint($id){
-        $patientFact = Cyto::where('id','=',$id)->first();
-        return view('cyto.without-header-print',compact('patientFact'));
+    public function withoutHeaderPrint($id)
+    {
+        $patientFact = Cyto::with(['cytoPhotos', 'specimenType', 'hospital'])->where('id', '=', $id)->first();
+        return view('cyto.without-header-print', compact('patientFact'));
     }
 
     // Invoice
-    public function invoice($id){
-        $invoice = Cyto::where('id','=',$id)->first();
-        return view('cyto.invoice',compact('invoice'));
+    public function invoice($id)
+    {
+        $invoice = Cyto::with('specimenType')->where('id', '=', $id)->first();
+        return view('cyto.invoice', compact('invoice'));
     }
 
-    public function export(){
+    public function export()
+    {
         return Excel::download(new CytosExport, 'cytos.xlsx');
     }
-
 }

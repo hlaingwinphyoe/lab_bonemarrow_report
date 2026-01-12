@@ -27,7 +27,6 @@ class TrephineController extends Controller
         $this->middleware(['permission:write trephine'], ['only' => ['create']]);
         $this->middleware(['permission:edit trephine'], ['only' => ['edit']]);
         $this->middleware(['permission:delete trephine'], ['only' => ['destroy']]);
-
     }
 
     /**
@@ -40,7 +39,7 @@ class TrephineController extends Controller
         $trephines = Trephine::search()->latest('id')
             ->paginate(10);
         $specimens = SpecimenType::all();
-        return view('trephine.index',['trephines'=>$trephines,'specimens'=>$specimens]);
+        return view('trephine.index', ['trephines' => $trephines, 'specimens' => $specimens]);
     }
 
     /**
@@ -53,7 +52,7 @@ class TrephineController extends Controller
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
 
-        return view('trephine.create',['hospitals'=>$hospitals,'specimens'=>$specimens]);
+        return view('trephine.create', ['hospitals' => $hospitals, 'specimens' => $specimens]);
     }
 
     /**
@@ -68,7 +67,7 @@ class TrephineController extends Controller
         $trephine->sc_date = $request->sc_date;
         $trephine->lab_access = $request->lab_access;
         $trephine->patient_name = $request->patient_name;
-        $trephine->slug = Str::slug($request->patient_name,'-');
+        $trephine->slug = Str::slug($request->patient_name, '-');
         $trephine->year = $request->year;
         $trephine->month = $request->month;
         $trephine->day = $request->day;
@@ -105,24 +104,24 @@ class TrephineController extends Controller
         $trephine->save();
 
         $users = User::role(['User'])->get();
-        Notification::send($users,new TrephineApproveNotification($trephine));
+        Notification::send($users, new TrephineApproveNotification($trephine));
 
-        if ($request->hasFile('trephine_photos')){
-            foreach ($request->file('trephine_photos') as $photo){
+        if ($request->hasFile('trephine_photos')) {
+            foreach ($request->file('trephine_photos') as $photo) {
                 //store file
 
-                if (!Storage::exists('public/trephine_thumbnails')){
+                if (!Storage::exists('public/trephine_thumbnails')) {
                     Storage::makeDirectory('public/trephine_thumbnails');
                 }
 
-                $newName =uniqid()."_trephine.".$photo->extension();
-                $photo->storeAs('public/trephine_photos/',$newName);
+                $newName = uniqid() . "_trephine." . $photo->extension();
+                $photo->storeAs('public/trephine_photos/', $newName);
 
                 // making thumbnail
                 $img = Image::make($photo);
                 // reduce size
-                $img->fit(200,200);
-                $img->save('storage/trephine_thumbnails/'.$newName);  // public folder
+                $img->fit(200, 200);
+                $img->save('storage/trephine_thumbnails/' . $newName);  // public folder
 
                 // store db
                 $photo = new TrephinePhoto();
@@ -130,13 +129,11 @@ class TrephineController extends Controller
                 $photo->trephine_id = $trephine->id;
                 $photo->user_id = Auth::id();
                 $photo->save();
-
             }
         }
 
 
-        return redirect()->route('trephine.index')->with(['status'=>'Successfully Updated!','create'=>$trephine->patient_name.' report အား အတည်ပြုပြီးဖြစ်ပါသည်။']);
-
+        return redirect()->route('trephine.index')->with(['status' => 'Successfully Updated!', 'create' => $trephine->patient_name . ' report အား အတည်ပြုပြီးဖြစ်ပါသည်။']);
     }
 
     /**
@@ -161,7 +158,7 @@ class TrephineController extends Controller
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
 
-        return view('trephine.edit',['trephine'=>$trephine,'hospitals'=>$hospitals,'specimens'=>$specimens]);
+        return view('trephine.edit', ['trephine' => $trephine, 'hospitals' => $hospitals, 'specimens' => $specimens]);
     }
 
     /**
@@ -176,7 +173,7 @@ class TrephineController extends Controller
         $trephine->sc_date = $request->sc_date;
         $trephine->lab_access = $request->lab_access;
         $trephine->patient_name = $request->patient_name;
-        $trephine->slug = Str::slug($request->patient_name,'-');
+        $trephine->slug = Str::slug($request->patient_name, '-');
         $trephine->year = $request->year;
         $trephine->month = $request->month;
         $trephine->day = $request->day;
@@ -211,7 +208,7 @@ class TrephineController extends Controller
         $trephine->hospital_id = $request->hospital;
         $trephine->update();
 
-        return redirect()->route('trephine.index')->with('status',"Successfully Updated!");
+        return redirect()->route('trephine.index')->with('status', "Successfully Updated!");
     }
 
     /**
@@ -224,27 +221,29 @@ class TrephineController extends Controller
     {
         $trephine->delete();
         $trephine->trephinePhotos()->delete();
-        return redirect()->back()->with('status',"Successfully Deleted!");
-
+        return redirect()->back()->with('status', "Successfully Deleted!");
     }
 
-    public function print($id){
-        $patientFact = Trephine::where('id','=',$id)->first();
-        return view('trephine.print',compact('patientFact'));
+    public function print($id)
+    {
+        $patientFact = Trephine::with(['hospital', 'specimenType', 'trephinePhotos'])->where('id', '=', $id)->first();
+        return view('trephine.print', compact('patientFact'));
     }
 
-    public function withoutHeaderPrint($id){
-        $patientFact = Trephine::where('id','=',$id)->first();
-        return view('trephine.without-header-print',compact('patientFact'));
+    public function withoutHeaderPrint($id)
+    {
+        $patientFact = Trephine::with(['hospital', 'specimenType', 'trephinePhotos'])->where('id', '=', $id)->first();
+        return view('trephine.without-header-print', compact('patientFact'));
     }
 
-    public function invoice($id){
-        $invoice = Trephine::where('id','=',$id)->first();
-        return view('trephine.invoice',compact('invoice'));
+    public function invoice($id)
+    {
+        $invoice = Trephine::with('specimenType')->where('id', '=', $id)->first();
+        return view('trephine.invoice', compact('invoice'));
     }
 
-    public function export(){
+    public function export()
+    {
         return Excel::download(new TrephinesExport, 'trephines.xlsx');
     }
-
 }
