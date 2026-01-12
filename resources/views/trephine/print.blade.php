@@ -14,7 +14,7 @@
         }
 
         .print-header span{
-            font-size: 12px !important;
+            font-size: 13px !important;
         }
 
         .print-header .first{
@@ -31,7 +31,7 @@
 <body oncontextmenu="return false">
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 px-5 pt-3">
+        {{-- <div class="col-12 px-5 pt-3">
             <div class="mb-2 position-relative">
                 <a href="{{ route('trephine.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                 <div class="d-flex align-items-center">
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div style="border-top: 1px solid black"></div>
+        <div style="border-top: 1px solid black"></div> --}}
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">

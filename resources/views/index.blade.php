@@ -146,6 +146,14 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <h5 class="text-center">
+                        Made With ❤️ <a href="https://zeroonee.com" target="_blank" class="text-decoration-none">Zeroonee</a>
+                    </h5>
+                </div>
+            </div>
         </div>
     </div>
 @stop

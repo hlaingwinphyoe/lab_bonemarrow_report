@@ -35,12 +35,12 @@ class HistoController extends Controller
     public function index()
     {
         $histos = Histo::with('specimenType')->search()
-            ->where('is_complete','!=','0')
+            ->where('is_complete', '!=', '0')
             ->latest('id')
             ->paginate(10);
 
         $specimens = SpecimenType::all();
-        return view('histo.index',['histos'=>$histos,'specimens'=>$specimens]);
+        return view('histo.index', ['histos' => $histos, 'specimens' => $specimens]);
     }
 
     /**
@@ -52,7 +52,7 @@ class HistoController extends Controller
     {
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
-        return view('histo.create',['hospitals'=>$hospitals,'specimens'=>$specimens]);
+        return view('histo.create', ['hospitals' => $hospitals, 'specimens' => $specimens]);
     }
 
     /**
@@ -65,7 +65,7 @@ class HistoController extends Controller
     {
         $histo = new Histo();
         $histo->name = $request->name;
-        $histo->slug = Str::slug($request->name,'-');
+        $histo->slug = Str::slug($request->name, '-');
         $histo->year = $request->year;
         $histo->month = $request->month;
         $histo->day = $request->day;
@@ -77,10 +77,9 @@ class HistoController extends Controller
         $histo->user_id = Auth::id();
         $histo->save();
 
-        $users = User::role(['Admin','Gross_doctor','Micro_doctor'])->get();
-        Notification::send($users,new HistoJobCreatedNotification($histo));
-        return redirect()->route('histo.index')->with(['status'=>'Successfully Created!','create'=>$histo->name.' report အား Tests စစ်ဆေးပေးရန်ရှိပါသည်။']);
-
+        $users = User::role(['Admin', 'Gross_doctor', 'Micro_doctor'])->get();
+        Notification::send($users, new HistoJobCreatedNotification($histo));
+        return redirect()->route('histo.index')->with(['status' => 'Successfully Created!', 'create' => $histo->name . ' report အား Tests စစ်ဆေးပေးရန်ရှိပါသည်။']);
     }
 
     /**
@@ -105,7 +104,7 @@ class HistoController extends Controller
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
 
-        return view('histo.edit',compact('histo','hospitals','specimens'));
+        return view('histo.edit', compact('histo', 'hospitals', 'specimens'));
     }
 
     /**
@@ -118,7 +117,7 @@ class HistoController extends Controller
     public function update(UpdateHistoRequest $request, Histo $histo)
     {
         $histo->name = $request->name;
-        $histo->slug = Str::slug($request->name,'-');
+        $histo->slug = Str::slug($request->name, '-');
         $histo->year = $request->year;
         $histo->month = $request->month;
         $histo->day = $request->day;
@@ -134,27 +133,24 @@ class HistoController extends Controller
         $histo->specimen_type_id = $request->specimen_type;
         $histo->hospital_id = $request->hospital;
         $histo->user_id = Auth::id();
-        if ($histo->gross== null || $histo->description == null){
-            if (isset($histo->gross) || isset($histo->description))
-            {
+        if ($histo->gross == null || $histo->description == null) {
+            if (isset($histo->gross) || isset($histo->description)) {
                 $histo->is_complete = '1';
-            }
-            else{
+            } else {
                 $histo->is_complete = '2';
             }
-        }else{
+        } else {
             $histo->is_complete = '0';
         }
 
         $histo->update();
-        if ($histo->is_complete == '0'){
+        if ($histo->is_complete == '0') {
             $users = User::role('Admin')->get();
-            Notification::send($users,new HistoResultAddNotification($histo));
-            return redirect()->route('histo.index')->with(['status'=>'Successfully Updated!','create'=>$histo->name.' report အား အတည်ပြုပေးရန်ရှိပါသည်။']);
-        }else{
-            return redirect()->route('histo.index')->with('status',"Successfully Updated!");
+            Notification::send($users, new HistoResultAddNotification($histo));
+            return redirect()->route('histo.index')->with(['status' => 'Successfully Updated!', 'create' => $histo->name . ' report အား အတည်ပြုပေးရန်ရှိပါသည်။']);
+        } else {
+            return redirect()->route('histo.index')->with('status', "Successfully Updated!");
         }
-
     }
 
     /**
@@ -167,26 +163,28 @@ class HistoController extends Controller
     {
         $histo->delete();
         $histo->histoPhotos()->delete();
-        return redirect()->back()->with('status',"Successfully Deleted!");
-
+        return redirect()->back()->with('status', "Successfully Deleted!");
     }
 
-    public function print($id){
-        $patientFact = Histo::where('id','=',$id)->first();
-        return view('histo.print',compact('patientFact'));
+    public function print($id)
+    {
+        $patientFact = Histo::with(['hospital', 'specimenType', 'grossPhotos', 'histoPhotos'])->where('id', '=', $id)->first();
+        return view('histo.print', compact('patientFact'));
     }
-    public function withoutHeaderPrint($id){
-        $patientFact = Histo::where('id','=',$id)->first();
-        return view('histo.without-header-print',compact('patientFact'));
-    }
-
-    public function invoice($id){
-        $invoice = Histo::where('id',$id)->first();
-        return view('histo.invoice',compact('invoice'));
+    public function withoutHeaderPrint($id)
+    {
+        $patientFact = Histo::with(['hospital', 'specimenType', 'grossPhotos', 'histoPhotos'])->where('id', '=', $id)->first();
+        return view('histo.without-header-print', compact('patientFact'));
     }
 
-    public function export(){
+    public function invoice($id)
+    {
+        $invoice = Histo::with('specimenType')->where('id', $id)->first();
+        return view('histo.invoice', compact('invoice'));
+    }
+
+    public function export()
+    {
         return Excel::download(new HistosExport, 'histos.xlsx');
     }
-
 }

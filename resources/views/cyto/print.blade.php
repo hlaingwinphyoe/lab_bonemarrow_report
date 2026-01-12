@@ -35,7 +35,7 @@
         <div class="col-12">
             <div class="card border-0">
                 <div class="card-body">
-                    <div class="mb-2 position-relative">
+                    {{-- <div class="mb-2 position-relative">
                         <a href="{{ route('cyto') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                         <div class="d-flex align-items-center">
                             <div class="">
@@ -52,10 +52,10 @@
                             </div>
                         </div>
                     </div>
-                    <div style="border-top: 1px solid black"></div>
-                    <div class="row mt-2">
+                    <div style="border-top: 1px solid black"></div> --}}
+                    <div class="row">
                         <div class="col-12">
-                            <div class="ms-5 mt-2">
+                            <div class="mt-2">
                                 <div class="row mb-2">
                                     @if($patientFact->is_approve == '0')
                                         <div class="text-end">
@@ -152,7 +152,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12" style="position: absolute; bottom: 10px; left: 0; right: 0;">
             <div style="font-size: 13px">
                 <p class="mb-0">
                     This document is computer-generated and has been approved by authorized pathologists;

@@ -27,7 +27,6 @@ class AspirateController extends Controller
         $this->middleware(['permission:write aspirate'], ['only' => ['create']]);
         $this->middleware(['permission:edit aspirate'], ['only' => ['edit']]);
         $this->middleware(['permission:delete aspirate'], ['only' => ['destroy']]);
-
     }
 
     /**
@@ -40,7 +39,7 @@ class AspirateController extends Controller
         $aspirates = Aspirate::search()->latest('id')
             ->paginate(10);
         $specimens = SpecimenType::all();
-        return view('aspirate.index',['aspirates'=>$aspirates,'specimens'=>$specimens]);
+        return view('aspirate.index', ['aspirates' => $aspirates, 'specimens' => $specimens]);
     }
 
     /**
@@ -52,7 +51,7 @@ class AspirateController extends Controller
     {
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
-        return view('aspirate.create',['hospitals'=>$hospitals,'specimens'=>$specimens]);
+        return view('aspirate.create', ['hospitals' => $hospitals, 'specimens' => $specimens]);
     }
 
     /**
@@ -67,7 +66,7 @@ class AspirateController extends Controller
         $aspirate->sc_date = $request->sc_date;
         $aspirate->lab_access = $request->lab_access;
         $aspirate->patient_name = $request->patient_name;
-        $aspirate->slug = Str::slug($request->patient_name,'-');
+        $aspirate->slug = Str::slug($request->patient_name, '-');
         $aspirate->year = $request->year;
         $aspirate->month = $request->month;
         $aspirate->day = $request->day;
@@ -106,23 +105,23 @@ class AspirateController extends Controller
         $aspirate->save();
 
         $users = User::role(['User'])->get();
-        Notification::send($users,new AspirateApproveNotification($aspirate));
+        Notification::send($users, new AspirateApproveNotification($aspirate));
 
-        if ($request->hasFile('aspirate_photos')){
-            foreach ($request->file('aspirate_photos') as $photo){
+        if ($request->hasFile('aspirate_photos')) {
+            foreach ($request->file('aspirate_photos') as $photo) {
                 //store file
-                if (!Storage::exists('public/aspirate_thumbnails')){
+                if (!Storage::exists('public/aspirate_thumbnails')) {
                     Storage::makeDirectory('public/aspirate_thumbnails');
                 }
 
-                $newName =uniqid()."_aspirate.".$photo->extension();
-                $photo->storeAs('public/aspirate_photos/',$newName);
+                $newName = uniqid() . "_aspirate." . $photo->extension();
+                $photo->storeAs('public/aspirate_photos/', $newName);
 
                 // making thumbnail
                 $img = Image::make($photo);
                 // reduce size
-                $img->fit(200,200);
-                $img->save('storage/aspirate_thumbnails/'.$newName);  // public folder
+                $img->fit(200, 200);
+                $img->save('storage/aspirate_thumbnails/' . $newName);  // public folder
 
                 // store db
                 $photo = new AspiratePhoto();
@@ -130,11 +129,10 @@ class AspirateController extends Controller
                 $photo->aspirate_id = $aspirate->id;
                 $photo->user_id = Auth::id();
                 $photo->save();
-
             }
         }
 
-        return redirect()->route('aspirate.index')->with(['status'=>'Successfully Updated!','create'=>$aspirate->patient_name.' report အား အတည်ပြုပြီးဖြစ်ပါသည်။']);
+        return redirect()->route('aspirate.index')->with(['status' => 'Successfully Updated!', 'create' => $aspirate->patient_name . ' report အား အတည်ပြုပြီးဖြစ်ပါသည်။']);
     }
 
     /**
@@ -158,7 +156,7 @@ class AspirateController extends Controller
     {
         $hospitals = Hospital::all();
         $specimens = SpecimenType::all();
-        return view('aspirate.edit',['aspirate'=>$aspirate,'hospitals'=>$hospitals,'specimens'=>$specimens]);
+        return view('aspirate.edit', ['aspirate' => $aspirate, 'hospitals' => $hospitals, 'specimens' => $specimens]);
     }
 
     /**
@@ -173,7 +171,7 @@ class AspirateController extends Controller
         $aspirate->sc_date = $request->sc_date;
         $aspirate->lab_access = $request->lab_access;
         $aspirate->patient_name = $request->patient_name;
-        $aspirate->slug = Str::slug($request->patient_name,'-');
+        $aspirate->slug = Str::slug($request->patient_name, '-');
         $aspirate->year = $request->year;
         $aspirate->month = $request->month;
         $aspirate->day = $request->day;
@@ -210,7 +208,7 @@ class AspirateController extends Controller
         $aspirate->specimen_type_id = $request->specimen_type;
         $aspirate->update();
 
-        return redirect()->route('aspirate.index')->with('status','Successfully Updated!');
+        return redirect()->route('aspirate.index')->with('status', 'Successfully Updated!');
     }
 
     /**
@@ -223,27 +221,30 @@ class AspirateController extends Controller
     {
         $aspirate->delete();
         $aspirate->aspiratePhotos()->delete();
-        return redirect()->back()->with('status','Successfully Deleted!');
+        return redirect()->back()->with('status', 'Successfully Deleted!');
     }
 
     // Print Section
-    public function print($id){
-        $patientFact = Aspirate::where('id','=',$id)->first();
-        return view('aspirate.print',compact('patientFact'));
+    public function print($id)
+    {
+        $patientFact = Aspirate::with(['hospital', 'specimenType', 'aspiratePhotos'])->where('id', '=', $id)->first();
+        return view('aspirate.print', compact('patientFact'));
     }
 
-    public function withoutHeaderPrint($id){
-        $patientFact = Aspirate::where('id','=',$id)->first();
-        return view('aspirate.without-header-print',compact('patientFact'));
+    public function withoutHeaderPrint($id)
+    {
+        $patientFact = Aspirate::with(['hospital', 'specimenType', 'aspiratePhotos'])->where('id', '=', $id)->first();
+        return view('aspirate.without-header-print', compact('patientFact'));
     }
 
-    public function invoice($id){
-        $invoice = Aspirate::where('id','=',$id)->first();
-        return view('aspirate.invoice',compact('invoice'));
+    public function invoice($id)
+    {
+        $invoice = Aspirate::with('specimenType')->where('id', '=', $id)->first();
+        return view('aspirate.invoice', compact('invoice'));
     }
 
-    public function export(){
+    public function export()
+    {
         return Excel::download(new AspiratesExport, 'aspirates.xlsx');
     }
-
 }
