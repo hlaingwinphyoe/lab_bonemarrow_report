@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') 550MCH Biopsy Reports @endsection
+@section('title') Dashboard : Biopsy Reports @endsection
 @section('head')
     <style>
         #polarChart{
@@ -14,7 +14,6 @@
             <div class="mb-3">
                 <h4 class="text-dark mb-2">
                     <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <!-- Uploaded to SVGRepo https://www.svgrepo.com -->
                         <title>ic_fluent_grid_28_filled</title>
                         <desc>Created with Sketch.</desc>
                         <g id="🔍-Product-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -25,7 +24,27 @@
                     </svg>
                     Dashboard
                 </h4>
-                <h6 class="ms-4">From <span class="fw-bold text-dark">{{ $first }}</span> To <span class="fw-bold text-dark">{{ $currentDate }}</span></h6>
+                <h6>From <span class="fw-bold text-dark">{{ $first }}</span> To <span class="fw-bold text-dark">{{ $currentDate }}</span></h6>
+                
+                {{-- Date Filter Form --}}
+                <div class="row mb-3">
+                    <div class="col-12 col-lg-6">
+                        <div class="d-md-flex d-none">
+                            <form action="{{ route('index') }}" method="get" class="d-flex align-items-end">
+                                <div class="me-4">
+                                    <label for="start-picker" class="form-label">From Date</label>
+                                    <input type="text" class="form-control" id="start-picker" placeholder="dd/MM/YYYY" name="start_date" value="{{ request()->start_date ?? $startDate->format('Y-m-d') }}">
+                                </div>
+                                <div class="me-4">
+                                    <label for="end-picker" class="form-label">To Date</label>
+                                    <input type="text" class="form-control" id="end-picker" placeholder="dd/MM/YYYY" name="end_date" value="{{ request()->end_date ?? $endDate->format('Y-m-d') }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary me-2">Filter</button>
+                                <a href="{{ route('index') }}" class="btn btn-danger"><i class="fa-solid fa-refresh"></i></a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row mb-4">
                 <div class="col-xxl-3 col-lg-6">
@@ -241,6 +260,14 @@
                     },
                 }
             },
+        });
+
+        // Initialize datepickers
+        $("#start-picker").datepicker({
+            dateFormat: 'yy-mm-dd',
+        });
+        $("#end-picker").datepicker({
+            dateFormat: 'yy-mm-dd',
         });
     </script>
 @endpush

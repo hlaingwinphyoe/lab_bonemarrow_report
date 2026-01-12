@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $patientFact->patient_name }} : Aspirate Report</title>
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
-    <link rel="icon" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" href="{{ $clinicInfo && $clinicInfo->logo ? asset('storage/' . $clinicInfo->logo) : asset('images/logo.png') }}">
     <style>
         .print-table tr{
             font-size: 12px !important;
@@ -46,7 +46,7 @@
                             <h5 class="text-center text-uppercase mb-0">ICSH Guidelines</h5>
                         </div>
                         <p class="mb-0">
-                            {!! DNS2D::getBarcodeSVG(config('app.url').'/aspirate-print/'.$patientFact->id, 'DATAMATRIX',3,3) !!}
+                            {!! DNS2D::getBarcodeSVG(config('app.url').'/aspirate-print/'.$patientFact->id, 'QRCODE',3,3) !!}
                         </p>
                     </div>
                     <div class="">

@@ -18,7 +18,7 @@
                                     <form action="{{ route('login') }}" method="post">
                                         @csrf
                                         <div class="d-flex align-items-center mb-3 pb-1">
-                                            <img src="{{ asset('images/logo.png') }}" height="50" alt="">
+                                            <img src="{{ $clinicInfo && $clinicInfo->logo ? asset('storage/' . $clinicInfo->logo) : asset('images/logo.png') }}" alt="Logo" height="50">
                                             <span class="h1 fw-bold mb-0">Biopsy Report Panel</span>
                                         </div>
 

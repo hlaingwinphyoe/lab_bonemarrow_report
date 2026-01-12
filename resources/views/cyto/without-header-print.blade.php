@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Print : Cyto Report</title>
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
-    <link rel="icon" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" href="{{ $clinicInfo && $clinicInfo->logo ? asset('storage/' . $clinicInfo->logo) : asset('images/logo.png') }}">
     <style>
         .print-header span{
             font-size: 13px !important;
@@ -104,7 +104,7 @@
                                             Cytopathology report
                                         </h3>
                                         <p>
-                                            {!! DNS2D::getBarcodeSVG(config('app.url').'/cyto-print/'.$patientFact->id, 'DATAMATRIX',3,3) !!}
+                                            {!! DNS2D::getBarcodeSVG(config('app.url').'/cyto-print/'.$patientFact->id, 'QRCODE',3,3) !!}
                                         </p>
                                     </div>
                                     <div class="col-12">
