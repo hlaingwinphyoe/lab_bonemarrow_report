@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Histo : 550MCH Biopsy Reports @endsection
+@section('title') Histo : Biopsy Reports @endsection
 
 @section('content')
     <div class="d-block d-lg-none">
@@ -208,7 +208,10 @@
                                     {{ $histo->created_at->format('j M Y') }}
                                 </td>
                                 <td>
-                                    <div class="dropdown">
+                                    <a class="btn btn-light btn-sm" href="{{ route('histo.without.print',$histo->id) }}">
+                                            <img src="{{ asset('images/printer.png') }}" width="15" data-mdb-toggle="tooltip" data-mdb-placement="top" title="Print" alt="">
+                                        </a>
+                                    {{-- <div class="dropdown">
                                         <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                                             <img src="{{ asset('images/printer.png') }}" data-mdb-toggle="tooltip" data-mdb-placement="right" title="Print" width="22" alt="">
                                         </a>
@@ -218,7 +221,7 @@
                                                 <a class="dropdown-item" href="{{ route('histo.without.print',$histo->id) }}">Without Header</a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> --}}
                                 </td>
 
                             </tr>

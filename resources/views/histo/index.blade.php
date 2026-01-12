@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Registered : 550MCH Biopsy Reports @endsection
+@section('title') Registered : Biopsy Reports @endsection
 
 @section('content')
     <div class="d-block d-lg-none">

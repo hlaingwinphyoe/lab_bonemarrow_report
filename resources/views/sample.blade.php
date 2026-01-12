@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Total Sales : 550MCH Biopsy Reports @endsection
+@section('title') Total Sales : Biopsy Reports @endsection
 
 @section('content')
     <div class="row p-2">

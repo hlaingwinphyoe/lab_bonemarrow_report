@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Roles : 550MCH Biopsy Reports @endsection
+@section('title') Roles : Biopsy Reports @endsection
 @section('content')
     <div class="row align-items-end">
         <div class="col-12">

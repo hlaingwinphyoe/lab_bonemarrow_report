@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $patientFact->patient_name }} : Trephine Report</title>
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
-    <link rel="icon" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" href="{{ $clinicInfo && $clinicInfo->logo ? asset('storage/' . $clinicInfo->logo) : asset('images/logo.png') }}">
     <style>
         .print-table tr{
             font-size: 12px !important;
@@ -36,11 +36,16 @@
                 <a href="{{ route('trephine.index') }}" class="btn btn-primary back-btn"><i class="fa-solid fa-arrow-left"></i></a>
                 <div class="d-flex align-items-center">
                     <div class="">
-                        <img src="{{ asset('images/header.jpg') }}" style="width: 130px" alt="">
+                        <img src="{{ $clinicInfo && $clinicInfo->logo ? asset('storage/' . $clinicInfo->logo) : asset('images/logo.png') }}" style="width: 110px" alt="Logo">
                     </div>
                     <div class="ms-2">
-                        <p class="mb-2" style="font-size: 2rem">ချမ်းမြေ့ရောဂါရှာဖွေရေး ဓါတ်ခွဲခန်း</p>
-                        <p class="mb-0" style="font-size: 12px">12E, 68 Street,Between 29th & 30th Street, Mandalay. Ph: 09974478264, 0933763367</p>
+                        <p class="mb-0" style="font-size: 2rem">{{ $clinicInfo && $clinicInfo->name ? $clinicInfo->name : "Cellular Pathology" }}</p>
+                        <p class="mb-0" style="font-size: 12px">{{ $clinicInfo && $clinicInfo->address ? $clinicInfo->address : "Mandalay, Myanmar" }}. 
+                            @foreach ($clinicInfo->clinic_phones as $phone)
+                                {{ $phone->phone }}
+                                @if(!$loop->last), @endif
+                            @endforeach
+                        </p>
                     </div>
                 </div>
             </div>
@@ -57,7 +62,7 @@
                             <h5 class="text-center text-uppercase mb-0">ICSH Guidelines</h5>
                         </div>
                         <p>
-                            {!! DNS2D::getBarcodeSVG(config('app.url').'/trephine-print/'.$patientFact->id, 'DATAMATRIX',3,3) !!}
+                            {!! DNS2D::getBarcodeSVG(config('app.url').'/trephine-print/'.$patientFact->id, 'QRCODE',3,3) !!}
                         </p>
                     </div>
                     <div class="row mt-2">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Trephine : 550MCH Biopsy Reports @endsection
+@section('title') Trephine : Biopsy Reports @endsection
 
 @section('content')
     <div class="d-block d-lg-none">
@@ -201,7 +201,10 @@
                                                 <i class="fa-regular fa-trash-alt"></i>
                                             </a>
                                         @endcan
-                                        <div class="btn-group" role="group">
+                                        <a class="btn btn-light btn-sm" href="{{ route('trephine.without.print',$trephine->id) }}">
+                                            <img src="{{ asset('images/printer.png') }}" width="15" data-mdb-toggle="tooltip" data-mdb-placement="top" title="Print" alt="">
+                                        </a>
+                                        {{-- <div class="btn-group" role="group">
                                             <button
                                                 id="btnGroupDrop1"
                                                 type="button"
@@ -215,7 +218,7 @@
                                                 <li><a class="dropdown-item" href="{{ route('trephine.print',$trephine->id) }}">With Header</a></li>
                                                 <li><a class="dropdown-item" href="{{ route('trephine.without.print',$trephine->id) }}">Without Header</a></li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </td>
                             </tr>

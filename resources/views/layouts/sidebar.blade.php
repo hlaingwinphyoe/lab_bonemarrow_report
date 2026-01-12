@@ -3,7 +3,7 @@
         <a href="" class="d-flex align-items-center">
             <span class="p-2 rounded d-flex justify-content-center align-items-center me-2">
 <!--                <i class="fas fa-user text-white h4 mb-0"></i>-->
-                <img src="{{ asset('images/logo.png') }}" style="width: 40px" alt="">
+                <img src="{{ $clinicInfo && $clinicInfo->logo ? asset('storage/' . $clinicInfo->logo) : asset('images/logo.png') }}" style="width: 40px" alt="Logo">
             </span>
             <span class="fw-bolder h4 mb-0  text-primary ms-2">Biopsy Reports</span>
         </a>
@@ -19,7 +19,7 @@
 
             <li class="menu-spacer"></li>
 
-            <x-side-bar-title title="Index" />
+            <x-side-bar-title title="Home" />
 
             <li class="menu-item">
                 <x-side-bar-link name="Dashboard" link="{{ route('index') }}" />
@@ -132,6 +132,12 @@
             @endrole
 
             <x-side-bar-title title="User Setting" />
+            
+@role('Admin')
+            <li class="menu-item">
+                <x-side-bar-link name="Clinic Info" link="{{ route('clinic-infos.index') }}" />
+            </li>
+            @endrole
 
             <li class="menu-item">
                 <x-side-bar-link name="Profile" link="{{ route('profile') }}" />

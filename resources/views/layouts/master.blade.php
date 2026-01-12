@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title',env('APP_NAME'))</title>
-    <link rel="icon" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" href="{{ $clinicInfo && $clinicInfo->logo ? asset('storage/' . $clinicInfo->logo) : asset('images/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
     <!-- PWA  -->
     <meta name="theme-color" content="#ffffff"/>
@@ -14,7 +14,7 @@
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- Primary Meta Tags -->
-    <title>550 MCH Biopsy Report With ICSH Guidelines</title>
+    <title>Biopsy Report With ICSH Guidelines</title>
     <meta name="title" content="Biopsy Report With ICSH Guidelines">
     <meta name="description" content="Can report for bonemarrow aspirate,bonemarrrow trephine, histological report and cytological report in one place.">
 

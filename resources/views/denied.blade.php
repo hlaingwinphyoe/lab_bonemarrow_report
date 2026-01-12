@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Page Not Found | 550MCh Lab @endsection
+@section('title') Page Not Found | Biopsy Reports @endsection
 @section('content')
     <!-- 404 Start -->
     <div class="container">
