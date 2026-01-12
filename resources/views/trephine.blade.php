@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') Trephine : 550MCH Biopsy Reports @endsection
+@section('title') Trephine : Biopsy Reports @endsection
 
 @section('content')
     <div class="container-fluid p-0 m-0">

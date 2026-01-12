@@ -20,27 +20,14 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(RoleSeeder::class);
         $this->call(PermissionSeeder::class);
-        $this->call(AspiratePhotoSeeder::class);
-        $this->call(AspirateSeeder::class);
-
-        $this->call(CytoPhotoSeeder::class);
-        $this->call(CytoSeeder::class);
-        $this->call(HistoGrossSeeder::class);
-        $this->call(HistoPhotoSeeder::class);
-
-        $this->call(HistoSeeder::class);
-        $this->call(HospitalSeeder::class);
-        $this->call(SpecimenTypeSeeder::class);
-        $this->call(TrephinePhotoSeeder::class);
-        $this->call(TrephineSeeder::class);
+        $this->call(ClinicInfoSeeder::class);
 
         User::create([
             'name' => "Hlaing Win Phyoe",
             'email' => "hlaingwinphyoedev@gmail.com",
             'email_verified_at' => now(),
-            'password' => Hash::make('venom29502') ,
+            'password' => Hash::make('venom29502'),
             'remember_token' => Str::random(10),
         ])->assignRole('Admin')->givePermissionTo(Permission::all());
-
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Approve Cyto : 550MCH Biopsy Reports @endsection
+@section('title') Approve Cyto :   Biopsy Reports @endsection
 @section('content')
     <div class="d-block d-lg-none">
         <div class="fab btn btn-danger">

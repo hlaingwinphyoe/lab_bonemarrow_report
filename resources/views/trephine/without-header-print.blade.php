@@ -50,7 +50,7 @@
                                 <h5 class="text-center text-uppercase mb-0">ICSH Guidelines</h5>
                             </div>
                             <p>
-                                {!! DNS2D::getBarcodeSVG(config('app.url') . '/trephine-print/' . $patientFact->id, 'DATAMATRIX', 3, 3) !!}
+                                {!! DNS2D::getBarcodeSVG(config('app.url') . '/trephine-print/' . $patientFact->id, 'QRCODE', 3, 3) !!}
                             </p>
                         </div>
                         <div class="row mt-4">

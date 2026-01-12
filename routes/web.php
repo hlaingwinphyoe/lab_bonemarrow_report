@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AspirateController;
 use App\Http\Controllers\AspiratePhotoController;
+use App\Http\Controllers\ClinicInfoController;
 use App\Http\Controllers\CytoController;
 use App\Http\Controllers\CytoPhotoController;
 use App\Http\Controllers\HistoController;
@@ -50,11 +51,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('/hospital', HospitalController::class)->except('show');
     Route::resource('/specimen_type', SpecimenTypeController::class)->except('show');
-    Route::get('/sales',[PageController::class,'totalSales'])->name('sales');
+    Route::get('/sales', [PageController::class, 'totalSales'])->name('sales');
 
     // role and permission
-    Route::middleware('role:Admin')->prefix('admin')->group(function (){
-        Route::resource('/roles',RoleController::class);
+    Route::middleware('role:Admin')->prefix('admin')->group(function () {
+        Route::resource('/roles', RoleController::class);
     });
     // end
 
@@ -76,22 +77,22 @@ Route::middleware('auth')->group(function () {
     Route::resource('/histo_photos', HistoPhotoController::class);
     Route::resource('/histo_gross', HistoGrossController::class);
     Route::get('histos/export', [HistoController::class, 'export'])->name('histo.export');
-    Route::get('/histos',[IndexController::class,'histo'])->name('histo');
+    Route::get('/histos', [IndexController::class, 'histo'])->name('histo');
     // cyto
     Route::resource('/cyto', CytoController::class)->except('show');
     Route::get('/cyto-invoice/{id}', [CytoController::class, 'invoice'])->name('cyto.invoice');
     Route::resource('/cyto_photos', CytoPhotoController::class);
     Route::get('cytos/export', [CytoController::class, 'export'])->name('cyto.export');
-    Route::get('/cytos',[IndexController::class,'cyto'])->name('cyto');
+    Route::get('/cytos', [IndexController::class, 'cyto'])->name('cyto');
 
     // approve result
-    Route::get('/histo-approve',[IndexController::class,'toapproveHisto'])->name('report.toApproveHisto');
-    Route::get('/cyto-approve',[IndexController::class,'toapproveCyto'])->name('report.toApproveCyto');
-    Route::post('/histo-approve/{id}',[IndexController::class,'histoApproved'])->name('histo.approved');
-    Route::post('/cyto-approve/{id}',[IndexController::class,'cytoApproved'])->name('cyto.approved');
+    Route::get('/histo-approve', [IndexController::class, 'toapproveHisto'])->name('report.toApproveHisto');
+    Route::get('/cyto-approve', [IndexController::class, 'toapproveCyto'])->name('report.toApproveCyto');
+    Route::post('/histo-approve/{id}', [IndexController::class, 'histoApproved'])->name('histo.approved');
+    Route::post('/cyto-approve/{id}', [IndexController::class, 'cytoApproved'])->name('cyto.approved');
 
 
-    Route::middleware('role:Admin')->prefix('admin')->group(function (){
+    Route::middleware('role:Admin')->prefix('admin')->group(function () {
         // Custom User Register
         Route::get('/users', [PageController::class, 'users'])->name('users');
         Route::get('/users/{user}/edit', [PageController::class, 'edit'])->name('user.edit');
@@ -100,6 +101,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('/user-delete/{id}', [PageController::class, 'destroy'])->name('user.destroy');
         Route::post('/make-admin', [PageController::class, 'makeAdmin'])->name('user.makeAdmin');
     });
+
+    // Clinic Info
+    Route::resource('clinic-infos', ClinicInfoController::class);
 
     Route::prefix('profile')->group(function () {
         // Main Frame Route
@@ -112,12 +116,11 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::get('/markAsRead',function (){
+    Route::get('/markAsRead', function () {
         auth()->user()->unreadNotifications->markAsRead();
         return redirect()->back();
     })->name('markAsRead');
 
     // 404 page
     Route::get('/denied', [PageController::class, 'denied'])->name('denied');
-
 });

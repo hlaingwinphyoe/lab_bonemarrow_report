@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Aspirate : 550MCH Biopsy Reports @endsection
+@section('title') Aspirate : Biopsy Reports @endsection
 
 @section('head')
 @endsection
@@ -205,7 +205,11 @@
                                                 <i class="fa-regular fa-trash-alt"></i>
                                             </a>
                                         @endcan
-                                        <div class="btn-group" role="group">
+                                        <a class="btn btn-light btn-sm" href="{{ route('aspirate.without.print',$aspirate->id) }}">
+                                            <img src="{{ asset('images/printer.png') }}" width="15" data-mdb-toggle="tooltip" data-mdb-placement="top" title="Print" alt="">
+                                        </a>
+                                        {{-- <div class="btn-group" role="group">
+                                            
                                             <button
                                                 id="btnGroupDrop1"
                                                 type="button"
@@ -219,7 +223,7 @@
                                                 <li><a class="dropdown-item" href="{{ route('aspirate.print',$aspirate->id) }}">With Header</a></li>
                                                 <li><a class="dropdown-item" href="{{ route('aspirate.without.print',$aspirate->id) }}">Without Header</a></li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </td>
                             </tr>

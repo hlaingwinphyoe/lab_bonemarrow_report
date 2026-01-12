@@ -4,7 +4,9 @@
             <i class="fas fa-bars fa-2x text-white"></i>
         </button>
         <div class="d-flex d-none d-md-flex align-items-center">
-            <a href="" class="mb-0 text-white h4 ms-1">550 MCH Biopsy Reports</a>
+            <a href="" class="mb-0 text-white h4 ms-1">
+                {{ $clinicInfo ? $clinicInfo->name : "Cellular Pathology" }}
+            </a>
         </div>
         <div class="d-flex align-items-center">
             @include('layouts.notification')
