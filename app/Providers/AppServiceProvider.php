@@ -29,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         // Share clinic info globally to all views
-        View::share('clinicInfo', ClinicInfo::with('clinic_phones')->first());
+        // Wrapped in try-catch to prevent errors before migrations run
+        try {
+            View::share('clinicInfo', ClinicInfo::with('clinic_phones')->first());
+        } catch (\Exception $e) {
+            View::share('clinicInfo', null);
+        }
     }
 }
